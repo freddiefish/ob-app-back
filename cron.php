@@ -1,4 +1,10 @@
 <?php
+
+mail("frefeys@gmail.com","hallo","msg");
+exit;
+
+
+
 // Use the composer autoloader to load dependencies.
 require __DIR__ . '/vendor/autoload.php';
 

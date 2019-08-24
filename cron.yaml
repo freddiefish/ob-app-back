@@ -1,0 +1,5 @@
+# App Engine cron configuration
+cron:
+- description: "Open Bestuur cron tasks"
+  url: /cron.php
+  schedule: every 5 minutes
