@@ -1,6 +1,6 @@
 <?php
 // setting environment variables
-putenv('GOOGLE_APPLICATION_CREDENTIALS=/Users/Main/Apps/ob-app-back/tasks/ob-app-dev-8fc443537a13.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-8fc443537a13.json');
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
 
 // show all errors

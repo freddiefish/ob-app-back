@@ -11,6 +11,8 @@ $success = mail("frefeys@gmail.com","logs",$msg);
 if (!$success) {
     $errorMessage = error_get_last()['message'];
     logThis($errorMessage);
+} else {
+    logThis("Mail with log send!"); 
 }
 
 ?>

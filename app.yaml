@@ -1,8 +1,12 @@
-# Use the PHP 7.3 runtime (BETA) by replacing "php72" below with "php73"
-runtime: php72
+runtime: php55
+api_version: 1
+threadsafe: true
 
-# Defaults to "serve index.php" and "serve public/index.php". Can be used to
-# serve a custom PHP front controller (e.g. "serve backend/index.php") or to
-# run a long-running PHP script as a worker process (e.g. "php worker.php").
-#
-# entrypoint: serve index.php
+handlers:
+# Serve php scripts.
+# - url: /(.+\.php)$
+#  script: \1
+- url: /tasks/cron-weekly
+  script: /tasks/cron-weekly.php
+- url: /tasks/cron-daily
+  script: /tasks/cron-daily.php
