@@ -20,11 +20,12 @@ require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 set_time_limit(0); // script runs infinitely
 ini_set('memory_limit', '-1'); // script gets meomory ad infinitely
 
+// mail admin if script halted on the last run
+if (mailWhenScriptHalted()) exit();
+
 logThis('*************************************************');
 logThis('Script started: ' . date('l jS \of F Y h:i:s A'));
 logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
-
-$daysToScreen   = 5;
 
 // scraping the DOM, so init 
 use Sunra\PhpSimple\HtmlDomParser;
@@ -175,8 +176,6 @@ foreach($docList as $val) {
 
 logThis('Script ended: ' . date('l jS \of F Y h:i:s A'));
 logThis('END');
-
-mailWhenScriptHalted();
 
 // clean database (delete any location doc without a corresponding decision doc)
 ?>

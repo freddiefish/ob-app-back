@@ -1,7 +1,9 @@
 <?php
 // setting environment variables
-putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-8fc443537a13.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
+
+define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
 
 // show all errors
 error_reporting(E_ALL);
@@ -18,11 +20,18 @@ use Sk\Geohash\Geohash;
 use Google\Cloud\Core\GeoPoint;
 
 function get_data($url) {
+
 	$ch = curl_init();
-	$timeout = 5;
+    $timeout = 5;
+    
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
+    //setting them to false.
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
 	$data = curl_exec($ch);
     curl_close($ch);
     
@@ -280,10 +289,10 @@ function geoCode($stringLocations) {
 
 function logThis($data) {
     $msg = date("d-m-Y H:i:s") . ": " . $data ;
-    $save_path = './log.txt';
+    $save_path = LOG_PATH;
     if ($fp = @fopen($save_path, 'a')) {
         // open or create the file for writing and append info
-        fputs($fp, "$msg\n"); // write the data in the opened file
+        fputs($fp, "\n$msg"); // write the data in the opened file
         fclose($fp); // close the file
     }
 }
@@ -293,17 +302,20 @@ function mailWhenScriptHalted() {
     $file = escapeshellarg('log.txt'); // for the security concious (should be everyone!)
     $line = `tail -n 1 $file`;
 
-    if (!$line == 'END') {
-
+    if ( !strpos( $line, 'END' ) ) {
+        echo "Script did not run. Investigation of logs required!!!! " . LOG_PATH;
         // script halted so email admin
-        $msg = __DIR__  . 'log.txt';
+        $msg = LOG_PATH;
         
         $success = mail("frefeys@gmail.com","Investigation required", $msg);
 
         if (!$success) {
             $errorMessage = error_get_last()['message'];
             logThis($errorMessage);
+        } else {
+            logThis("Mail with log send!"); 
         }
+        return true;
     } 
 }
 

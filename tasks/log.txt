@@ -1,1 +1,849 @@
-04-09-2019 13:28:25: Mail with log send!
+04-09-2019 14:00:23: Mail with log send!
+04-09-2019 14:00:23: *************************************************
+04-09-2019 14:00:23: Script started: Wednesday 4th of September 2019 02:00:23 PM
+04-09-2019 14:00:23: Memory usage (Kb): 791.776
+04-09-2019 14:00:25: Update for date: 30-08-2019
+04-09-2019 14:00:31: Update for date: 31-08-2019
+04-09-2019 14:00:31: Update for date: 01-09-2019
+04-09-2019 14:00:33: Updated the DOM to month ' . 9 . ' of year '. 2019 . ' in calendar view: 
+04-09-2019 14:00:33: Update for date: 02-09-2019
+04-09-2019 14:00:36: Update for date: 03-09-2019
+04-09-2019 14:00:37: Update for date: 04-09-2019
+04-09-2019 14:00:37: Found 201 documents
+04-09-2019 14:00:38: Document facba535f08d472ab373 returned by query
+04-09-2019 14:00:38: Document 3507003ea822452eba10 returned by query
+04-09-2019 14:00:39: Document 2b176d79a1e54856a1e4 returned by query
+04-09-2019 14:00:39: Document 2876b0d1bc3c4fe49303 returned by query
+04-09-2019 14:00:39: Document 8234b2d301044ac2a180 returned by query
+04-09-2019 14:00:40: Document 42b8e32c02a14ac98541 returned by query
+04-09-2019 14:00:40: Document ccac1c768cee4742b71b returned by query
+04-09-2019 14:00:41: Document 0c15fbce705a48f4b4f1 returned by query
+04-09-2019 14:00:41: Document cda343a5ad2e456eb293 returned by query
+04-09-2019 14:00:41: Document 6a8c35ab8cd14cf2a747 returned by query
+04-09-2019 14:00:42: Document 0114cbde995d484ab875 returned by query
+04-09-2019 14:00:42: Document 067eb1a2e5364d248afd returned by query
+04-09-2019 14:00:43: Document 0b37ec06f8d54bf9b27c returned by query
+04-09-2019 14:00:43: Document 5a08dae6fe5141f28a82 returned by query
+04-09-2019 14:00:43: Document 38155e3b0cca43e4938a returned by query
+04-09-2019 14:00:44: Document 7e4e2974078240cbaaac returned by query
+04-09-2019 14:00:44: Document 80f5c04b73914f449c0f returned by query
+04-09-2019 14:00:45: Document c1ef2b05d6434a7bb174 returned by query
+04-09-2019 14:00:45: Document 15d248837eee48d2b861 returned by query
+04-09-2019 14:00:45: Document d909d83d4c7d482f864e returned by query
+04-09-2019 14:00:46: Document 556acd024ce3427e981f returned by query
+04-09-2019 14:00:46: Document 0c8164e157a84cf4b3aa returned by query
+04-09-2019 14:00:46: Document 077c3365f6d14dbfaaf9 returned by query
+04-09-2019 14:00:47: Document 0ac6e063077e420ebf54 returned by query
+04-09-2019 14:00:47: Document 69a617eda5d2402396db returned by query
+04-09-2019 14:00:47: Document 0237a861b8394c6cb0ae returned by query
+04-09-2019 14:00:48: Document 6650714c66b44c7db0bf returned by query
+04-09-2019 14:00:48: Document 19410614b4c6415eb6ac returned by query
+04-09-2019 14:00:48: Document 63a4e63132c141478ecb returned by query
+04-09-2019 14:00:49: Document 94ed93a6827942788630 returned by query
+04-09-2019 14:00:49: Document c68c2fde118d425799ec returned by query
+04-09-2019 14:00:49: Document 3f9d9ace92c64d87b696 returned by query
+04-09-2019 14:00:50: Document 528cabbf5adc4b8d97ca returned by query
+04-09-2019 14:00:50: Document a5045740f3794c4db2e3 returned by query
+04-09-2019 14:00:50: Document cceb2807d1f745ab8659 returned by query
+04-09-2019 14:00:51: Document 32a504ff79a142be80dd returned by query
+04-09-2019 14:00:51: Document 7422afb41011494296d5 returned by query
+04-09-2019 14:00:51: Document 3d9712f95d794a16bd50 returned by query
+04-09-2019 14:00:52: Document 3c9874cfaef24d33921e returned by query
+04-09-2019 14:00:52: Document cd052905c9e7488d8703 returned by query
+04-09-2019 14:00:53: Document 1602183913734bd1ab32 returned by query
+04-09-2019 14:00:53: Document b53eb216f48d4ce3a85e returned by query
+04-09-2019 14:00:53: Document 55e323d2ed3745179305 returned by query
+04-09-2019 14:00:54: Document 2c179212c34145b88189 returned by query
+04-09-2019 14:00:54: Document 81dca1a46c974c0484cc returned by query
+04-09-2019 14:00:54: Document 370cd3c46abc4c3f8221 returned by query
+04-09-2019 14:00:55: Document bc4aae83d30549c783c4 returned by query
+04-09-2019 14:00:55: Document a41c33303aed4f988d78 returned by query
+04-09-2019 14:00:55: Document 7be898843d414e10ad94 returned by query
+04-09-2019 14:00:56: Document 47b9ecb4106e4a9585a8 returned by query
+04-09-2019 14:00:56: Document 88ce9d59ecf94276843c returned by query
+04-09-2019 14:00:56: Document 86b9bede5eeb4f148d06 returned by query
+04-09-2019 14:00:57: Document 9e001d11d3684a938a2f returned by query
+04-09-2019 14:00:57: Document 70b884430e3f4ce3b4e7 returned by query
+04-09-2019 14:00:58: Document a74b125e05134e04bac0 returned by query
+04-09-2019 14:00:58: Document 7909d721f5a74c43ac24 returned by query
+04-09-2019 14:00:58: Document 209ff123309043ecb415 returned by query
+04-09-2019 14:00:59: Document 9001c859a148434aa22a returned by query
+04-09-2019 14:00:59: Document 0acbb196a62a443b9a5c returned by query
+04-09-2019 14:00:59: Document db18f8f907f94ffbb21c returned by query
+04-09-2019 14:01:00: Document c9bf3cf648144f9e93ac returned by query
+04-09-2019 14:01:00: Document b9ab63edd2684699b0e7 returned by query
+04-09-2019 14:01:00: Document 7b39b818d93c4191b72a returned by query
+04-09-2019 14:01:01: Document be24635ff24749ff8b5f returned by query
+04-09-2019 14:01:01: Document fd4213810e414a419dde returned by query
+04-09-2019 14:01:02: Document 5d22e371019b429ab6cb returned by query
+04-09-2019 14:01:02: Document a396f73108604d2ea592 returned by query
+04-09-2019 14:01:02: Document acd1673c9b4b47cf820e returned by query
+04-09-2019 14:01:03: Document 8108f474f54442a6a4af returned by query
+04-09-2019 14:01:03: Document fabe174c80874d63a414 returned by query
+04-09-2019 14:01:03: Document deedec946b5f491c8381 returned by query
+04-09-2019 14:01:04: Document da6ab7db1d66444cb70f returned by query
+04-09-2019 14:01:04: Document 97cb854206684913a9a1 returned by query
+04-09-2019 14:01:04: Document 33654b25eb694f8eb19b returned by query
+04-09-2019 14:01:05: Document 9ca7b75dbee44c189ed1 returned by query
+04-09-2019 14:01:05: Document 6474155b4697476e8ab0 returned by query
+04-09-2019 14:01:05: Document e7bc2843c92f48c69be0 returned by query
+04-09-2019 14:01:06: Document 0b35847cb0ee4c95b912 returned by query
+04-09-2019 14:01:06: Document 71ed39b85d304adbb6f2 returned by query
+04-09-2019 14:01:06: Document fc29ee0d11de4e4a8984 returned by query
+04-09-2019 14:01:07: Document 80007a8126c147cea7a3 returned by query
+04-09-2019 14:01:07: Document e83da21ff21a4cf09a85 returned by query
+04-09-2019 14:01:08: Document 3839d8b6ed2746a59b33 returned by query
+04-09-2019 14:01:08: Document edf2b8d65d6348a9a118 returned by query
+04-09-2019 14:01:08: Document 50938704a0bf4c258021 returned by query
+04-09-2019 14:01:09: Document c8033b0d84804351a2cc returned by query
+04-09-2019 14:01:09: Document 3198f861408c4e61bac9 returned by query
+04-09-2019 14:01:09: Document 9287f59b962a42d0bd69 returned by query
+04-09-2019 14:01:10: Document 8007556fb2be4bcb9493 returned by query
+04-09-2019 14:01:10: Document 06a2914a397b49888d42 returned by query
+04-09-2019 14:01:11: Document 49a861b85ac540ea8c88 returned by query
+04-09-2019 14:01:11: Document 3bc2a9a7514c4e768966 returned by query
+04-09-2019 14:01:11: Document a687d67127944284b90a returned by query
+04-09-2019 14:01:12: Document 64b4ef7017bf45449d7e returned by query
+04-09-2019 14:01:12: Document 08485639c53644ef9a22 returned by query
+04-09-2019 14:01:12: Document e24a5bf9cc3147d38987 returned by query
+04-09-2019 14:01:13: Document 1f1594e3d26c4938a570 returned by query
+04-09-2019 14:01:13: Document 1c3b5dd0b1ef436e8cd4 returned by query
+04-09-2019 14:01:13: Document cdbda95eadf24bc49294 returned by query
+04-09-2019 14:01:14: Document 37f0b8e412164973a650 returned by query
+04-09-2019 14:01:14: Document f2d6ca58264f435892ce returned by query
+04-09-2019 14:01:15: Document b6c185b77fd9495c8d43 returned by query
+04-09-2019 14:01:15: Document 67728269e8e54209a1bf returned by query
+04-09-2019 14:01:15: Document 01e09cc3206a4cf5bdd2 returned by query
+04-09-2019 14:01:16: Document 6e7d622ff8d34deda355 returned by query
+04-09-2019 14:01:16: Document 0900262e7d034baeac4a returned by query
+04-09-2019 14:01:16: Document b6cbd634916a4c2191fc returned by query
+04-09-2019 14:01:17: Document 5bd7e91431234eff8028 returned by query
+04-09-2019 14:01:17: Document 3c448cefbadb44018a2e returned by query
+04-09-2019 14:01:17: Document 6b8c1f586209461fa09c returned by query
+04-09-2019 14:01:18: Document 7f899bc9c88b4e6e8ed6 returned by query
+04-09-2019 14:01:18: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:19: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:19: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:19: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:20: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:20: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:20: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:22: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:22: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:23: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:23: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:23: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:24: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:24: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:24: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:25: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:25: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:25: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:26: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:26: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:26: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:27: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:27: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:27: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:29: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:29: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:30: Document 911a55305b494822b276 returned by query
+04-09-2019 14:01:30: Document 32bbe3d3b38a4905997d returned by query
+04-09-2019 14:01:30: Document f36f2259cf3d46c2820a returned by query
+04-09-2019 14:01:31: Document a1b3d66e447e45d4b7e3 returned by query
+04-09-2019 14:01:31: Document c9c9a0ccebe04458a2f2 returned by query
+04-09-2019 14:01:31: Document c27db6b1c03940ef8aed returned by query
+04-09-2019 14:01:32: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:32: Document e732d85d48384972a5e3 returned by query
+04-09-2019 14:01:32: Document 5ca627d9adf748629f27 returned by query
+04-09-2019 14:01:33: Document ad2fa19d390e4f0185f6 returned by query
+04-09-2019 14:01:33: Document 084be812a57847fb8234 returned by query
+04-09-2019 14:01:33: Document 414df2f12023425f932a returned by query
+04-09-2019 14:01:34: Document a6d83f5b0729496cb304 returned by query
+04-09-2019 14:01:34: Document 50a0c293fee2497eaad4 returned by query
+04-09-2019 14:01:34: Document de57d373d08a4613b964 returned by query
+04-09-2019 14:01:35: Document 9c69df8514b5406dac4f returned by query
+04-09-2019 14:01:35: Document 0abf52f85a4a4fec87e1 returned by query
+04-09-2019 14:01:35: Document f910ef2d39ea49e48131 returned by query
+04-09-2019 14:01:36: Document bebb0d99bbb4471fa214 returned by query
+04-09-2019 14:01:36: Document e81f7c15948f47b8b6bd returned by query
+04-09-2019 14:01:36: Document 258ab5bf7bbf4133bbda returned by query
+04-09-2019 14:01:37: Document fae584fa22bd43ceb53b returned by query
+04-09-2019 14:01:37: Document e8ad24e076f347429baf returned by query
+04-09-2019 14:01:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:40: Document 17ddfecff84546a8bbdb returned by query
+04-09-2019 14:01:40: Document 9b8726b03f934f31b23e returned by query
+04-09-2019 14:01:40: Document 58ac94c4509d4a13a9c1 returned by query
+04-09-2019 14:01:41: Document 6a711eb8fa3c4f9f9b4e returned by query
+04-09-2019 14:01:41: Document ed64f852178046029acd returned by query
+04-09-2019 14:01:41: Document f6a81984df8348468bfa returned by query
+04-09-2019 14:01:42: Document dc71cecb3f8542e8bcf2 returned by query
+04-09-2019 14:01:42: Document 648c637a958c4a5c88e8 returned by query
+04-09-2019 14:01:42: Document 34f00cfe61774d96bf49 returned by query
+04-09-2019 14:01:43: Document 61ebd5b3271b43c9a185 returned by query
+04-09-2019 14:01:43: Document 70fdaadf3d104b76b432 returned by query
+04-09-2019 14:01:44: Document 1f689b6e205b4b1b9292 returned by query
+04-09-2019 14:01:44: Document 6936022b85be4792987a returned by query
+04-09-2019 14:01:44: Document a36e478c59c4483daf89 returned by query
+04-09-2019 14:01:45: Document 2fe4c2c748334119be66 returned by query
+04-09-2019 14:01:45: Document 533968b3208b49418318 returned by query
+04-09-2019 14:01:45: Document 85fea92f680f4574abd2 returned by query
+04-09-2019 14:01:46: Document 1738443fb19548f0a661 returned by query
+04-09-2019 14:01:46: Document 7fac0949af134375bad1 returned by query
+04-09-2019 14:01:46: Document 56e423e56baf420dbedf returned by query
+04-09-2019 14:01:47: Document f96be2ed31df45b9ae5b returned by query
+04-09-2019 14:01:47: Document 5c68e296e68b4561aefb returned by query
+04-09-2019 14:01:47: Document a83cfe3da440469281f3 returned by query
+04-09-2019 14:01:48: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:01:48: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:01:48: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:01:49: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:01:49: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:49: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:01:49: Script ended: Wednesday 4th of September 2019 02:01:49 PM
+04-09-2019 14:01:49: END
+04-09-2019 14:04:39: *************************************************
+04-09-2019 14:04:39: Script started: Wednesday 4th of September 2019 02:04:39 PM
+04-09-2019 14:04:39: Memory usage (Kb): 791.776
+04-09-2019 14:04:41: Update for date: 30-08-2019
+04-09-2019 14:04:48: Update for date: 31-08-2019
+04-09-2019 14:04:48: Update for date: 01-09-2019
+04-09-2019 14:04:50: Updated the DOM to month ' . 9 . ' of year '. 2019 . ' in calendar view: 
+04-09-2019 14:04:50: Update for date: 02-09-2019
+04-09-2019 14:04:53: Update for date: 03-09-2019
+04-09-2019 14:04:54: Update for date: 04-09-2019
+04-09-2019 14:04:54: Found 201 documents
+04-09-2019 14:04:55: Document facba535f08d472ab373 returned by query
+04-09-2019 14:04:55: Document 3507003ea822452eba10 returned by query
+04-09-2019 14:04:56: Document 2b176d79a1e54856a1e4 returned by query
+04-09-2019 14:04:56: Document 2876b0d1bc3c4fe49303 returned by query
+04-09-2019 14:04:56: Document 8234b2d301044ac2a180 returned by query
+04-09-2019 14:04:57: Document 42b8e32c02a14ac98541 returned by query
+04-09-2019 14:04:57: Document ccac1c768cee4742b71b returned by query
+04-09-2019 14:04:57: Document 0c15fbce705a48f4b4f1 returned by query
+04-09-2019 14:04:58: Document cda343a5ad2e456eb293 returned by query
+04-09-2019 14:04:58: Document 6a8c35ab8cd14cf2a747 returned by query
+04-09-2019 14:04:58: Document 0114cbde995d484ab875 returned by query
+04-09-2019 14:04:59: Document 067eb1a2e5364d248afd returned by query
+04-09-2019 14:04:59: Document 0b37ec06f8d54bf9b27c returned by query
+04-09-2019 14:05:00: Document 5a08dae6fe5141f28a82 returned by query
+04-09-2019 14:05:00: Document 38155e3b0cca43e4938a returned by query
+04-09-2019 14:05:00: Document 7e4e2974078240cbaaac returned by query
+04-09-2019 14:05:01: Document 80f5c04b73914f449c0f returned by query
+04-09-2019 14:05:01: Document c1ef2b05d6434a7bb174 returned by query
+04-09-2019 14:05:01: Document 15d248837eee48d2b861 returned by query
+04-09-2019 14:05:02: Document d909d83d4c7d482f864e returned by query
+04-09-2019 14:05:02: Document 556acd024ce3427e981f returned by query
+04-09-2019 14:05:02: Document 0c8164e157a84cf4b3aa returned by query
+04-09-2019 14:05:03: Document 077c3365f6d14dbfaaf9 returned by query
+04-09-2019 14:05:03: Document 0ac6e063077e420ebf54 returned by query
+04-09-2019 14:05:03: Document 69a617eda5d2402396db returned by query
+04-09-2019 14:05:04: Document 0237a861b8394c6cb0ae returned by query
+04-09-2019 14:05:04: Document 6650714c66b44c7db0bf returned by query
+04-09-2019 14:05:04: Document 19410614b4c6415eb6ac returned by query
+04-09-2019 14:05:05: Document 63a4e63132c141478ecb returned by query
+04-09-2019 14:05:05: Document 94ed93a6827942788630 returned by query
+04-09-2019 14:05:05: Document c68c2fde118d425799ec returned by query
+04-09-2019 14:05:06: Document 3f9d9ace92c64d87b696 returned by query
+04-09-2019 14:05:06: Document 528cabbf5adc4b8d97ca returned by query
+04-09-2019 14:05:06: Document a5045740f3794c4db2e3 returned by query
+04-09-2019 14:05:07: Document cceb2807d1f745ab8659 returned by query
+04-09-2019 14:05:07: Document 32a504ff79a142be80dd returned by query
+04-09-2019 14:05:08: Document 7422afb41011494296d5 returned by query
+04-09-2019 14:05:08: Document 3d9712f95d794a16bd50 returned by query
+04-09-2019 14:05:08: Document 3c9874cfaef24d33921e returned by query
+04-09-2019 14:05:09: Document cd052905c9e7488d8703 returned by query
+04-09-2019 14:05:09: Document 1602183913734bd1ab32 returned by query
+04-09-2019 14:05:09: Document b53eb216f48d4ce3a85e returned by query
+04-09-2019 14:05:10: Document 55e323d2ed3745179305 returned by query
+04-09-2019 14:05:10: Document 2c179212c34145b88189 returned by query
+04-09-2019 14:05:10: Document 81dca1a46c974c0484cc returned by query
+04-09-2019 14:05:11: Document 370cd3c46abc4c3f8221 returned by query
+04-09-2019 14:05:11: Document bc4aae83d30549c783c4 returned by query
+04-09-2019 14:05:11: Document a41c33303aed4f988d78 returned by query
+04-09-2019 14:05:12: Document 7be898843d414e10ad94 returned by query
+04-09-2019 14:05:12: Document 47b9ecb4106e4a9585a8 returned by query
+04-09-2019 14:05:12: Document 88ce9d59ecf94276843c returned by query
+04-09-2019 14:05:13: Document 86b9bede5eeb4f148d06 returned by query
+04-09-2019 14:05:13: Document 9e001d11d3684a938a2f returned by query
+04-09-2019 14:05:14: Document 70b884430e3f4ce3b4e7 returned by query
+04-09-2019 14:05:14: Document a74b125e05134e04bac0 returned by query
+04-09-2019 14:05:14: Document 7909d721f5a74c43ac24 returned by query
+04-09-2019 14:05:15: Document 209ff123309043ecb415 returned by query
+04-09-2019 14:05:15: Document 9001c859a148434aa22a returned by query
+04-09-2019 14:05:15: Document 0acbb196a62a443b9a5c returned by query
+04-09-2019 14:05:16: Document db18f8f907f94ffbb21c returned by query
+04-09-2019 14:05:16: Document c9bf3cf648144f9e93ac returned by query
+04-09-2019 14:05:16: Document b9ab63edd2684699b0e7 returned by query
+04-09-2019 14:05:17: Document 7b39b818d93c4191b72a returned by query
+04-09-2019 14:05:17: Document be24635ff24749ff8b5f returned by query
+04-09-2019 14:05:17: Document fd4213810e414a419dde returned by query
+04-09-2019 14:05:18: Document 5d22e371019b429ab6cb returned by query
+04-09-2019 14:05:18: Document a396f73108604d2ea592 returned by query
+04-09-2019 14:05:18: Document acd1673c9b4b47cf820e returned by query
+04-09-2019 14:05:19: Document 8108f474f54442a6a4af returned by query
+04-09-2019 14:05:19: Document fabe174c80874d63a414 returned by query
+04-09-2019 14:05:20: Document deedec946b5f491c8381 returned by query
+04-09-2019 14:05:20: Document da6ab7db1d66444cb70f returned by query
+04-09-2019 14:05:20: Document 97cb854206684913a9a1 returned by query
+04-09-2019 14:05:21: Document 33654b25eb694f8eb19b returned by query
+04-09-2019 14:05:21: Document 9ca7b75dbee44c189ed1 returned by query
+04-09-2019 14:05:21: Document 6474155b4697476e8ab0 returned by query
+04-09-2019 14:05:22: Document e7bc2843c92f48c69be0 returned by query
+04-09-2019 14:05:22: Document 0b35847cb0ee4c95b912 returned by query
+04-09-2019 14:05:22: Document 71ed39b85d304adbb6f2 returned by query
+04-09-2019 14:05:23: Document fc29ee0d11de4e4a8984 returned by query
+04-09-2019 14:05:23: Document 80007a8126c147cea7a3 returned by query
+04-09-2019 14:05:23: Document e83da21ff21a4cf09a85 returned by query
+04-09-2019 14:05:24: Document 3839d8b6ed2746a59b33 returned by query
+04-09-2019 14:05:24: Document edf2b8d65d6348a9a118 returned by query
+04-09-2019 14:05:24: Document 50938704a0bf4c258021 returned by query
+04-09-2019 14:05:25: Document c8033b0d84804351a2cc returned by query
+04-09-2019 14:05:25: Document 3198f861408c4e61bac9 returned by query
+04-09-2019 14:05:25: Document 9287f59b962a42d0bd69 returned by query
+04-09-2019 14:05:26: Document 8007556fb2be4bcb9493 returned by query
+04-09-2019 14:05:26: Document 06a2914a397b49888d42 returned by query
+04-09-2019 14:05:27: Document 49a861b85ac540ea8c88 returned by query
+04-09-2019 14:05:27: Document 3bc2a9a7514c4e768966 returned by query
+04-09-2019 14:05:27: Document a687d67127944284b90a returned by query
+04-09-2019 14:05:28: Document 64b4ef7017bf45449d7e returned by query
+04-09-2019 14:05:28: Document 08485639c53644ef9a22 returned by query
+04-09-2019 14:05:28: Document e24a5bf9cc3147d38987 returned by query
+04-09-2019 14:05:29: Document 1f1594e3d26c4938a570 returned by query
+04-09-2019 14:05:29: Document 1c3b5dd0b1ef436e8cd4 returned by query
+04-09-2019 14:05:29: Document cdbda95eadf24bc49294 returned by query
+04-09-2019 14:05:30: Document 37f0b8e412164973a650 returned by query
+04-09-2019 14:05:30: Document f2d6ca58264f435892ce returned by query
+04-09-2019 14:05:30: Document b6c185b77fd9495c8d43 returned by query
+04-09-2019 14:05:31: Document 67728269e8e54209a1bf returned by query
+04-09-2019 14:05:31: Document 01e09cc3206a4cf5bdd2 returned by query
+04-09-2019 14:05:32: Document 6e7d622ff8d34deda355 returned by query
+04-09-2019 14:05:32: Document 0900262e7d034baeac4a returned by query
+04-09-2019 14:05:32: Document b6cbd634916a4c2191fc returned by query
+04-09-2019 14:05:33: Document 5bd7e91431234eff8028 returned by query
+04-09-2019 14:05:33: Document 3c448cefbadb44018a2e returned by query
+04-09-2019 14:05:33: Document 6b8c1f586209461fa09c returned by query
+04-09-2019 14:05:34: Document 7f899bc9c88b4e6e8ed6 returned by query
+04-09-2019 14:05:34: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:34: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:35: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:35: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:35: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:36: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:36: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:36: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:40: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:40: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:40: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:41: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:41: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:42: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:42: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:42: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:43: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:43: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:43: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:44: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:44: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:44: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:45: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:45: Document 911a55305b494822b276 returned by query
+04-09-2019 14:05:45: Document 32bbe3d3b38a4905997d returned by query
+04-09-2019 14:05:46: Document f36f2259cf3d46c2820a returned by query
+04-09-2019 14:05:46: Document a1b3d66e447e45d4b7e3 returned by query
+04-09-2019 14:05:46: Document c9c9a0ccebe04458a2f2 returned by query
+04-09-2019 14:05:47: Document c27db6b1c03940ef8aed returned by query
+04-09-2019 14:05:47: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:47: Document e732d85d48384972a5e3 returned by query
+04-09-2019 14:05:48: Document 5ca627d9adf748629f27 returned by query
+04-09-2019 14:05:48: Document ad2fa19d390e4f0185f6 returned by query
+04-09-2019 14:05:48: Document 084be812a57847fb8234 returned by query
+04-09-2019 14:05:49: Document 414df2f12023425f932a returned by query
+04-09-2019 14:05:49: Document a6d83f5b0729496cb304 returned by query
+04-09-2019 14:05:49: Document 50a0c293fee2497eaad4 returned by query
+04-09-2019 14:05:50: Document de57d373d08a4613b964 returned by query
+04-09-2019 14:05:50: Document 9c69df8514b5406dac4f returned by query
+04-09-2019 14:05:51: Document 0abf52f85a4a4fec87e1 returned by query
+04-09-2019 14:05:51: Document f910ef2d39ea49e48131 returned by query
+04-09-2019 14:05:51: Document bebb0d99bbb4471fa214 returned by query
+04-09-2019 14:05:52: Document e81f7c15948f47b8b6bd returned by query
+04-09-2019 14:05:52: Document 258ab5bf7bbf4133bbda returned by query
+04-09-2019 14:05:52: Document fae584fa22bd43ceb53b returned by query
+04-09-2019 14:05:53: Document e8ad24e076f347429baf returned by query
+04-09-2019 14:05:53: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:53: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:54: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:54: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:54: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:55: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:05:55: Document 17ddfecff84546a8bbdb returned by query
+04-09-2019 14:05:55: Document 9b8726b03f934f31b23e returned by query
+04-09-2019 14:05:56: Document 58ac94c4509d4a13a9c1 returned by query
+04-09-2019 14:05:56: Document 6a711eb8fa3c4f9f9b4e returned by query
+04-09-2019 14:05:57: Document ed64f852178046029acd returned by query
+04-09-2019 14:05:57: Document f6a81984df8348468bfa returned by query
+04-09-2019 14:05:57: Document dc71cecb3f8542e8bcf2 returned by query
+04-09-2019 14:05:58: Document 648c637a958c4a5c88e8 returned by query
+04-09-2019 14:05:58: Document 34f00cfe61774d96bf49 returned by query
+04-09-2019 14:05:58: Document 61ebd5b3271b43c9a185 returned by query
+04-09-2019 14:05:59: Document 70fdaadf3d104b76b432 returned by query
+04-09-2019 14:05:59: Document 1f689b6e205b4b1b9292 returned by query
+04-09-2019 14:05:59: Document 6936022b85be4792987a returned by query
+04-09-2019 14:06:00: Document a36e478c59c4483daf89 returned by query
+04-09-2019 14:06:00: Document 2fe4c2c748334119be66 returned by query
+04-09-2019 14:06:01: Document 533968b3208b49418318 returned by query
+04-09-2019 14:06:01: Document 85fea92f680f4574abd2 returned by query
+04-09-2019 14:06:01: Document 1738443fb19548f0a661 returned by query
+04-09-2019 14:06:02: Document 7fac0949af134375bad1 returned by query
+04-09-2019 14:06:02: Document 56e423e56baf420dbedf returned by query
+04-09-2019 14:06:02: Document f96be2ed31df45b9ae5b returned by query
+04-09-2019 14:06:03: Document 5c68e296e68b4561aefb returned by query
+04-09-2019 14:06:03: Document a83cfe3da440469281f3 returned by query
+04-09-2019 14:06:03: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:06:04: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:06:04: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:06:04: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:06:05: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:05: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:05: Script ended: Wednesday 4th of September 2019 02:06:05 PM
+
+04-09-2019 14:06:13: *************************************************
+04-09-2019 14:06:13: Script started: Wednesday 4th of September 2019 02:06:13 PM
+04-09-2019 14:06:13: Memory usage (Kb): 791.776
+04-09-2019 14:06:16: Update for date: 02-09-2019
+04-09-2019 14:06:19: Update for date: 03-09-2019
+04-09-2019 14:06:21: Update for date: 04-09-2019
+04-09-2019 14:06:21: Found 51 documents
+04-09-2019 14:06:21: Document e732d85d48384972a5e3 returned by query
+04-09-2019 14:06:22: Document 5ca627d9adf748629f27 returned by query
+04-09-2019 14:06:22: Document ad2fa19d390e4f0185f6 returned by query
+04-09-2019 14:06:22: Document 084be812a57847fb8234 returned by query
+04-09-2019 14:06:23: Document 414df2f12023425f932a returned by query
+04-09-2019 14:06:23: Document a6d83f5b0729496cb304 returned by query
+04-09-2019 14:06:23: Document 50a0c293fee2497eaad4 returned by query
+04-09-2019 14:06:24: Document de57d373d08a4613b964 returned by query
+04-09-2019 14:06:24: Document 9c69df8514b5406dac4f returned by query
+04-09-2019 14:06:24: Document 0abf52f85a4a4fec87e1 returned by query
+04-09-2019 14:06:25: Document f910ef2d39ea49e48131 returned by query
+04-09-2019 14:06:25: Document bebb0d99bbb4471fa214 returned by query
+04-09-2019 14:06:25: Document e81f7c15948f47b8b6bd returned by query
+04-09-2019 14:06:26: Document 258ab5bf7bbf4133bbda returned by query
+04-09-2019 14:06:26: Document fae584fa22bd43ceb53b returned by query
+04-09-2019 14:06:26: Document e8ad24e076f347429baf returned by query
+04-09-2019 14:06:27: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:27: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:29: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:29: Document 17ddfecff84546a8bbdb returned by query
+04-09-2019 14:06:29: Document 9b8726b03f934f31b23e returned by query
+04-09-2019 14:06:30: Document 58ac94c4509d4a13a9c1 returned by query
+04-09-2019 14:06:30: Document 6a711eb8fa3c4f9f9b4e returned by query
+04-09-2019 14:06:30: Document ed64f852178046029acd returned by query
+04-09-2019 14:06:31: Document f6a81984df8348468bfa returned by query
+04-09-2019 14:06:31: Document dc71cecb3f8542e8bcf2 returned by query
+04-09-2019 14:06:31: Document 648c637a958c4a5c88e8 returned by query
+04-09-2019 14:06:32: Document 34f00cfe61774d96bf49 returned by query
+04-09-2019 14:06:32: Document 61ebd5b3271b43c9a185 returned by query
+04-09-2019 14:06:33: Document 70fdaadf3d104b76b432 returned by query
+04-09-2019 14:06:33: Document 1f689b6e205b4b1b9292 returned by query
+04-09-2019 14:06:33: Document 6936022b85be4792987a returned by query
+04-09-2019 14:06:34: Document a36e478c59c4483daf89 returned by query
+04-09-2019 14:06:34: Document 2fe4c2c748334119be66 returned by query
+04-09-2019 14:06:34: Document 533968b3208b49418318 returned by query
+04-09-2019 14:06:35: Document 85fea92f680f4574abd2 returned by query
+04-09-2019 14:06:35: Document 1738443fb19548f0a661 returned by query
+04-09-2019 14:06:35: Document 7fac0949af134375bad1 returned by query
+04-09-2019 14:06:36: Document 56e423e56baf420dbedf returned by query
+04-09-2019 14:06:36: Document f96be2ed31df45b9ae5b returned by query
+04-09-2019 14:06:36: Document 5c68e296e68b4561aefb returned by query
+04-09-2019 14:06:37: Document a83cfe3da440469281f3 returned by query
+04-09-2019 14:06:37: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:06:37: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:06:38: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:06:38: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:06:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:06:39: Script ended: Wednesday 4th of September 2019 02:06:39 PM
+04-09-2019 14:06:39: END
+04-09-2019 14:10:50: *************************************************
+04-09-2019 14:10:50: Script started: Wednesday 4th of September 2019 02:10:50 PM
+04-09-2019 14:10:50: Memory usage (Kb): 791.776
+04-09-2019 14:10:53: Update for date: 02-09-2019
+04-09-2019 14:10:58: Update for date: 03-09-2019
+04-09-2019 14:11:00: Update for date: 04-09-2019
+04-09-2019 14:11:00: Found 51 documents
+04-09-2019 14:11:00: Document e732d85d48384972a5e3 returned by query
+04-09-2019 14:11:01: Document 5ca627d9adf748629f27 returned by query
+04-09-2019 14:11:01: Document ad2fa19d390e4f0185f6 returned by query
+04-09-2019 14:11:01: Document 084be812a57847fb8234 returned by query
+04-09-2019 14:11:02: Document 414df2f12023425f932a returned by query
+04-09-2019 14:11:02: Document a6d83f5b0729496cb304 returned by query
+04-09-2019 14:11:02: Document 50a0c293fee2497eaad4 returned by query
+04-09-2019 14:11:03: Document de57d373d08a4613b964 returned by query
+04-09-2019 14:11:03: Document 9c69df8514b5406dac4f returned by query
+04-09-2019 14:11:03: Document 0abf52f85a4a4fec87e1 returned by query
+04-09-2019 14:11:04: Document f910ef2d39ea49e48131 returned by query
+04-09-2019 14:11:04: Document bebb0d99bbb4471fa214 returned by query
+04-09-2019 14:11:05: Document e81f7c15948f47b8b6bd returned by query
+04-09-2019 14:11:05: Document 258ab5bf7bbf4133bbda returned by query
+04-09-2019 14:11:05: Document fae584fa22bd43ceb53b returned by query
+04-09-2019 14:11:06: Document e8ad24e076f347429baf returned by query
+04-09-2019 14:11:06: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:06: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:07: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:07: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:07: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:08: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:08: Document 17ddfecff84546a8bbdb returned by query
+04-09-2019 14:11:08: Document 9b8726b03f934f31b23e returned by query
+04-09-2019 14:11:09: Document 58ac94c4509d4a13a9c1 returned by query
+04-09-2019 14:11:09: Document 6a711eb8fa3c4f9f9b4e returned by query
+04-09-2019 14:11:10: Document ed64f852178046029acd returned by query
+04-09-2019 14:11:10: Document f6a81984df8348468bfa returned by query
+04-09-2019 14:11:10: Document dc71cecb3f8542e8bcf2 returned by query
+04-09-2019 14:11:11: Document 648c637a958c4a5c88e8 returned by query
+04-09-2019 14:11:11: Document 34f00cfe61774d96bf49 returned by query
+04-09-2019 14:11:11: Document 61ebd5b3271b43c9a185 returned by query
+04-09-2019 14:11:12: Document 70fdaadf3d104b76b432 returned by query
+04-09-2019 14:11:12: Document 1f689b6e205b4b1b9292 returned by query
+04-09-2019 14:11:12: Document 6936022b85be4792987a returned by query
+04-09-2019 14:11:13: Document a36e478c59c4483daf89 returned by query
+04-09-2019 14:11:13: Document 2fe4c2c748334119be66 returned by query
+04-09-2019 14:11:13: Document 533968b3208b49418318 returned by query
+04-09-2019 14:11:14: Document 85fea92f680f4574abd2 returned by query
+04-09-2019 14:11:14: Document 1738443fb19548f0a661 returned by query
+04-09-2019 14:11:14: Document 7fac0949af134375bad1 returned by query
+04-09-2019 14:11:15: Document 56e423e56baf420dbedf returned by query
+04-09-2019 14:11:15: Document f96be2ed31df45b9ae5b returned by query
+04-09-2019 14:11:15: Document 5c68e296e68b4561aefb returned by query
+04-09-2019 14:11:16: Document a83cfe3da440469281f3 returned by query
+04-09-2019 14:11:16: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:11:17: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:11:17: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:11:17: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:11:18: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:18: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:18: Script ended: Wednesday 4th of September 2019 02:11:18 PM
+04-09-2019 14:11:18: 
+04-09-2019 14:11:25: *************************************************
+04-09-2019 14:11:25: Script started: Wednesday 4th of September 2019 02:11:25 PM
+04-09-2019 14:11:25: Memory usage (Kb): 791.776
+04-09-2019 14:11:27: Update for date: 03-09-2019
+04-09-2019 14:11:29: Update for date: 04-09-2019
+04-09-2019 14:11:29: Found 6 documents
+04-09-2019 14:11:30: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:11:30: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:11:30: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:11:31: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:11:31: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:32: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:11:32: Script ended: Wednesday 4th of September 2019 02:11:32 PM
+04-09-2019 14:11:32: 
+04-09-2019 14:13:15: Mail with log send!
+04-09-2019 14:13:15: *************************************************
+04-09-2019 14:13:15: Script started: Wednesday 4th of September 2019 02:13:15 PM
+04-09-2019 14:13:15: Memory usage (Kb): 791.776
+04-09-2019 14:13:17: Update for date: 03-09-2019
+04-09-2019 14:13:19: Update for date: 04-09-2019
+04-09-2019 14:13:19: Found 6 documents
+04-09-2019 14:13:19: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:13:20: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:13:20: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:13:20: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:13:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:13:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:13:21: Script ended: Wednesday 4th of September 2019 02:13:21 PM
+04-09-2019 14:13:21: 
+04-09-2019 14:19:59: Mail with log send!
+04-09-2019 14:19:59: *************************************************
+04-09-2019 14:19:59: Script started: Wednesday 4th of September 2019 02:19:59 PM
+04-09-2019 14:19:59: Memory usage (Kb): 791.776
+04-09-2019 14:20:01: Update for date: 03-09-2019
+04-09-2019 14:20:03: Update for date: 04-09-2019
+04-09-2019 14:20:03: Found 6 documents
+04-09-2019 14:20:04: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:20:04: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:20:04: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:20:05: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:20:05: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:20:06: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:20:06: Script ended: Wednesday 4th of September 2019 02:20:06 PM
+04-09-2019 14:20:06: 
+04-09-2019 14:21:57: Mail with log send!
+04-09-2019 14:21:57: *************************************************
+04-09-2019 14:21:57: Script started: Wednesday 4th of September 2019 02:21:57 PM
+04-09-2019 14:21:57: Memory usage (Kb): 791.88
+04-09-2019 14:22:00: Update for date: 03-09-2019
+04-09-2019 14:22:01: Update for date: 04-09-2019
+04-09-2019 14:22:01: Found 6 documents
+04-09-2019 14:22:02: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:22:02: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:22:02: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:22:03: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:22:03: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:22:03: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:22:03: Script ended: Wednesday 4th of September 2019 02:22:03 PM
+04-09-2019 14:22:03: END
+04-09-2019 14:25:48: Mail with log send!
+04-09-2019 14:25:48: *************************************************
+04-09-2019 14:25:48: Script started: Wednesday 4th of September 2019 02:25:48 PM
+04-09-2019 14:25:48: Memory usage (Kb): 791.976
+04-09-2019 14:25:50: Update for date: 03-09-2019
+04-09-2019 14:25:52: Update for date: 04-09-2019
+04-09-2019 14:25:52: Found 6 documents
+04-09-2019 14:25:52: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:25:53: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:25:53: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:25:53: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:25:54: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:25:54: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:25:54: Script ended: Wednesday 4th of September 2019 02:25:54 PM
+04-09-2019 14:25:54: END
+04-09-2019 14:27:03: Mail with log send!
+04-09-2019 14:27:03: *************************************************
+04-09-2019 14:27:03: Script started: Wednesday 4th of September 2019 02:27:03 PM
+04-09-2019 14:27:03: Memory usage (Kb): 791.976
+04-09-2019 14:27:05: Update for date: 03-09-2019
+04-09-2019 14:27:07: Update for date: 04-09-2019
+04-09-2019 14:27:07: Found 6 documents
+04-09-2019 14:27:07: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:27:08: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:27:08: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:27:08: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:27:09: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:27:09: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:27:09: Script ended: Wednesday 4th of September 2019 02:27:09 PM
+04-09-2019 14:27:09: END04-09-2019 14:27:32: Mail with log send!
+04-09-2019 14:27:32: *************************************************
+04-09-2019 14:27:32: Script started: Wednesday 4th of September 2019 02:27:32 PM
+04-09-2019 14:27:32: Memory usage (Kb): 791.976
+04-09-2019 14:27:33: Update for date: 03-09-2019
+04-09-2019 14:27:35: Update for date: 04-09-2019
+04-09-2019 14:27:35: Found 6 documents
+04-09-2019 14:27:35: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:27:35: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:27:36: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:27:36: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:27:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:27:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:27:37: Script ended: Wednesday 4th of September 2019 02:27:37 PM
+04-09-2019 14:27:37: END
+04-09-2019 14:27:54: Mail with log send!
+04-09-2019 14:27:54: *************************************************
+04-09-2019 14:27:54: Script started: Wednesday 4th of September 2019 02:27:54 PM
+04-09-2019 14:27:54: Memory usage (Kb): 791.976
+04-09-2019 14:27:56: Update for date: 03-09-2019
+04-09-2019 14:27:57: Update for date: 04-09-2019
+04-09-2019 14:27:57: Found 6 documents
+04-09-2019 14:27:58: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:27:58: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:27:59: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:27:59: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:27:59: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:28:00: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:28:00: Script ended: Wednesday 4th of September 2019 02:28:00 PM
+04-09-2019 14:28:00: END
+04-09-2019 14:28:33: Mail with log send!
+04-09-2019 14:28:33: *************************************************
+04-09-2019 14:28:33: Script started: Wednesday 4th of September 2019 02:28:33 PM
+04-09-2019 14:28:33: Memory usage (Kb): 791.976
+04-09-2019 14:28:35: Update for date: 03-09-2019
+04-09-2019 14:28:37: Update for date: 04-09-2019
+04-09-2019 14:28:37: Found 6 documents
+04-09-2019 14:28:37: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:28:37: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:28:38: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:28:38: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:28:38: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:28:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:28:39: Script ended: Wednesday 4th of September 2019 02:28:39 PM
+04-09-2019 14:28:39: END
+
+04-09-2019 14:29:22: Mail with log send!
+04-09-2019 14:29:22: *************************************************
+04-09-2019 14:29:22: Script started: Wednesday 4th of September 2019 02:29:22 PM
+04-09-2019 14:29:22: Memory usage (Kb): 791.976
+04-09-2019 14:29:24: Update for date: 03-09-2019
+04-09-2019 14:29:26: Update for date: 04-09-2019
+04-09-2019 14:29:26: Found 6 documents
+04-09-2019 14:29:26: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:29:27: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:29:27: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:29:27: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:29:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:29:28: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:29:28: Script ended: Wednesday 4th of September 2019 02:29:28 PM
+04-09-2019 14:29:28: END
+04-09-2019 14:29:31: Mail with log send!
+04-09-2019 14:29:31: *************************************************
+04-09-2019 14:29:31: Script started: Wednesday 4th of September 2019 02:29:31 PM
+04-09-2019 14:29:31: Memory usage (Kb): 791.976
+04-09-2019 14:29:33: Update for date: 03-09-2019
+04-09-2019 14:29:35: Update for date: 04-09-2019
+04-09-2019 14:29:35: Found 6 documents
+04-09-2019 14:29:36: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:29:36: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:29:36: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:29:37: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:29:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:29:37: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:29:37: Script ended: Wednesday 4th of September 2019 02:29:37 PM
+04-09-2019 14:29:37: 
+04-09-2019 14:33:44: Mail with log send!
+04-09-2019 14:33:44: *************************************************
+04-09-2019 14:33:44: Script started: Wednesday 4th of September 2019 02:33:44 PM
+04-09-2019 14:33:44: Memory usage (Kb): 792.008
+04-09-2019 14:33:46: Update for date: 03-09-2019
+04-09-2019 14:33:48: Update for date: 04-09-2019
+04-09-2019 14:33:48: Found 6 documents
+04-09-2019 14:33:49: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:33:49: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:33:50: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:33:50: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:33:50: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:33:51: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:33:51: Script ended: Wednesday 4th of September 2019 02:33:51 PM
+04-09-2019 14:33:51: END
+04-09-2019 14:33:59: Mail with log send!
+04-09-2019 14:33:59: *************************************************
+04-09-2019 14:33:59: Script started: Wednesday 4th of September 2019 02:33:59 PM
+04-09-2019 14:33:59: Memory usage (Kb): 792.008
+04-09-2019 14:34:01: Update for date: 03-09-2019
+04-09-2019 14:34:02: Update for date: 04-09-2019
+04-09-2019 14:34:02: Found 6 documents
+04-09-2019 14:34:03: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:34:03: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:34:03: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:34:04: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:34:04: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:34:05: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:34:05: Script ended: Wednesday 4th of September 2019 02:34:05 PM
+04-09-2019 14:34:05: END
+04-09-2019 14:34:52: Mail with log send!
+04-09-2019 14:34:52: *************************************************
+04-09-2019 14:34:52: Script started: Wednesday 4th of September 2019 02:34:52 PM
+04-09-2019 14:34:52: Memory usage (Kb): 792.08
+04-09-2019 14:34:54: Update for date: 03-09-2019
+04-09-2019 14:34:55: Update for date: 04-09-2019
+04-09-2019 14:34:55: Found 6 documents
+04-09-2019 14:34:56: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:34:56: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:34:57: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:34:57: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:34:58: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:34:58: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:34:58: Script ended: Wednesday 4th of September 2019 02:34:58 PM
+04-09-2019 14:34:58: 
+04-09-2019 14:35:33: Mail with log send!
+04-09-2019 14:35:33: *************************************************
+04-09-2019 14:35:33: Script started: Wednesday 4th of September 2019 02:35:33 PM
+04-09-2019 14:35:33: Memory usage (Kb): 792.072
+04-09-2019 14:35:35: Update for date: 03-09-2019
+04-09-2019 14:35:37: Update for date: 04-09-2019
+04-09-2019 14:35:37: Found 6 documents
+04-09-2019 14:35:37: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 14:35:38: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 14:35:38: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 14:35:38: Document 108489b84a64411ab238 returned by query
+04-09-2019 14:35:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:35:39: Document 3deadffc639740b19d3c returned by query
+04-09-2019 14:35:39: Script ended: Wednesday 4th of September 2019 02:35:39 PM
+04-09-2019 14:35:39: 
+04-09-2019 14:38:42: Mail with log send!
+04-09-2019 14:39:12: Mail with log send!
+04-09-2019 14:39:20: Mail with log send!
+04-09-2019 14:39:20: Mail with log send!
+04-09-2019 15:06:27: Mail with log send!
+04-09-2019 15:06:39: Mail with log send!
+04-09-2019 15:07:21: Mail with log send!
+04-09-2019 15:07:35: Mail with log send!
+END
+04-09-2019 15:07:53: Mail with log send!
+04-09-2019 15:07:57: Mail with log send!
+04-09-2019 15:08:00: Mail with log send!
+END
+04-09-2019 15:08:13: Mail with log send!
+04-09-2019 15:08:26: Mail with log send!
+04-09-2019 14:34:05: END
+04-09-2019 15:09:07: *************************************************
+04-09-2019 15:09:07: Script started: Wednesday 4th of September 2019 03:09:07 PM
+04-09-2019 15:09:07: Memory usage (Kb): 797.208
+04-09-2019 15:09:09: Update for date: 02-09-2019
+04-09-2019 15:09:12: Update for date: 03-09-2019
+04-09-2019 15:09:14: Update for date: 04-09-2019
+04-09-2019 15:09:14: Found 51 documents
+04-09-2019 15:09:15: Document e732d85d48384972a5e3 returned by query
+04-09-2019 15:09:15: Document 5ca627d9adf748629f27 returned by query
+04-09-2019 15:09:15: Document ad2fa19d390e4f0185f6 returned by query
+04-09-2019 15:09:16: Document 084be812a57847fb8234 returned by query
+04-09-2019 15:09:16: Document 414df2f12023425f932a returned by query
+04-09-2019 15:09:17: Document a6d83f5b0729496cb304 returned by query
+04-09-2019 15:09:17: Document 50a0c293fee2497eaad4 returned by query
+04-09-2019 15:09:18: Document de57d373d08a4613b964 returned by query
+04-09-2019 15:09:18: Document 9c69df8514b5406dac4f returned by query
+04-09-2019 15:09:18: Document 0abf52f85a4a4fec87e1 returned by query
+04-09-2019 15:09:19: Document f910ef2d39ea49e48131 returned by query
+04-09-2019 15:09:19: Document bebb0d99bbb4471fa214 returned by query
+04-09-2019 15:09:20: Document e81f7c15948f47b8b6bd returned by query
+04-09-2019 15:09:20: Document 258ab5bf7bbf4133bbda returned by query
+04-09-2019 15:09:20: Document fae584fa22bd43ceb53b returned by query
+04-09-2019 15:09:21: Document e8ad24e076f347429baf returned by query
+04-09-2019 15:09:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:21: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:22: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:22: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:23: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:23: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:23: Document 17ddfecff84546a8bbdb returned by query
+04-09-2019 15:09:24: Document 9b8726b03f934f31b23e returned by query
+04-09-2019 15:09:24: Document 58ac94c4509d4a13a9c1 returned by query
+04-09-2019 15:09:24: Document 6a711eb8fa3c4f9f9b4e returned by query
+04-09-2019 15:09:25: Document ed64f852178046029acd returned by query
+04-09-2019 15:09:25: Document f6a81984df8348468bfa returned by query
+04-09-2019 15:09:26: Document dc71cecb3f8542e8bcf2 returned by query
+04-09-2019 15:09:26: Document 648c637a958c4a5c88e8 returned by query
+04-09-2019 15:09:26: Document 34f00cfe61774d96bf49 returned by query
+04-09-2019 15:09:27: Document 61ebd5b3271b43c9a185 returned by query
+04-09-2019 15:09:27: Document 70fdaadf3d104b76b432 returned by query
+04-09-2019 15:09:28: Document 1f689b6e205b4b1b9292 returned by query
+04-09-2019 15:09:28: Document 6936022b85be4792987a returned by query
+04-09-2019 15:09:28: Document a36e478c59c4483daf89 returned by query
+04-09-2019 15:09:29: Document 2fe4c2c748334119be66 returned by query
+04-09-2019 15:09:29: Document 533968b3208b49418318 returned by query
+04-09-2019 15:09:29: Document 85fea92f680f4574abd2 returned by query
+04-09-2019 15:09:30: Document 1738443fb19548f0a661 returned by query
+04-09-2019 15:09:30: Document 7fac0949af134375bad1 returned by query
+04-09-2019 15:09:31: Document 56e423e56baf420dbedf returned by query
+04-09-2019 15:09:31: Document f96be2ed31df45b9ae5b returned by query
+04-09-2019 15:09:31: Document 5c68e296e68b4561aefb returned by query
+04-09-2019 15:09:32: Document a83cfe3da440469281f3 returned by query
+04-09-2019 15:09:32: Document 7e214a7fdcb144ccb660 returned by query
+04-09-2019 15:09:32: Document 6c44b3d5b37b48db9f54 returned by query
+04-09-2019 15:09:33: Document e1ccab1541a24e4baedd returned by query
+04-09-2019 15:09:33: Document 108489b84a64411ab238 returned by query
+04-09-2019 15:09:34: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:34: Document 3deadffc639740b19d3c returned by query
+04-09-2019 15:09:34: Script ended: Wednesday 4th of September 2019 03:09:34 PM
+04-09-2019 15:09:34: END

@@ -4,7 +4,7 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
-$msg = file_get_contents('./log.txt');
+$msg = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/tasks/log.txt');
 
 $success = mail("frefeys@gmail.com","logs",$msg);
 
