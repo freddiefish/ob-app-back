@@ -11,13 +11,28 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Sk\\Geohash\\' => 11,
+        ),
+        'R' => 
+        array (
+            'Ramsey\\Uuid\\' => 12,
+        ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Cache\\' => 10,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
         ),
         'G' => 
         array (
@@ -27,28 +42,40 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Grpc\\Gcp\\' => 9,
             'Grpc\\' => 5,
             'Google\\Protobuf\\' => 16,
-            'Google\\Cloud\\Storage\\' => 21,
-            'Google\\Cloud\\Datastore\\' => 23,
+            'Google\\Cloud\\Language\\' => 22,
+            'Google\\Cloud\\Firestore\\' => 23,
             'Google\\Cloud\\Core\\' => 18,
-            'Google\\CRC32\\' => 13,
             'Google\\Auth\\' => 12,
             'Google\\ApiCore\\' => 15,
             'Google\\' => 7,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
-            'GPBMetadata\\Google\\Datastore\\' => 29,
+            'GPBMetadata\\Google\\Firestore\\' => 29,
+            'GPBMetadata\\Google\\Cloud\\Language\\' => 34,
             'GPBMetadata\\Google\\' => 19,
         ),
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
         ),
-        'A' => 
-        array (
-            'Asika\\' => 6,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Sk\\Geohash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/saikiran/geohash/src',
+        ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -56,6 +83,10 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -81,21 +112,17 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/google/protobuf/src/Google/Protobuf',
         ),
-        'Google\\Cloud\\Storage\\' => 
+        'Google\\Cloud\\Language\\' => 
         array (
-            0 => __DIR__ . '/..' . '/google/cloud-storage/src',
+            0 => __DIR__ . '/..' . '/google/cloud-language/src',
         ),
-        'Google\\Cloud\\Datastore\\' => 
+        'Google\\Cloud\\Firestore\\' => 
         array (
-            0 => __DIR__ . '/..' . '/google/cloud-datastore/src',
+            0 => __DIR__ . '/..' . '/google/cloud-firestore/src',
         ),
         'Google\\Cloud\\Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-core/src',
-        ),
-        'Google\\CRC32\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/crc32/src',
         ),
         'Google\\Auth\\' => 
         array (
@@ -113,9 +140,13 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf',
         ),
-        'GPBMetadata\\Google\\Datastore\\' => 
+        'GPBMetadata\\Google\\Firestore\\' => 
         array (
-            0 => __DIR__ . '/..' . '/google/cloud-datastore/metadata',
+            0 => __DIR__ . '/..' . '/google/cloud-firestore/metadata',
+        ),
+        'GPBMetadata\\Google\\Cloud\\Language\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-language/metadata',
         ),
         'GPBMetadata\\Google\\' => 
         array (
@@ -125,10 +156,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
-        ),
-        'Asika\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/asika/pdf2text/src',
         ),
     );
 
@@ -153,13 +180,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Rize\\UriTemplate' => 
             array (
                 0 => __DIR__ . '/..' . '/rize/uri-template/src',
-            ),
-        ),
-        'M' => 
-        array (
-            'Monolog' => 
-            array (
-                0 => __DIR__ . '/..' . '/monolog/monolog/src',
             ),
         ),
     );

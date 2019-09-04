@@ -1,5 +1,9 @@
-# App Engine cron configuration
 cron:
-- description: "Open Bestuur cron tasks"
-  url: /cron.php
-  schedule: every 5 minutes
+- description: "daily decisions extraction job"
+  url: /tasks/cron-daily
+  schedule: every 24 hours
+  timezone: Europe/Brussels
+- description: "weekly email log job"
+  url: /tasks/cron-weekly
+  schedule: every monday 09:00
+  timezone: Europe/Brussels
