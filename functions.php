@@ -251,6 +251,10 @@ function geoCode($stringLocations) {
         $ch                 = curl_init();
         curl_setopt($ch, CURLOPT_URL, $requestUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
+        //setting them to false.
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $output             = curl_exec($ch);
         curl_close($ch);
        
@@ -301,9 +305,9 @@ function logThis($data) {
 function mailWhenScriptHalted() {
     $file = escapeshellarg('log.txt'); // for the security concious (should be everyone!)
     $line = `tail -n 1 $file`;
-
-    if ( !strpos( $line, 'END' ) ) {
-        echo "Script did not run. Investigation of logs required!!!! " . LOG_PATH;
+        
+    if ( strpos( $line, 'END' ) === false ) {
+        echo "Script did not run till the end. Investigation of logs required!!!! " . LOG_PATH;
         // script halted so email admin
         $msg = LOG_PATH;
         
@@ -313,7 +317,7 @@ function mailWhenScriptHalted() {
             $errorMessage = error_get_last()['message'];
             logThis($errorMessage);
         } else {
-            logThis("Mail with log send!"); 
+            // logThis("Mail with log send!"); 
         }
         return true;
     } 
