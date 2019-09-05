@@ -147,10 +147,14 @@ foreach($docList as $val) {
             if (count($stringLocations) > 0) { // lets do some geocoding and add in db
                 
                 $geoLocations = geoCode($stringLocations) ;
-                // var_dump($geoLocations);
+
+                // remove possible duplicates 
+                $geoLocations = unique_multidim_array($geoLocations, 'formattedAddress') ;
 
                 $db_temp = new FirestoreClient();
                 $decisionRef = $db_temp->document('decisions/' . $ID);
+                
+                var_dump($geoLocations);
 
                 foreach ($geoLocations as $location) {
 
