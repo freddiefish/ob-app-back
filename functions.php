@@ -25,7 +25,8 @@ function get_data($url) {
     $timeout = 5;
     
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 2);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
     //setting them to false.
@@ -107,10 +108,8 @@ function isolateResult($title) {
     return $result;
 }
 
-function get_document($projectId,$field,$op, $val)
+function get_document($field,$op, $val)
 {
-    global $credentials;
-    
     // Create the Cloud Firestore client
     $db = new FirestoreClient();
 
@@ -128,12 +127,8 @@ function get_document($projectId,$field,$op, $val)
     }
 }
 
-function add_document($projectId,$collection,$data) {
+function add_document($collection,$data) {
     // Create the Cloud Firestore client
-    /* $db = new FirestoreClient([
-        'projectId' => $projectId,
-    ]); */
-
     $db = new FirestoreClient();
     
     $addDoc = $db->collection($collection)->newDocument();
@@ -176,8 +171,13 @@ function extractFromPDF($id) {
     $background = $arrayBGText[0];
 
     // get decision
-    $arrayBGText = explode('Artikel 1', $clean1Txt);
-    $finalDecision = 'Artikel 1' . $arrayBGText[1];
+    $artikelPieces = explode('Artikel 1', $arrayBGText[1]);
+    unset($artikelPieces[0]);
+    foreach ($artikelPieces as $piece) {
+        $position = preg_match("/^[A-Z]/", $piece);
+        if ($position = 1) $finalDecision = $piece;
+    }
+    var_dump($finalDecision);
 
     return array ($fullTxt, $background, $finalDecision);
 } 
@@ -251,6 +251,8 @@ function geoCode($stringLocations) {
         $ch                 = curl_init();
         curl_setopt($ch, CURLOPT_URL, $requestUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
         //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
         //setting them to false.
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
