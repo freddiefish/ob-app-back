@@ -21,3 +21,784 @@ END
 05-09-2019 10:36:55: Document d09c50e8453143068798 returned by query
 05-09-2019 10:36:55: Script ended: Thursday 5th of September 2019 10:36:55 AM
 05-09-2019 10:36:55: END
+05-09-2019 12:54:12: *************************************************
+05-09-2019 12:54:12: Script started: Thursday 5th of September 2019 12:54:12 PM
+05-09-2019 12:54:12: Memory usage (Kb): 797.696
+05-09-2019 12:54:14: Update for date: 04-09-2019
+05-09-2019 12:54:14: Update for date: 05-09-2019
+05-09-2019 12:54:16: Found 14 documents
+05-09-2019 12:54:16: Document a494f3fcd3b947248d2c returned by query
+05-09-2019 12:54:17: Document 86987bbdb8034b96907b returned by query
+05-09-2019 12:54:17: Document 7a79865419f24806a0f0 returned by query
+05-09-2019 12:54:18: Document 3c3a55762be94f8cba44 returned by query
+05-09-2019 12:54:18: Document 8e5bc175f5af49fb9a11 returned by query
+05-09-2019 12:54:18: Document 24fead2ac64042978f2d returned by query
+05-09-2019 12:54:19: Document 22bef229da354e3eb707 returned by query
+05-09-2019 12:54:19: Document b811d36f9a2344c5afe6 returned by query
+05-09-2019 12:54:19: Document e494adf8a90d473988af returned by query
+05-09-2019 12:54:20: Document 9fb42a6c64154b8181c1 returned by query
+05-09-2019 12:54:20: Document 5ec118932b13498dad02 returned by query
+05-09-2019 12:54:20: Document e2d03253a469423d9e99 returned by query
+05-09-2019 12:54:21: Document 547d7e9dd2e1469b9aff returned by query
+05-09-2019 12:54:21: Document d09c50e8453143068798 returned by query
+05-09-2019 12:54:21: Script ended: Thursday 5th of September 2019 12:54:21 PM
+05-09-2019 12:54:21: END
+05-09-2019 12:54:52: *************************************************
+05-09-2019 12:54:52: Script started: Thursday 5th of September 2019 12:54:52 PM
+05-09-2019 12:54:52: Memory usage (Kb): 797.696
+05-09-2019 12:54:56: Update for date: 09-03-2019
+05-09-2019 12:54:56: Update for date: 10-03-2019
+05-09-2019 12:54:56: Update for date: 11-03-2019
+05-09-2019 12:55:02: Update for date: 12-03-2019
+05-09-2019 12:55:04: Update for date: 13-03-2019
+05-09-2019 12:55:04: Update for date: 14-03-2019
+05-09-2019 12:55:05: Update for date: 15-03-2019
+05-09-2019 12:55:21: Update for date: 16-03-2019
+05-09-2019 12:55:21: Update for date: 17-03-2019
+05-09-2019 12:55:21: Update for date: 18-03-2019
+05-09-2019 12:55:28: Update for date: 19-03-2019
+05-09-2019 12:55:30: Update for date: 20-03-2019
+05-09-2019 12:55:31: Update for date: 21-03-2019
+05-09-2019 12:55:33: Update for date: 22-03-2019
+05-09-2019 12:55:48: Update for date: 23-03-2019
+05-09-2019 12:55:48: Update for date: 24-03-2019
+05-09-2019 12:55:48: Update for date: 25-03-2019
+05-09-2019 12:56:02: Update for date: 26-03-2019
+05-09-2019 12:56:04: Update for date: 27-03-2019
+05-09-2019 12:56:04: Update for date: 28-03-2019
+05-09-2019 12:56:05: Update for date: 29-03-2019
+05-09-2019 12:56:21: Update for date: 30-03-2019
+05-09-2019 12:56:21: Update for date: 31-03-2019
+05-09-2019 12:56:21: Update for date: 01-04-2019
+05-09-2019 12:56:26: Updated the DOM to month ' . 4 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 12:56:29: Update for date: 02-04-2019
+05-09-2019 12:56:31: Update for date: 03-04-2019
+05-09-2019 12:56:31: Update for date: 04-04-2019
+05-09-2019 12:56:33: Update for date: 05-04-2019
+05-09-2019 12:56:47: Update for date: 06-04-2019
+05-09-2019 12:56:47: Update for date: 07-04-2019
+05-09-2019 12:56:47: Update for date: 08-04-2019
+05-09-2019 12:56:50: Update for date: 09-04-2019
+05-09-2019 12:56:51: Update for date: 10-04-2019
+05-09-2019 12:56:51: Update for date: 11-04-2019
+05-09-2019 12:56:51: Update for date: 12-04-2019
+05-09-2019 12:57:05: Update for date: 13-04-2019
+05-09-2019 12:57:05: Update for date: 14-04-2019
+05-09-2019 12:57:05: Update for date: 15-04-2019
+05-09-2019 12:57:09: Update for date: 16-04-2019
+05-09-2019 12:57:10: Update for date: 17-04-2019
+05-09-2019 12:57:10: Update for date: 18-04-2019
+05-09-2019 12:57:10: Update for date: 19-04-2019
+05-09-2019 12:57:21: Update for date: 20-04-2019
+05-09-2019 12:57:21: Update for date: 21-04-2019
+05-09-2019 12:57:21: Update for date: 22-04-2019
+05-09-2019 12:57:21: Update for date: 23-04-2019
+05-09-2019 12:57:29: Update for date: 24-04-2019
+05-09-2019 12:57:30: Update for date: 25-04-2019
+05-09-2019 12:57:33: Update for date: 26-04-2019
+05-09-2019 12:57:46: Update for date: 27-04-2019
+05-09-2019 12:57:46: Update for date: 28-04-2019
+05-09-2019 12:57:46: Update for date: 29-04-2019
+05-09-2019 12:57:57: Update for date: 30-04-2019
+05-09-2019 12:57:59: Update for date: 01-05-2019
+05-09-2019 12:58:04: Updated the DOM to month ' . 5 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 12:58:04: Update for date: 02-05-2019
+05-09-2019 12:58:05: Update for date: 03-05-2019
+05-09-2019 12:58:13: Update for date: 04-05-2019
+05-09-2019 12:58:13: Update for date: 05-05-2019
+05-09-2019 12:58:13: Update for date: 06-05-2019
+05-09-2019 12:58:17: Update for date: 07-05-2019
+05-09-2019 12:58:19: Update for date: 08-05-2019
+05-09-2019 12:58:19: Update for date: 09-05-2019
+05-09-2019 12:58:19: Update for date: 10-05-2019
+05-09-2019 12:58:34: Update for date: 11-05-2019
+05-09-2019 12:58:34: Update for date: 12-05-2019
+05-09-2019 12:58:34: Update for date: 13-05-2019
+05-09-2019 12:58:37: Update for date: 14-05-2019
+05-09-2019 12:58:40: Update for date: 15-05-2019
+05-09-2019 12:58:40: Update for date: 16-05-2019
+05-09-2019 12:58:40: Update for date: 17-05-2019
+05-09-2019 12:58:50: Update for date: 18-05-2019
+05-09-2019 12:58:50: Update for date: 19-05-2019
+05-09-2019 12:58:50: Update for date: 20-05-2019
+05-09-2019 12:58:57: Update for date: 21-05-2019
+05-09-2019 12:59:00: Update for date: 22-05-2019
+05-09-2019 12:59:01: Update for date: 23-05-2019
+05-09-2019 12:59:04: Update for date: 24-05-2019
+05-09-2019 12:59:19: Update for date: 25-05-2019
+05-09-2019 12:59:19: Update for date: 26-05-2019
+05-09-2019 12:59:19: Update for date: 27-05-2019
+05-09-2019 12:59:26: Update for date: 28-05-2019
+05-09-2019 12:59:28: Update for date: 29-05-2019
+05-09-2019 12:59:34: Update for date: 30-05-2019
+05-09-2019 12:59:34: Update for date: 31-05-2019
+05-09-2019 12:59:34: Update for date: 01-06-2019
+05-09-2019 12:59:39: Updated the DOM to month ' . 6 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 12:59:39: Update for date: 02-06-2019
+05-09-2019 12:59:39: Update for date: 03-06-2019
+05-09-2019 12:59:43: Update for date: 04-06-2019
+05-09-2019 12:59:45: Update for date: 05-06-2019
+05-09-2019 12:59:45: Update for date: 06-06-2019
+05-09-2019 12:59:47: Update for date: 07-06-2019
+05-09-2019 13:00:03: Update for date: 08-06-2019
+05-09-2019 13:00:03: Update for date: 09-06-2019
+05-09-2019 13:00:03: Update for date: 10-06-2019
+05-09-2019 13:00:04: Update for date: 11-06-2019
+05-09-2019 13:00:08: Update for date: 12-06-2019
+05-09-2019 13:00:09: Update for date: 13-06-2019
+05-09-2019 13:00:09: Update for date: 14-06-2019
+05-09-2019 13:00:17: Update for date: 15-06-2019
+05-09-2019 13:00:17: Update for date: 16-06-2019
+05-09-2019 13:00:17: Update for date: 17-06-2019
+05-09-2019 13:00:24: Update for date: 18-06-2019
+05-09-2019 13:00:27: Update for date: 19-06-2019
+05-09-2019 13:00:27: Update for date: 20-06-2019
+05-09-2019 13:00:30: Update for date: 21-06-2019
+05-09-2019 13:00:40: Update for date: 22-06-2019
+05-09-2019 13:00:40: Update for date: 23-06-2019
+05-09-2019 13:00:40: Update for date: 24-06-2019
+05-09-2019 13:00:52: Update for date: 25-06-2019
+05-09-2019 13:00:54: Update for date: 26-06-2019
+05-09-2019 13:00:54: Update for date: 27-06-2019
+05-09-2019 13:00:55: Update for date: 28-06-2019
+05-09-2019 13:01:06: Update for date: 29-06-2019
+05-09-2019 13:01:06: Update for date: 30-06-2019
+05-09-2019 13:01:06: Update for date: 01-07-2019
+05-09-2019 13:01:08: Updated the DOM to month ' . 7 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 13:01:11: Update for date: 02-07-2019
+05-09-2019 13:01:12: Update for date: 03-07-2019
+05-09-2019 13:01:12: Update for date: 04-07-2019
+05-09-2019 13:01:14: Update for date: 05-07-2019
+05-09-2019 13:01:28: Update for date: 06-07-2019
+05-09-2019 13:01:28: Update for date: 07-07-2019
+05-09-2019 13:01:28: Update for date: 08-07-2019
+05-09-2019 13:01:31: Update for date: 09-07-2019
+05-09-2019 13:01:32: Update for date: 10-07-2019
+05-09-2019 13:01:40: Update for date: 11-07-2019
+05-09-2019 13:01:40: Update for date: 12-07-2019
+05-09-2019 13:01:40: Update for date: 13-07-2019
+05-09-2019 13:01:40: Update for date: 14-07-2019
+05-09-2019 13:01:40: Update for date: 15-07-2019
+05-09-2019 13:01:41: Update for date: 16-07-2019
+05-09-2019 13:01:41: Update for date: 17-07-2019
+05-09-2019 13:01:42: Update for date: 18-07-2019
+05-09-2019 13:01:42: Update for date: 19-07-2019
+05-09-2019 13:01:50: Update for date: 20-07-2019
+05-09-2019 13:01:50: Update for date: 21-07-2019
+05-09-2019 13:01:50: Update for date: 22-07-2019
+05-09-2019 13:01:53: Update for date: 23-07-2019
+05-09-2019 13:01:55: Update for date: 24-07-2019
+05-09-2019 13:01:55: Update for date: 25-07-2019
+05-09-2019 13:01:55: Update for date: 26-07-2019
+05-09-2019 13:02:05: Update for date: 27-07-2019
+05-09-2019 13:02:05: Update for date: 28-07-2019
+05-09-2019 13:02:05: Update for date: 29-07-2019
+05-09-2019 13:02:06: Update for date: 30-07-2019
+05-09-2019 13:02:06: Update for date: 31-07-2019
+05-09-2019 13:02:06: Update for date: 01-08-2019
+05-09-2019 13:02:08: Updated the DOM to month ' . 8 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 13:02:08: Update for date: 02-08-2019
+05-09-2019 13:02:17: Update for date: 03-08-2019
+05-09-2019 13:02:17: Update for date: 04-08-2019
+05-09-2019 13:02:17: Update for date: 05-08-2019
+05-09-2019 13:02:19: Update for date: 06-08-2019
+05-09-2019 13:02:20: Update for date: 07-08-2019
+05-09-2019 13:02:20: Update for date: 08-08-2019
+05-09-2019 13:02:20: Update for date: 09-08-2019
+05-09-2019 13:02:27: Update for date: 10-08-2019
+05-09-2019 13:02:27: Update for date: 11-08-2019
+05-09-2019 13:02:27: Update for date: 12-08-2019
+05-09-2019 13:02:28: Update for date: 13-08-2019
+05-09-2019 13:02:29: Update for date: 14-08-2019
+05-09-2019 13:02:35: Update for date: 15-08-2019
+05-09-2019 13:02:35: Update for date: 16-08-2019
+05-09-2019 13:02:35: Update for date: 17-08-2019
+05-09-2019 13:02:35: Update for date: 18-08-2019
+05-09-2019 13:02:35: Update for date: 19-08-2019
+05-09-2019 13:02:39: Update for date: 20-08-2019
+05-09-2019 13:02:39: Update for date: 21-08-2019
+05-09-2019 13:02:39: Update for date: 22-08-2019
+05-09-2019 13:02:40: Update for date: 23-08-2019
+05-09-2019 13:02:50: Update for date: 24-08-2019
+05-09-2019 13:02:50: Update for date: 25-08-2019
+05-09-2019 13:02:50: Update for date: 26-08-2019
+05-09-2019 13:02:52: Update for date: 27-08-2019
+05-09-2019 13:02:55: Update for date: 28-08-2019
+05-09-2019 13:02:55: Update for date: 29-08-2019
+05-09-2019 13:02:55: Update for date: 30-08-2019
+05-09-2019 13:03:03: Update for date: 31-08-2019
+05-09-2019 13:03:03: Update for date: 01-09-2019
+05-09-2019 13:03:05: Updated the DOM to month ' . 9 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 13:03:05: Update for date: 02-09-2019
+05-09-2019 13:03:09: Update for date: 03-09-2019
+05-09-2019 13:03:11: Update for date: 04-09-2019
+05-09-2019 13:03:11: Update for date: 05-09-2019
+05-09-2019 13:03:12: Found 7995 documents
+05-09-2019 13:03:14: Added decisions>document with ID: f06561c441304033b07b
+05-09-2019 13:03:16: Added decisions>document with ID: 202cb6dc3a594149973c
+05-09-2019 13:03:18: Added decisions>document with ID: 6ee95ef2b11c48b5ba21
+05-09-2019 13:03:19: Added decisions>document with ID: ffd76e72db0a43ecbcf0
+05-09-2019 13:03:21: Added decisions>document with ID: eb6c5355ed4e4118b035
+05-09-2019 13:03:21: Address extracted: Bist, 2180
+05-09-2019 13:03:21: Address extracted: Bist, 2610
+05-09-2019 13:03:21: Address extracted: De Manstraat, 2100
+05-09-2019 13:03:21: Address extracted: Jos Scheurweghstraat, 2100
+05-09-2019 13:03:21: Address extracted: Scheurweg, 2030
+05-09-2019 13:03:23: Geopoint API has result. Encoded: Bist, Antwerpen (2180)
+05-09-2019 13:03:23: Geopoint API has result. Encoded: Bist, Antwerpen (2610)
+05-09-2019 13:03:25: Geopoint API has result. Encoded: De Manstraat, Antwerpen
+05-09-2019 13:03:25: Geopoint API has result. Encoded: Jos Scheurweghstraat, Antwerpen
+05-09-2019 13:03:26: Geopoint API has result. Encoded: Scheurweg, Antwerpen
+05-09-2019 13:03:26: Added locations>document with ID: c3d533c25c1f4dfd94dc
+05-09-2019 13:03:26: Added locations>document with ID: 763211cd4c3142a4b412
+05-09-2019 13:03:27: Added locations>document with ID: 640186b1282f4dc885d0
+05-09-2019 13:03:27: Added locations>document with ID: 4f20627be56a418d8ae0
+05-09-2019 13:03:28: Added locations>document with ID: babc225b353645bcb458
+05-09-2019 13:03:29: Added decisions>document with ID: 4ab7e8141311488aa4ab
+05-09-2019 13:03:30: Address extracted: Collegelaan, 2100
+05-09-2019 13:03:30: Address extracted: Collegelaan, 2140
+05-09-2019 13:03:30: Geopoint API has result. Encoded: Collegelaan, Antwerpen
+05-09-2019 13:03:31: Geopoint API has result. Encoded: Collegelaan, Antwerpen
+05-09-2019 13:03:31: Added locations>document with ID: 5544f891cad74a869aac
+05-09-2019 13:03:32: Added locations>document with ID: d4dd741182024079b08d
+05-09-2019 13:03:32: Document 3deadffc639740b19d3c returned by query
+05-09-2019 13:03:34: Added decisions>document with ID: 489faf8425c943be9455
+05-09-2019 13:03:35: Added decisions>document with ID: 744591ac1539422a8a7d
+05-09-2019 13:03:37: Added decisions>document with ID: 5d2c41e2878049b19022
+05-09-2019 13:03:40: Added decisions>document with ID: 515a1a6f37bf41c5a8a1
+05-09-2019 13:03:41: Added decisions>document with ID: 278482db1850482cbb77
+05-09-2019 13:03:43: Added decisions>document with ID: 4ff5bb6f4d6646a99336
+05-09-2019 13:03:44: Address extracted: Ellermanstraat, 2060
+05-09-2019 13:03:45: Geopoint API has result. Encoded: Ellermanstraat, Antwerpen
+05-09-2019 13:03:45: Added locations>document with ID: 505163aa2aba4bcead0d
+05-09-2019 13:03:47: Added decisions>document with ID: c97bee1fa9364629aafd
+05-09-2019 13:03:47: Address extracted: Kasteelpleinstraat, 2000
+05-09-2019 13:03:47: Address extracted: Kronenburgstraat, 2000
+05-09-2019 13:03:47: Address extracted: Terninckstraat, 2000
+05-09-2019 13:03:47: Geopoint API has result. Encoded: Kasteelpleinstraat, Antwerpen
+05-09-2019 13:03:48: Geopoint API has result. Encoded: Kronenburgstraat, Antwerpen
+05-09-2019 13:03:49: Geopoint API has result. Encoded: Terninckstraat, Antwerpen
+05-09-2019 13:03:49: Added locations>document with ID: 0b88d4f7e6754000b5ea
+05-09-2019 13:03:49: Added locations>document with ID: 163793f7f8944353a506
+05-09-2019 13:03:50: Added locations>document with ID: a398222657cc4f938c11
+05-09-2019 13:03:51: Added decisions>document with ID: d0a4a154f16a4df3a2f1
+05-09-2019 13:03:53: Added decisions>document with ID: 9bac278762984162a523
+05-09-2019 14:12:55: END
+05-09-2019 14:14:09: *************************************************
+05-09-2019 14:14:09: Script started: Thursday 5th of September 2019 02:14:09 PM
+05-09-2019 14:14:09: Memory usage (Kb): 797.664
+05-09-2019 14:14:11: Update for date: 06-08-2019
+05-09-2019 14:14:13: Update for date: 07-08-2019
+05-09-2019 14:14:13: Update for date: 08-08-2019
+05-09-2019 14:14:13: Update for date: 09-08-2019
+05-09-2019 14:14:20: Update for date: 10-08-2019
+05-09-2019 14:14:20: Update for date: 11-08-2019
+05-09-2019 14:14:20: Update for date: 12-08-2019
+05-09-2019 14:14:21: Update for date: 13-08-2019
+05-09-2019 14:14:22: Update for date: 14-08-2019
+05-09-2019 14:14:28: Update for date: 15-08-2019
+05-09-2019 14:14:28: Update for date: 16-08-2019
+05-09-2019 14:14:28: Update for date: 17-08-2019
+05-09-2019 14:14:28: Update for date: 18-08-2019
+05-09-2019 14:14:28: Update for date: 19-08-2019
+05-09-2019 14:14:32: Update for date: 20-08-2019
+05-09-2019 14:14:32: Update for date: 21-08-2019
+05-09-2019 14:14:32: Update for date: 22-08-2019
+05-09-2019 14:14:33: Update for date: 23-08-2019
+05-09-2019 14:14:42: Update for date: 24-08-2019
+05-09-2019 14:14:42: Update for date: 25-08-2019
+05-09-2019 14:14:42: Update for date: 26-08-2019
+05-09-2019 14:14:44: Update for date: 27-08-2019
+05-09-2019 14:14:46: Update for date: 28-08-2019
+05-09-2019 14:14:46: Update for date: 29-08-2019
+05-09-2019 14:14:46: Update for date: 30-08-2019
+05-09-2019 14:14:54: Update for date: 31-08-2019
+05-09-2019 14:14:54: Update for date: 01-09-2019
+05-09-2019 14:14:56: Updated the DOM to month ' . 9 . ' of year '. 2019 . ' in calendar view: 
+05-09-2019 14:14:56: Update for date: 02-09-2019
+05-09-2019 14:14:59: Update for date: 03-09-2019
+05-09-2019 14:15:02: Update for date: 04-09-2019
+05-09-2019 14:15:02: Update for date: 05-09-2019
+05-09-2019 14:15:03: Found 948 documents
+05-09-2019 14:15:03: Document 1a8b0b391882413ea774 returned by query
+05-09-2019 14:15:04: Document 9b40b3d834914a649118 returned by query
+05-09-2019 14:15:04: Document a38cd58bdc344828b55f returned by query
+05-09-2019 14:15:04: Document 422d74afd27c45dba5a0 returned by query
+05-09-2019 14:15:05: Document 6b6834129b004d1a9a73 returned by query
+05-09-2019 14:15:05: Document ad6bb931af174ccba85b returned by query
+05-09-2019 14:15:06: Document 841b3688120b462b8ab4 returned by query
+05-09-2019 14:15:06: Document aacee56c8d2340d1a4b1 returned by query
+05-09-2019 14:15:06: Document 16897ea2de254c5eb269 returned by query
+05-09-2019 14:15:07: Document 34951d5fedc74b859088 returned by query
+05-09-2019 14:15:07: Document db070080b8a447d292e9 returned by query
+05-09-2019 14:15:07: Document c9e298217f40489295a8 returned by query
+05-09-2019 14:15:08: Document c1b5bd48b98547fcaad8 returned by query
+05-09-2019 14:15:08: Document ff85811d2fd748a182b6 returned by query
+05-09-2019 14:15:08: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:09: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:09: Document fce9df8782c948eaa8f7 returned by query
+05-09-2019 14:15:09: Document e7ab62a0cb2649249c20 returned by query
+05-09-2019 14:15:10: Document 163dbccf22b943b7a032 returned by query
+05-09-2019 14:15:10: Document 0ae85fd8c67043858b58 returned by query
+05-09-2019 14:15:11: Document f14a07fb7636485db331 returned by query
+05-09-2019 14:15:11: Document 3b288333b6d347329929 returned by query
+05-09-2019 14:15:11: Document 4a27e2864b634845a155 returned by query
+05-09-2019 14:15:12: Document 7a7322ca07dc46bcb707 returned by query
+05-09-2019 14:15:12: Document 90ebeced910c48efa122 returned by query
+05-09-2019 14:15:12: Document 0400be65cfec4447bda3 returned by query
+05-09-2019 14:15:13: Document 73c2f89cb34d42b8b934 returned by query
+05-09-2019 14:15:13: Document 2a319e1716344473ad30 returned by query
+05-09-2019 14:15:13: Document 4f49f960e61a411b917c returned by query
+05-09-2019 14:15:14: Document c2b109f049ca411fafff returned by query
+05-09-2019 14:15:14: Document f2c6907c82e842a5a704 returned by query
+05-09-2019 14:15:15: Document 799512cf4ff848b3829a returned by query
+05-09-2019 14:15:15: Document 0ab3fbbab6c040d285a6 returned by query
+05-09-2019 14:15:15: Document 0f785729d0bb4650895e returned by query
+05-09-2019 14:15:16: Document 5c85d597da8f403c9816 returned by query
+05-09-2019 14:15:16: Document 1701e43b961d4612b14b returned by query
+05-09-2019 14:15:16: Document 3e3a73545b8b4867a620 returned by query
+05-09-2019 14:15:17: Document 48119f582e6047f28573 returned by query
+05-09-2019 14:15:17: Document f6a2056989474f839950 returned by query
+05-09-2019 14:15:18: Document 42cbfc2070954a2587fe returned by query
+05-09-2019 14:15:18: Document 09b3ca9759be44908754 returned by query
+05-09-2019 14:15:18: Document 39987f97379d426cadfd returned by query
+05-09-2019 14:15:19: Document 675ce5cb390b45ebbccb returned by query
+05-09-2019 14:15:19: Document 442ed42149424df3a0ed returned by query
+05-09-2019 14:15:19: Document 2f2fbdd98e364b7f9102 returned by query
+05-09-2019 14:15:20: Document 1c530e97f145462ea3fa returned by query
+05-09-2019 14:15:20: Document ba367e516b9447e4a7fb returned by query
+05-09-2019 14:15:21: Document 98508bc206c548e49217 returned by query
+05-09-2019 14:15:21: Document 95809d492b174b5bbe38 returned by query
+05-09-2019 14:15:21: Document 895a09ea6b4b4e7a9d82 returned by query
+05-09-2019 14:15:22: Document b974500da1df4f208a70 returned by query
+05-09-2019 14:15:22: Document 42603cfe9c9b4e61be01 returned by query
+05-09-2019 14:15:22: Document 024855ef4bbf460db99f returned by query
+05-09-2019 14:15:23: Document cafef2935f3b4c6795b8 returned by query
+05-09-2019 14:15:23: Document 7cabdc9559ae4f8b98e6 returned by query
+05-09-2019 14:15:23: Document 2071732281924438a22e returned by query
+05-09-2019 14:15:24: Document 70ebdc5191014e6ea53d returned by query
+05-09-2019 14:15:24: Document 672191d2e2ad4ef78fed returned by query
+05-09-2019 14:15:24: Document 4fb316c280164d8f9aa9 returned by query
+05-09-2019 14:15:25: Document 6094c655f4f2487082e8 returned by query
+05-09-2019 14:15:25: Document 418fbb39474440018e9a returned by query
+05-09-2019 14:15:26: Document 90c4bc13e09a45a19d03 returned by query
+05-09-2019 14:15:26: Document dca02a98a1da434c8faf returned by query
+05-09-2019 14:15:26: Document 0a1be357438e4a00848b returned by query
+05-09-2019 14:15:27: Document 7210346fa1bc4ec8a93f returned by query
+05-09-2019 14:15:27: Document 66b9247706dd4d0e9064 returned by query
+05-09-2019 14:15:27: Document eaf8aed315f043b5af66 returned by query
+05-09-2019 14:15:28: Document 3739b37472784593a19f returned by query
+05-09-2019 14:15:28: Document 4ce50190463046e58962 returned by query
+05-09-2019 14:15:28: Document 8ea6e483bd554e50a755 returned by query
+05-09-2019 14:15:29: Document 113c349d88384252ad55 returned by query
+05-09-2019 14:15:29: Document 5cc389b5948844caa05c returned by query
+05-09-2019 14:15:29: Document 850ff86da13e4bd092b5 returned by query
+05-09-2019 14:15:30: Document 5e7eac343c254f26b7d3 returned by query
+05-09-2019 14:15:30: Document 8ee94828b8fa4f3d96f4 returned by query
+05-09-2019 14:15:30: Document d1d40bc63bee4e4d9eb6 returned by query
+05-09-2019 14:15:31: Document e5914286f40a4bd5a213 returned by query
+05-09-2019 14:15:31: Document 3ba18e62ea3c49b58e6f returned by query
+05-09-2019 14:15:32: Document 18b105c7251d4f3b9e26 returned by query
+05-09-2019 14:15:32: Document c765ce0b854d4340a587 returned by query
+05-09-2019 14:15:32: Document 06d6b1fe387e4b388c76 returned by query
+05-09-2019 14:15:33: Document f789b608552e44f298ce returned by query
+05-09-2019 14:15:33: Document 3835ee206dcc46e4a34e returned by query
+05-09-2019 14:15:33: Document 441e97f113384454837f returned by query
+05-09-2019 14:15:34: Document d552a47348f149dab51d returned by query
+05-09-2019 14:15:34: Document 67f9e75a1abe4d8d9777 returned by query
+05-09-2019 14:15:34: Document c829e9b8fd00410691f7 returned by query
+05-09-2019 14:15:35: Document ddbff7aa2a99425da3d9 returned by query
+05-09-2019 14:15:35: Document 75b3944fa8564685a21d returned by query
+05-09-2019 14:15:36: Document 57695c317b564ca69c0a returned by query
+05-09-2019 14:15:36: Document 0474679e036f4d159ef0 returned by query
+05-09-2019 14:15:36: Document f7131b05532e4d0c8093 returned by query
+05-09-2019 14:15:37: Document da7a2536c11545d3b33e returned by query
+05-09-2019 14:15:37: Document adbbc7a4264d4424bc04 returned by query
+05-09-2019 14:15:37: Document d1824b18909b4445b332 returned by query
+05-09-2019 14:15:38: Document f0eb931ee5fb4e258365 returned by query
+05-09-2019 14:15:38: Document 919f2dfb38f14b79a913 returned by query
+05-09-2019 14:15:38: Document e9c6fc4692b442f28bf2 returned by query
+05-09-2019 14:15:39: Document 2c7b97c1025f49588d49 returned by query
+05-09-2019 14:15:39: Document fcbc4fc655ce4102a92d returned by query
+05-09-2019 14:15:40: Document 73ec715a89954a82a180 returned by query
+05-09-2019 14:15:40: Document bcb81222e44f4d738410 returned by query
+05-09-2019 14:15:40: Document d1538d7e561d465fa665 returned by query
+05-09-2019 14:15:41: Document ff83975359974060868c returned by query
+05-09-2019 14:15:41: Document f6253fbe72a146eabd92 returned by query
+05-09-2019 14:15:41: Document 868df140e5fa41fe92fc returned by query
+05-09-2019 14:15:42: Document 288152153e0d4002a03d returned by query
+05-09-2019 14:15:42: Document 621e14e1315c4367b301 returned by query
+05-09-2019 14:15:42: Document e003d3f41df34529a0dd returned by query
+05-09-2019 14:15:43: Document a868eaf912a44ce5bf91 returned by query
+05-09-2019 14:15:43: Document 770625cd9ef64d6d9882 returned by query
+05-09-2019 14:15:43: Document 892bf62a52b14231abd7 returned by query
+05-09-2019 14:15:44: Document 4cffd57de83b472a9faf returned by query
+05-09-2019 14:15:44: Document b1512208ec3a450a8b95 returned by query
+05-09-2019 14:15:44: Document a5c15e3a5de44d7aa18a returned by query
+05-09-2019 14:15:45: Document 9c1bf1bc3b3c4adbbcde returned by query
+05-09-2019 14:15:45: Document 35748c7fe8b34122a161 returned by query
+05-09-2019 14:15:45: Document 14f9cf78d2a34b5db262 returned by query
+05-09-2019 14:15:46: Document 3d7f525926084b4bb259 returned by query
+05-09-2019 14:15:46: Document 84fe5f689a9f48409508 returned by query
+05-09-2019 14:15:46: Document 9caa9e82e3b944199d66 returned by query
+05-09-2019 14:15:47: Document 4978a8bb5d014ffe9fa9 returned by query
+05-09-2019 14:15:47: Document 1067b6869f3445d1a1d8 returned by query
+05-09-2019 14:15:47: Document 1ea19d5541b2476ba76a returned by query
+05-09-2019 14:15:48: Document 5ce8cb9e13c243e5884b returned by query
+05-09-2019 14:15:48: Document 91cad23ccdc44a54b5dd returned by query
+05-09-2019 14:15:48: Document c0d7a140a55f43709012 returned by query
+05-09-2019 14:15:49: Document 25163819450b40f6820a returned by query
+05-09-2019 14:15:49: Document ae26fa34001a4220a712 returned by query
+05-09-2019 14:15:50: Document cfc8daeb35ae44a59982 returned by query
+05-09-2019 14:15:50: Document efd9f48cf1114e7597c1 returned by query
+05-09-2019 14:15:50: Document 6d96dfe5df194a66a201 returned by query
+05-09-2019 14:15:51: Document e8ca120a2f114e98b9b2 returned by query
+05-09-2019 14:15:51: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:51: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:52: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:52: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:52: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:53: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:53: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:53: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:54: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:54: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:54: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:55: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:55: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:55: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:56: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:56: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:56: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:57: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:57: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:57: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:58: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:58: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:58: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:59: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:15:59: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:00: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:00: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:00: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:01: Document 1d97c16469ef4097a7f6 returned by query
+05-09-2019 14:16:01: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:02: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:16:02: Document 3ceba2b8a6834e6b8c64 returned by query
+05-09-2019 14:16:02: Document 9ed58081fa8843b8a552 returned by query
+05-09-2019 14:16:03: Document 839ec353918f47999c3d returned by query
+05-09-2019 14:16:03: Document fd87c485915c4a7dbb20 returned by query
+05-09-2019 14:16:04: Document e9f16d12b4394a909104 returned by query
+05-09-2019 14:16:04: Document 26c90682d33e4d3bb7a1 returned by query
+05-09-2019 14:16:05: Document 1414e270f91c42958352 returned by query
+05-09-2019 14:16:05: Document a94d68e3db2c49f19138 returned by query
+05-09-2019 14:16:06: Document 5fdc6ed8a5ac495f925e returned by query
+05-09-2019 14:16:06: Document 37b03359f6e54f6bb342 returned by query
+05-09-2019 14:16:06: Document b208b4a7cc5945438a33 returned by query
+05-09-2019 14:16:07: Document 333fca401ee2431a8a1e returned by query
+05-09-2019 14:16:07: Document 3c7cbcfb63a5485d9ae4 returned by query
+05-09-2019 14:16:08: Document aedbf658b49d44da9682 returned by query
+05-09-2019 14:16:08: Document 3f1242a5c1d643349184 returned by query
+05-09-2019 14:16:08: Document edd642f827894ca0bb8a returned by query
+05-09-2019 14:16:09: Document a043ceb6d38445f88d98 returned by query
+05-09-2019 14:16:09: Document b073a538c4774927b701 returned by query
+05-09-2019 14:16:10: Document c586acd83a5a4c83a068 returned by query
+05-09-2019 14:16:10: Document faebfea224f942cdb60c returned by query
+05-09-2019 14:16:10: Document 624044b5a3d1410a9d40 returned by query
+05-09-2019 14:16:11: Document 1b4a6193a9dd45368d94 returned by query
+05-09-2019 14:16:11: Document c59ad89578dc47ffa5ee returned by query
+05-09-2019 14:16:11: Document 3c687c9baf834c809195 returned by query
+05-09-2019 14:16:12: Document d489f1bbaa8a446c9d94 returned by query
+05-09-2019 14:16:12: Document a64e2d767f89485385b7 returned by query
+05-09-2019 14:16:13: Document df5a60bdfba94e3396e2 returned by query
+05-09-2019 14:16:13: Document 0a0adf34afab4dd184b5 returned by query
+05-09-2019 14:16:13: Document d2bfdb7a70924d57abf0 returned by query
+05-09-2019 14:16:14: Document 3e999f9cd83a4fcc8d23 returned by query
+05-09-2019 14:16:14: Document cc4291871b4048959b23 returned by query
+05-09-2019 14:16:14: Document f080a5f8b36f479bb402 returned by query
+05-09-2019 14:16:15: Document f54ee114d03f4b729687 returned by query
+05-09-2019 14:16:15: Document 8e0481be765c461c94dd returned by query
+05-09-2019 14:16:15: Document fa2dfea5ac4c407bb71b returned by query
+05-09-2019 14:16:16: Document e9807d82fb3a40f684a6 returned by query
+05-09-2019 14:16:16: Document 602c5dfc9347413888b0 returned by query
+05-09-2019 14:16:16: Document dfd0c661195f4e0596c7 returned by query
+05-09-2019 14:16:17: Document dfb2181651014d5c8436 returned by query
+05-09-2019 14:16:17: Document df816189096345bf9ec6 returned by query
+05-09-2019 14:16:17: Document 41342f4ed5e044e3aed1 returned by query
+05-09-2019 14:16:18: Document 9f3365d716cd4da6bd5e returned by query
+05-09-2019 14:16:18: Document 9cb4d32cba2b427e9dbd returned by query
+05-09-2019 14:16:18: Document 6473509691324823b3e7 returned by query
+05-09-2019 14:16:19: Document 8a3a532e9fcd448bb204 returned by query
+05-09-2019 14:16:19: Document dd992010580a43968736 returned by query
+05-09-2019 14:16:20: Document aadbd69e406b4511b405 returned by query
+05-09-2019 14:16:20: Document 52bc304fabb64f78907d returned by query
+05-09-2019 14:16:20: Document 809c81d6f5d040878e31 returned by query
+05-09-2019 14:16:21: Document 815ce31f61f04e819df5 returned by query
+05-09-2019 14:16:21: Document 0d3bf57f654047d4a432 returned by query
+05-09-2019 14:16:22: Document 46b4352a927b43b18369 returned by query
+05-09-2019 14:16:22: Document 14ba923f03904f65930c returned by query
+05-09-2019 14:16:22: Document 3c9e83c700d84849a976 returned by query
+05-09-2019 14:16:23: Document 896b333166814a0c85f5 returned by query
+05-09-2019 14:16:23: Document 244bc533430140af898d returned by query
+05-09-2019 14:16:23: Document 327b2333d83f4a5cb362 returned by query
+05-09-2019 14:16:24: Document 0336438243bd40dca9aa returned by query
+05-09-2019 14:16:24: Document 34c139414ffb48d68be9 returned by query
+05-09-2019 14:16:25: Document 411ae9dc621b4b7aa8a3 returned by query
+05-09-2019 14:16:25: Document 76555cd54d1c4393b444 returned by query
+05-09-2019 14:16:25: Document 2a53e64671b64c329c56 returned by query
+05-09-2019 14:16:26: Document 5ecd657aa5244ac09782 returned by query
+05-09-2019 14:16:26: Document 11c5e7483f2b4f168ed4 returned by query
+05-09-2019 14:16:26: Document 6ea299ff0f5748e891e8 returned by query
+05-09-2019 14:16:27: Document 29dc29eb05cf4db1b16b returned by query
+05-09-2019 14:16:27: Document fbe714ad8d30452d9eab returned by query
+05-09-2019 14:16:27: Document 82cc7c19100143ab807d returned by query
+05-09-2019 14:16:28: Document ae3e15b751174c4da11f returned by query
+05-09-2019 14:16:28: Document 656ef98095bd41b8a648 returned by query
+05-09-2019 14:16:29: Document e20d7842a97f43d6abda returned by query
+05-09-2019 14:16:29: Document a20ec52135d84ee4adfe returned by query
+05-09-2019 14:16:29: Document e1a91fcecee64f1e893b returned by query
+05-09-2019 14:16:30: Document cf9ad9ad80b242f5a652 returned by query
+05-09-2019 14:16:30: Document 4e85c1f4c8854c8598dc returned by query
+05-09-2019 14:16:30: Document 3768694d61004ba8b224 returned by query
+05-09-2019 14:16:31: Document daf4e8e811dc404ab030 returned by query
+05-09-2019 14:16:31: Document 0d3a362120d045f496f7 returned by query
+05-09-2019 14:16:31: Document 1ad8c036beb04ad5b4d7 returned by query
+05-09-2019 14:16:32: Document 2f20347ff2d04a12a9fc returned by query
+05-09-2019 14:16:32: Document b05a55a9e5ca43bd94a1 returned by query
+05-09-2019 14:16:32: Document 79d069936702455fa9e9 returned by query
+05-09-2019 14:16:33: Document cb7b7d46bbcb415fa1ce returned by query
+05-09-2019 14:16:33: Document b90afe2f079149fa81cd returned by query
+05-09-2019 14:16:33: Document 4b8391d1a8f440e8bf50 returned by query
+05-09-2019 14:16:34: Document 43479973c76b41089bb7 returned by query
+05-09-2019 14:16:34: Document 3f43dea6b9924229bcfc returned by query
+05-09-2019 14:16:35: Document 16d1fce5759d4aa4b1c8 returned by query
+05-09-2019 14:16:35: Document 1dde3f6b354746d3a3b7 returned by query
+05-09-2019 14:16:35: Document fbddd53454174136b49a returned by query
+05-09-2019 14:16:36: Document 7823a7d012554ec39b2f returned by query
+05-09-2019 14:16:36: Document 73a3b6de0a6e4633817c returned by query
+05-09-2019 14:16:36: Document f3d84b8ff603495da9f9 returned by query
+05-09-2019 14:16:37: Document 0575c5b28f4e4bb49759 returned by query
+05-09-2019 14:16:37: Document 1762daf1679449448dda returned by query
+05-09-2019 14:16:37: Document 7db4829640f548339498 returned by query
+05-09-2019 14:16:38: Document afd75d8df73a4f0d93a3 returned by query
+05-09-2019 14:16:38: Document 83143e4dd2a4412faf68 returned by query
+05-09-2019 14:16:38: Document 7cb35ecbcd0745bdae4c returned by query
+05-09-2019 14:16:39: Document be4fccd5e90d41e4b596 returned by query
+05-09-2019 14:16:39: Document ef086d7df2f845018761 returned by query
+05-09-2019 14:16:39: Document a00709a0cf884a9abc98 returned by query
+05-09-2019 14:16:40: Document 4688df2f37aa4c6c87cc returned by query
+05-09-2019 14:16:40: Document ba1b15f4938f45279a4e returned by query
+05-09-2019 14:16:41: Document e55c2d89d23f4876896a returned by query
+05-09-2019 14:16:41: Document e9ad86c396414e9ca2f8 returned by query
+05-09-2019 14:16:41: Document dba2e4c8102546778667 returned by query
+05-09-2019 14:16:42: Document 41eb47e4fbba4a1b9c71 returned by query
+05-09-2019 14:16:42: Document bdbc8a5e376e43b09d65 returned by query
+05-09-2019 14:16:42: Document 03bbb17fb3044a1b9ec9 returned by query
+05-09-2019 14:16:44: Added decisions>document with ID: 26892b786a014524a63f
+05-09-2019 14:16:44: Address extracted: Sint-Jansplein, 2060
+05-09-2019 14:16:44: Geopoint API has result. Encoded: Sint-Jansplein, Antwerpen
+05-09-2019 14:16:44: Added locations>document with ID: 872fd5b217d54e6f93b3
+05-09-2019 14:16:46: Added decisions>document with ID: 417684826261410181e6
+05-09-2019 14:16:47: Added decisions>document with ID: b14079f935334370bbdb
+05-09-2019 14:16:49: Added decisions>document with ID: 84f9a0530728403c816c
+05-09-2019 14:16:51: Added decisions>document with ID: 05ab0e0ee7b040b1874d
+05-09-2019 14:16:52: Added decisions>document with ID: aee2fa6aa5504de6a331
+05-09-2019 14:16:54: Added decisions>document with ID: f74e1314b6244f10b3b6
+05-09-2019 14:16:55: Added decisions>document with ID: 3781d14758a24b3696c1
+05-09-2019 14:16:57: Added decisions>document with ID: 839c7cd1066041d39889
+05-09-2019 14:16:57: Address extracted: Oogststraat, 2600
+05-09-2019 14:16:58: Geopoint API has result. Encoded: Oogststraat, Antwerpen
+05-09-2019 14:16:58: Added locations>document with ID: 6ef9fe5ee7e1439f8b66
+05-09-2019 14:16:59: Added decisions>document with ID: fa1eae39938b4a0d8f27
+05-09-2019 14:17:00: Address extracted: Laar, 2140
+05-09-2019 14:17:00: Address extracted: Laar, 2180
+05-09-2019 14:17:00: Geopoint API has result. Encoded: Laar, Antwerpen (2140)
+05-09-2019 14:17:00: Geopoint API has result. Encoded: Laar, Antwerpen (2180)
+05-09-2019 14:17:00: Added locations>document with ID: 37d205fca7b742a2a76a
+05-09-2019 14:17:00: Added locations>document with ID: 8c2e55b0c06041fd9c69
+05-09-2019 14:17:02: Added decisions>document with ID: 07e2567f7a2c41df9ffd
+05-09-2019 14:17:02: Address extracted: Tampicoplein, 2030
+05-09-2019 14:17:03: Geopoint API has result. Encoded: Tampicoplein, Antwerpen
+05-09-2019 14:17:03: Added locations>document with ID: dc48a81f1f554dd992a2
+05-09-2019 14:17:04: Added decisions>document with ID: 5c62e15401964320adcd
+05-09-2019 14:17:05: Address extracted: Kioskplaats, 2660
+05-09-2019 14:17:05: Geopoint API has result. Encoded: Kioskplaats, Antwerpen
+05-09-2019 14:17:05: Added locations>document with ID: a6d3362a2e5c4d4b922c
+05-09-2019 14:17:06: Added decisions>document with ID: ae0ca4f3e85841e58f15
+05-09-2019 14:17:07: Address extracted: Sint-Jansvliet, 2000
+05-09-2019 14:17:07: Geopoint API has result. Encoded: Sint-Jansvliet, Antwerpen
+05-09-2019 14:17:07: Added locations>document with ID: 66a0365636b046e988ea
+05-09-2019 14:17:08: Added decisions>document with ID: 717964bf81174839acda
+05-09-2019 14:17:09: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:10: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:10: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:10: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:11: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:11: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:11: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:12: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:12: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:13: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:13: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:13: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:14: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:14: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:14: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:15: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:15: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:15: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:16: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:16: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:16: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:17: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:17: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:17: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:18: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:18: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:18: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:19: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:19: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:19: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:20: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:20: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:20: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:21: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:21: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:21: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:22: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:22: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:22: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:23: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:23: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:23: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:24: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:24: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:24: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:25: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:25: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:25: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:26: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:26: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:26: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:27: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:27: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:28: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:28: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:28: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:29: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:30: Added decisions>document with ID: 8d4b73920e0d47e9b514
+05-09-2019 14:17:30: Clean , out of house number: 32,
+05-09-2019 14:17:30: Address extracted: Van Trierstraat 32, 2018
+05-09-2019 14:17:31: Geopoint API has result. Encoded: Van Trierstraat 32, 2018 Antwerpen
+05-09-2019 14:17:31: Added locations>document with ID: 686bb2f0e8bf478590b5
+05-09-2019 14:17:33: Added decisions>document with ID: 071bf7dbd74a48f6b4a7
+05-09-2019 14:17:34: Address extracted: Lange Nieuwstraat 7, 2000
+05-09-2019 14:17:34: Clean double house numbers: 9-10,
+05-09-2019 14:17:34: Address extracted: Sint-Nicolaasplaats 9, 2000
+05-09-2019 14:17:34: Geopoint API has result. Encoded: Lange Nieuwstraat 7, 2000 Antwerpen
+05-09-2019 14:17:34: Geopoint API has result. Encoded: Sint-Nicolaasplaats 9, 2000 Antwerpen
+05-09-2019 14:17:34: Added locations>document with ID: cc49096387aa4bb6aa99
+05-09-2019 14:17:34: Added locations>document with ID: 51ed6ed6a415498cb094
+05-09-2019 14:17:35: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:35: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:36: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:36: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:37: Added decisions>document with ID: 2bdf7b4dbf814fa48af8
+05-09-2019 14:17:39: Added decisions>document with ID: a57420b9f1494237ba1c
+05-09-2019 14:17:39: Address extracted: Van Erstenstraat, 2100
+05-09-2019 14:17:39: Geopoint API has result. Encoded: Van Erstenstraat, Antwerpen
+05-09-2019 14:17:39: Added locations>document with ID: a7daad2d04f7479480aa
+05-09-2019 14:17:42: Added decisions>document with ID: 22d2267bd43d4066b9b4
+05-09-2019 14:17:42: Address extracted: George Ivanowlaan, 2100
+05-09-2019 14:17:43: Geopoint API has result. Encoded: George Ivanowlaan, Antwerpen
+05-09-2019 14:17:43: Added locations>document with ID: 419308308af44724a0a6
+05-09-2019 14:17:44: Added decisions>document with ID: 2dd95fd0d3404ba286f0
+05-09-2019 14:17:45: Address extracted: Eugeen Fahylaan, 2100
+05-09-2019 14:17:46: Geopoint API has result. Encoded: Eugeen Fahylaan, Antwerpen
+05-09-2019 14:17:46: Added locations>document with ID: 9f112c7a72924df58cb2
+05-09-2019 14:17:48: Added decisions>document with ID: daca2f677f7948bb92e6
+05-09-2019 14:17:50: Added decisions>document with ID: e909b12df10647bdba8f
+05-09-2019 14:17:51: Added decisions>document with ID: 4a43237d4dd949469b8a
+05-09-2019 14:17:53: Added decisions>document with ID: c63f7f8ce2e44ad69b90
+05-09-2019 14:17:56: Added decisions>document with ID: 5dda5b180e4f41dc8003
+05-09-2019 14:17:58: Added decisions>document with ID: d1ea007f254f41e28355
+05-09-2019 14:17:58: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:17:59: Added decisions>document with ID: 0c44fe03243b4bc694fe
+05-09-2019 14:18:01: Added decisions>document with ID: 555f8ef1a3494a53a0dd
+05-09-2019 14:18:01: Address extracted: Van den Nestlei, 2018
+05-09-2019 14:18:01: Geopoint API has result. Encoded: Van den Nestlei, Antwerpen
+05-09-2019 14:18:01: Added locations>document with ID: f082e35d06f6416f910e
+05-09-2019 14:18:03: Added decisions>document with ID: 343b74a3315a43a99928
+05-09-2019 14:18:04: Added decisions>document with ID: b620283d93264824b7ec
+05-09-2019 14:18:06: Added decisions>document with ID: aa93ffeb6a564998b897
+05-09-2019 14:18:08: Added decisions>document with ID: e71612c0e740477bb99b
+05-09-2019 14:18:08: Address extracted: Brialmontlei, 2018
+05-09-2019 14:18:08: Address extracted: Mercatorstraat, 2018
+05-09-2019 14:18:08: Address extracted: Van den Nestlei, 2018
+05-09-2019 14:18:08: Geopoint API has result. Encoded: Brialmontlei, Antwerpen
+05-09-2019 14:18:08: Geopoint API has result. Encoded: Mercatorstraat, Antwerpen
+05-09-2019 14:18:09: Geopoint API has result. Encoded: Van den Nestlei, Antwerpen
+05-09-2019 14:18:09: Added locations>document with ID: 95556ad191514c269d54
+05-09-2019 14:18:09: Added locations>document with ID: 7709eebe96a644d4a0aa
+05-09-2019 14:18:09: Added locations>document with ID: ac3f39c5969e4f91a8fa
+05-09-2019 14:18:11: Added decisions>document with ID: 64f323aaa65d42d8a7e3
+05-09-2019 14:18:12: Added decisions>document with ID: 01b53b46eca74d3aaafd
+05-09-2019 14:18:14: Added decisions>document with ID: 9902cf34a3e14d8ab0ea
+05-09-2019 14:18:14: Address extracted: Boomgaardstraat, 2018
+05-09-2019 14:18:14: Address extracted: Boomgaardstraat, 2600
+05-09-2019 14:18:14: Address extracted: Stanleystraat, 2018
+05-09-2019 14:18:15: Geopoint API has result. Encoded: Boomgaardstraat, Antwerpen
+05-09-2019 14:18:15: Geopoint API has result. Encoded: Boomgaardstraat, Antwerpen
+05-09-2019 14:18:15: Geopoint API has result. Encoded: Stanleystraat, Antwerpen
+05-09-2019 14:18:15: Added locations>document with ID: afb2a0c1623e4fd1a632
+05-09-2019 14:18:15: Added locations>document with ID: 2e10e6015acf499ebeee
+05-09-2019 14:18:16: Added locations>document with ID: 6fd04e867be24c77910e
+05-09-2019 14:18:17: Added decisions>document with ID: d328e1b3cffd4b3ebdd0
+05-09-2019 14:18:19: Added decisions>document with ID: 62ae4bb68384419280d6
+05-09-2019 14:18:19: Address extracted: Schoolstraat, 2060
+05-09-2019 14:18:19: Geopoint API has result. Encoded: Schoolstraat, Antwerpen
+05-09-2019 14:18:19: Added locations>document with ID: 55dc6e5d075f4793b99e
+05-09-2019 14:18:21: Added decisions>document with ID: 1178d49dd03c4be3ad2e
+05-09-2019 14:18:22: Address extracted: Columbiastraat, 2030
+05-09-2019 14:18:22: Geopoint API has result. Encoded: Columbiastraat, Antwerpen
+05-09-2019 14:18:22: Added locations>document with ID: 578e1e67984e40218de9
+05-09-2019 14:18:23: Added decisions>document with ID: b8f2aa499f2c40ac8a7d
+05-09-2019 14:18:25: Added decisions>document with ID: 0a9f4ad6934545238d35
+05-09-2019 14:18:26: Added decisions>document with ID: 4e50442d7b6e49c8b37e
+05-09-2019 14:18:28: Added decisions>document with ID: 58f620f42c314735bcd8
+05-09-2019 14:18:30: Added decisions>document with ID: 7fef7bdb784444a3ade7
+05-09-2019 14:18:31: Added decisions>document with ID: 0e0b4513c65e4aefaa38
+05-09-2019 14:18:32: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:18:32: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:18:33: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:18:33: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:18:34: Document 3deadffc639740b19d3c returned by query
+05-09-2019 14:18:35: Added decisions>document with ID: b1c7f04686014f5da651
+05-09-2019 14:18:35: Address extracted: Berthoutstraat, 2600
+05-09-2019 14:18:35: Address extracted: Ferdinand Coosemansstraat, 2600
+05-09-2019 14:18:35: Address extracted: Walemstraat, 2600
+05-09-2019 14:18:36: Geopoint API has result. Encoded: Berthoutstraat, Antwerpen
+05-09-2019 14:18:36: Geopoint API has result. Encoded: Ferdinand Coosemansstraat, Antwerpen
+05-09-2019 14:18:36: Geopoint API has result. Encoded: Walemstraat, Antwerpen
+05-09-2019 14:18:36: Added locations>document with ID: 55ac0fd4afad49e2883a
+05-09-2019 14:18:36: Added locations>document with ID: 3cb3d96783a4481b9909
+05-09-2019 14:18:37: Added locations>document with ID: 0125b117faf145aea4f5
+05-09-2019 14:18:38: Added decisions>document with ID: 6a2026f2866e4861bfb5
+05-09-2019 14:18:40: Added decisions>document with ID: 79caf10557fa493695a6
+05-09-2019 14:18:41: Added decisions>document with ID: 816bd7a0cb9f4a668aa8
+05-09-2019 14:18:43: Added decisions>document with ID: e9bad642c0d24d94be31
+05-09-2019 14:18:44: Added decisions>document with ID: e88f37806f7d4743a9d6
+05-09-2019 14:18:46: Added decisions>document with ID: f2079b3f69a2465d991a
+05-09-2019 14:18:47: Added decisions>document with ID: 7f53b00ebdbd46799d44
+05-09-2019 14:18:49: Added decisions>document with ID: d2483c50b2f9474aa406
+05-09-2019 14:18:50: Added decisions>document with ID: d3305d49d1c74cf4849f
+05-09-2019 14:18:52: Added decisions>document with ID: 180cded058754140aaf3
+05-09-2019 14:18:52: Address extracted: Diksmuidelaan, 2600
+05-09-2019 14:18:53: Geopoint API has result. Encoded: Diksmuidelaan, Antwerpen
+05-09-2019 14:18:53: Added locations>document with ID: 3ce9b47a626545cdb9ab
+05-09-2019 14:18:54: Added decisions>document with ID: a6a8efc7d2144c15b0ee
+05-09-2019 14:18:56: Added decisions>document with ID: d4f628fbb56e4a05b677
+05-09-2019 14:18:57: Added decisions>document with ID: d1e4c3a6903549fabad5
+05-09-2019 14:18:57: Address extracted: Berchemhofstraat, 2600
+05-09-2019 14:18:58: Geopoint API has result. Encoded: Berchemhofstraat, Antwerpen
+05-09-2019 14:18:58: Added locations>document with ID: 0206d49f985a489bb26c
