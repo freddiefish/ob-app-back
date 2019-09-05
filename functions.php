@@ -176,8 +176,8 @@ function extractFromPDF($id) {
     $background = $arrayBGText[0];
 
     // get decision
-    $arrayBGText = explode('Besluit', $clean1Txt);
-    $finalDecision = $arrayBGText[1];
+    $arrayBGText = explode('Artikel 1', $clean1Txt);
+    $finalDecision = 'Artikel 1' . $arrayBGText[1];
 
     return array ($fullTxt, $background, $finalDecision);
 } 
@@ -289,6 +289,20 @@ function geoCode($stringLocations) {
     return $geoLocations;
 }
 
+function unique_multidim_array($array, $key) {
+    $temp_array = array();
+    $i = 0;
+    $key_array = array();
+   
+    foreach($array as $val) {
+        if (!in_array($val[$key], $key_array)) {
+            $key_array[$i] = $val[$key];
+            $temp_array[$i] = $val;
+        }
+        $i++;
+    }
+    return $temp_array;
+}
 
 
 function logThis($data) {
