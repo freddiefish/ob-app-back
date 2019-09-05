@@ -11,7 +11,6 @@
 
 define("BASE_DIR",      "https://ebesluit.antwerpen.be");
 define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
-define("PROJECT_ID",    "ob-app-dev-251909");
 
 // Use the composer autoloader to load dependencies.
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
@@ -110,7 +109,7 @@ foreach($docList as $val) {
     // logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
     // first check if document is in firestore (https://console.cloud.google.com/firestore/data?folder=&organizationId=&project=ob-app-backend)
-    $isInDb =get_document(PROJECT_ID,'docId', '=',$val['id']); // returns bool
+    $isInDb =get_document('docId', '=',$val['id']); // returns bool
     
     if (!$isInDb) {
         // scrape if document published, enrich and insert into db
@@ -135,7 +134,7 @@ foreach($docList as $val) {
                 'published' => $val['published']
             ];
 
-            $ID = add_document(PROJECT_ID,'decisions',$data); // returns ID
+            $ID = add_document('decisions',$data); // returns ID
 
             //ENRICH WITH GEODATA
             $stringLocations = array();
@@ -154,7 +153,7 @@ foreach($docList as $val) {
                 $db_temp = new FirestoreClient();
                 $decisionRef = $db_temp->document('decisions/' . $ID);
                 
-                var_dump($geoLocations);
+                // var_dump($geoLocations);
 
                 foreach ($geoLocations as $location) {
 
@@ -167,7 +166,7 @@ foreach($docList as $val) {
                             ]
                         ];
 
-                        add_document(PROJECT_ID,'locations',$dataLocation);
+                        add_document('locations',$dataLocation);
                        
                 }
                 
