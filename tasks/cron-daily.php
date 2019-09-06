@@ -131,7 +131,8 @@ foreach($docList as $val) {
                 'fullText' => $fullTxt,
                 'groupId' => $val['groupId'],
                 'groupName' => $val['groupName'],
-                'published' => $val['published']
+                'published' => $val['published'],
+                'hasGeoData' => false
             ];
 
             $ID = add_document('decisions',$data); // returns ID
@@ -167,6 +168,9 @@ foreach($docList as $val) {
                         ];
 
                         add_document('locations',$dataLocation);
+                        
+                        //update decision: indicate has Geo Data
+                        update_document('decisions',$ID);
                        
                 }
                 

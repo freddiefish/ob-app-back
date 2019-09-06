@@ -139,6 +139,19 @@ function add_document($collection,$data) {
     return $ID;
 }  
 
+function update_document($collection,$ID){
+
+    $db = new FirestoreClient();
+    
+    $updateRef = $db->collection($collection)->document($ID);
+    $updateRef->update([
+        ['path' => 'hasGeoData', 'value' => true]
+    ]);
+
+    logThis('Updated hasGeoData field in ' . $collection . '>document with ID: ' . $ID);
+
+}
+
 
 function extractFromPDF($id) {
     // Parse pdf file, trim, return entities: fulltext, background, decision
