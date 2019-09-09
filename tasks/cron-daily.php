@@ -132,7 +132,8 @@ foreach($docList as $val) {
                 'groupId' => $val['groupId'],
                 'groupName' => $val['groupName'],
                 'published' => $val['published'],
-                'hasGeoData' => false
+                'hasGeoData' => false,
+                'sortIndex1' => $val['sortIndex1']
             ];
 
             $ID = add_document('decisions',$data); // returns ID

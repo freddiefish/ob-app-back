@@ -18,15 +18,15 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Google\Cloud\Firestore\DocumentReference;
 use Sk\Geohash\Geohash;
 use Google\Cloud\Core\GeoPoint;
+use Google\Cloud\Core\Timestamp;
 
 function get_data($url) {
 
 	$ch = curl_init();
-    $timeout = 5;
+    $timeout = 300; // https://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html
     
 	curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 2);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
     //setting them to false.
@@ -61,6 +61,8 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
         $row['id'] = $docId;
         $row['published'] = true;
         $row['title'] = cleanTitle( $docTitle) ;
+        
+        $row['sortIndex1'] = new Timestamp(new DateTime($val['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         array_push($docList, $row);
     }  
 
@@ -73,6 +75,11 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
         $row['title'] = cleanTitle($docTitle);
         $row['id'] = null;
         $row['published'] = false;
+
+        // non published docs have no id, so create a random id
+        $docId = RandomString(12) ;
+        $row['sortIndex1'] = new Timestamp(new DateTime($val['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
+        
         array_push($docList,  $row);
     }
 
@@ -264,8 +271,7 @@ function geoCode($stringLocations) {
         $ch                 = curl_init();
         curl_setopt($ch, CURLOPT_URL, $requestUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        curl_setopt($ch, CURLOPT_TIMEOUT, 2);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
         //setting them to false.
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
@@ -352,5 +358,31 @@ function mailWhenScriptHalted() {
     } 
 }
 
+function RandomString($num) 
+{ 
+  // Variable that store final string 
+  $final_string = ""; 
+  
+  //Range of values used for generating string
+  $range = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; 
+  
+  // Find the length of created string 
+  $length = strlen($range); 
+  
+  // Loop to create random string 
+  for ($i = 0; $i < $num; $i++) 
+  { 
+    // Generate a random index to pick 
+    // characters 
+    $index = rand(0, $length - 1); 
+    
+    // Concatenating the character 
+    // in resultant string 
+    $final_string.=$range[$index]; 
+  } 
+  
+  // Return the random generated string 
+  return $final_string; 
+}
 
 ?>
