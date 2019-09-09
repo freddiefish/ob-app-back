@@ -1,6 +1,12 @@
 <?php
+define("PROD" , false);
+
 // setting environment variables
-putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
+if (PROD == true) {
+    putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
+} else {
+    putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-40dcf7752b62.json');
+}
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
 
 define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
