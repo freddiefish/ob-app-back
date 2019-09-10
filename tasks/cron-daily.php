@@ -23,6 +23,7 @@ ini_set('memory_limit', '-1'); // script gets meomory ad infinitely
 if (mailWhenScriptHalted()) exit();
 
 logThis('*************************************************');
+logthis('Running production mode = '. PROD);
 logThis('Script started: ' . date('l jS \of F Y h:i:s A'));
 logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
@@ -183,6 +184,7 @@ foreach($docList as $val) {
 } 
 
 logThis('Script ended: ' . date('l jS \of F Y h:i:s A'));
+echo '<h1>Production mode = ' .PROD . ' / '. date('l jS \of F Y h:i:s A') . ': Script ended succesfully</h1>';
 logThis('END');
 
 // clean database (delete any location doc without a corresponding decision doc)

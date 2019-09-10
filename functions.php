@@ -1,19 +1,19 @@
 <?php
-define("PROD" , false);
+define("PROD" , true);
 
 // setting environment variables
 if (PROD == true) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
-} else {
+    define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+} else { // developers mode
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-40dcf7752b62.json');
+    define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log-dev.txt");
+    // show all errors
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 }
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
-
-define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
-
-// show all errors
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 // TODO function extractfromPDF, if word "Besluit" occurs more than once, get only the relevant section
 // Use the composer autoloader to load dependencies.
@@ -360,7 +360,7 @@ function mailWhenScriptHalted() {
         } else {
             // logThis("Mail with log send!"); 
         }
-        return true;
+        // return true;
     } 
 }
 
