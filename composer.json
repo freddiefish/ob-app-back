@@ -5,7 +5,8 @@
         "saikiran/geohash": "1.0",
         "grpc/grpc": "^v1.1.0",
         "google/cloud-firestore": "^1.7",
-        "google/cloud-language": "^0.20.0"
+        "google/cloud-language": "^0.20.0",
+        "phpmailer/phpmailer": "~6.0"
     },
     "require-dev": {
     }

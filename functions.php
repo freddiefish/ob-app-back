@@ -5,7 +5,7 @@ define("PROD" , true);
 if (PROD == true) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
     define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    error_reporting(E_ERROR | E_PARSE);
 } else { // developers mode
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-40dcf7752b62.json');
     define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log-dev.txt");
@@ -203,7 +203,7 @@ function extractFromPDF($id) {
         $position = preg_match("/^[A-Z]/", $piece);
         if ($position = 1) $finalDecision = $piece;
     }
-    var_dump($finalDecision);
+    // var_dump($finalDecision);
 
     return array ($fullTxt, $background, $finalDecision);
 } 
