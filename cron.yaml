@@ -1,9 +1,12 @@
 cron:
-- description: "daily decisions extraction job"
-  url: /tasks/cron-daily
+- description: "daily decisions extraction"
+  url: /cron-daily
   schedule: every 24 hours
   timezone: Europe/Brussels
-- description: "weekly email log job"
-  url: /tasks/cron-weekly
+  retry_parameters:
+    min_backoff_seconds: 10
+    max_doublings: 3
+- description: "weekly delete log"
+  url: /cron-weekly
   schedule: every monday 09:00
   timezone: Europe/Brussels

@@ -1,18 +1,9 @@
 <?php 
 // TO DO script archives any entries older than 30 days
 // mails the log every week
+// Use the composer autoloader to load dependencies.
+// Use the composer autoloader to load dependencies. On GC App Engine paths are different
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../functions.php';
 
-require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
-
-$msg = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/tasks/log.txt');
-
-$success = mail("frefeys@gmail.com","logs",$msg);
-
-if (!$success) {
-    $errorMessage = error_get_last()['message'];
-    logThis($errorMessage);
-} else {
-    logThis("Mail with log send!"); 
-}
-
-?>
+unlink(LOG_PATH); // delete the log

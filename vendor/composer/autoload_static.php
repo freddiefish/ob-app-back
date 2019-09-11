@@ -187,6 +187,13 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
                 0 => __DIR__ . '/..' . '/rize/uri-template/src',
             ),
         ),
+        'M' => 
+        array (
+            'Mailjet' => 
+            array (
+                0 => __DIR__ . '/..' . '/mailjet/mailjet-apiv3-php/src',
+            ),
+        ),
     );
 
     public static $classMap = array (

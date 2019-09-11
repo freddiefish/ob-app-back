@@ -1,6 +1,7 @@
 composer.phar
 /vendor/
 /tasks/log.txt
+/tasks/log-dev.txt
 .vscode/
 Besluit-8.pdf
 
