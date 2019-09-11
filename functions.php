@@ -1,23 +1,19 @@
 <?php
+// setting environment variables
 define("PROD" , true);
 
-// setting environment variables
 if (PROD == true) {
-    putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-5e6adab126e2.json');
-    define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log.txt");
+    putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-5e6adab126e2.json');
+    define("LOG_PATH" , __DIR__ . "/tasks/log.txt");
     error_reporting(E_ERROR | E_PARSE);
 } else { // developers mode
-    putenv('GOOGLE_APPLICATION_CREDENTIALS='. $_SERVER['DOCUMENT_ROOT'] . '/tasks/ob-app-dev-40dcf7752b62.json');
-    define("LOG_PATH" , $_SERVER['DOCUMENT_ROOT'] . "/tasks/log-dev.txt");
+    putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-dev-40dcf7752b62.json');
+    define("LOG_PATH" , __DIR__ . '/tasks/log-dev.txt');
     // show all errors
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 }
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
-
-// TODO function extractfromPDF, if word "Besluit" occurs more than once, get only the relevant section
-// Use the composer autoloader to load dependencies.
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use Sunra\PhpSimple\HtmlDomParser;
 use Google\Cloud\Firestore\FirestoreClient;
@@ -25,8 +21,9 @@ use Google\Cloud\Firestore\DocumentReference;
 use Sk\Geohash\Geohash;
 use Google\Cloud\Core\GeoPoint;
 use Google\Cloud\Core\Timestamp;
+use PHPMailer\PHPMailer\PHPMailer;
 
-function get_data($url) {
+function do_curl($url) {
 
 	$ch = curl_init();
     $timeout = 300; // https://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html
@@ -48,7 +45,7 @@ function get_data($url) {
 function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){ 
     
     // Create DOM from URL or file
-    $dom = HtmlDomParser::file_get_html( BASE_DIR . $pathToScrape );
+    $dom = HtmlDomParser::str_get_html( do_curl( BASE_DIR . $pathToScrape ) );
 
     // get only the agenda html 
     $agenda_html = $dom->getElementById("agenda");
@@ -68,7 +65,7 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
         $row['published'] = true;
         $row['title'] = cleanTitle( $docTitle) ;
         
-        $row['sortIndex1'] = new Timestamp(new DateTime($val['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
+        $row['sortIndex1'] = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         array_push($docList, $row);
     }  
 
@@ -84,10 +81,14 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
 
         // non published docs have no id, so create a random id
         $docId = RandomString(12) ;
-        $row['sortIndex1'] = new Timestamp(new DateTime($val['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
+        $row['sortIndex1'] = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         
         array_push($docList,  $row);
     }
+
+    // prevent memory leaks
+    $dom->clear();
+    unset($dom);
 
     return $docList;
 }
@@ -170,8 +171,23 @@ function extractFromPDF($id) {
     // Parse pdf file, trim, return entities: fulltext, background, decision
     $text ='';
 
+    $dir = sys_get_temp_dir();
+    var_dump($dir);
+    $URL = BASE_DIR . '/publication/' . $id .'/download';
+    $fileName= '_besluit';
+    $path = $dir . '/' . $fileName.'.pdf';
+    $file__download= curl_init();
+
+    curl_setopt($file__download, CURLOPT_URL, $URL);
+    curl_setopt($file__download, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($file__download, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($file__download, CURLOPT_AUTOREFERER, true);
+    $result= curl_exec($file__download);
+    
+    file_put_contents($path, $result); // write to /tmp
+
     $parser = new \Smalot\PdfParser\Parser();
-    $pdf    = $parser->parseFile(BASE_DIR . '/publication/' . $id .'/download');
+    $pdf    = $parser->parseFile($path);
 
     $text = $pdf->getText();
 
@@ -209,11 +225,11 @@ function extractFromPDF($id) {
 } 
 
 function extractAddress($txt, $stringLocations) {
-
-    $file           = "straatnamen.txt";
+    
+    $file           = __DIR__ . "/tasks/straatnamen.txt";
     $contents       = file_get_contents($file);
     $lines          = explode("\n", $contents); // this is your array of words
-
+    
     foreach($lines as $line) {
         $elements   = explode(",", $line);
         $streetName = $elements[0];
@@ -274,18 +290,8 @@ function geoCode($stringLocations) {
         $searchString       = $stringLocation;
         $needleEncoded      = urlencode($searchString);
         $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
-        $ch                 = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $requestUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-        //Disable CURLOPT_SSL_VERIFYHOST and CURLOPT_SSL_VERIFYPEER by
-        //setting them to false.
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $output             = curl_exec($ch);
-        curl_close($ch);
-       
-        $geoloc = json_decode($output);
+        
+        $geoloc = json_decode( do_curl( $requestUrl ));
        
         $checkEmpty = $geoloc->LocationResult[0]; // sometimes ["LocationResult"]=> array(0) { }  is returned
                
@@ -340,28 +346,24 @@ function logThis($data) {
         fputs($fp, "\n$msg"); // write the data in the opened file
         fclose($fp); // close the file
     }
+    echo $msg . '<br>';
 }
 
 
-function mailWhenScriptHalted() {
-    $file = escapeshellarg('log.txt'); // for the security concious (should be everyone!)
+function mailWhenScriptResult() {
+    
+    $file = escapeshellarg(LOG_PATH); // for the security concious (should be everyone!)
     $line = `tail -n 1 $file`;
-        
-    if ( strpos( $line, 'END' ) === false ) {
-        echo "Script did not run till the end. Investigation of logs required!!!! " . LOG_PATH;
-        // script halted so email admin
-        $msg = LOG_PATH;
-        
-        $success = mail("frefeys@gmail.com","Investigation required", $msg);
+    
+    ( PROD? $msg= "https://ob-app-db2b6.appspot.com/log" : $msg='file:///Users/Main/Apps/ob-app-back/tasks/log-dev.txt\nhttps://ob-app-db2b6.appspot.com/log-dev' );
 
-        if (!$success) {
-            $errorMessage = error_get_last()['message'];
-            logThis($errorMessage);
-        } else {
-            // logThis("Mail with log send!"); 
-        }
-        // return true;
-    } 
+    if ( strpos( $line, 'END' ) === false ) {
+        $subj = "Last cron job did not finish completely";
+    } else {
+        $subj = "Last cron job did finish!";
+    }
+    
+    mail_this($subj, $msg);
 }
 
 function RandomString($num) 
@@ -389,6 +391,55 @@ function RandomString($num)
   
   // Return the random generated string 
   return $final_string; 
+}
+
+function mail_this($subj, $msg) {
+
+    $mail = new PHPMailer();
+
+    ( PROD ? $debugMode = 1 : $debugMode = 2 );
+    $mail->SMTPDebug = $debugMode;
+
+    /* //setup mailtrap
+    $mail->isSMTP();
+    $mail->Host = 'smtp.mailtrap.io';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'e62458779718b2'; //paste one generated by Mailtrap
+    $mail->Password = 'aa625b7617c3db' ; //paste one generated by Mailtrap
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 2525; */
+
+    //setup mailjet
+    $mail->isSMTP();
+    $mail->Host = 'in-v3.mailjet.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = '08f0ffd5a702d5b663f39b69f213f40b'; 
+    $mail->Password = '20b9614eed9a3fb48ce428ae25eba13c' ; 
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+    //headers
+    $mail->setFrom('frefeys@gmail.com', 'Frederik Feys');
+    $mail->addAddress('frefeys@gmail.com', 'Admin Fred'); 
+    // $mail->addCC('cc1@example.com', 'Elena');
+    // $mail->addBCC('bcc1@example.com', 'Alex');
+
+    // mail
+    $mail->isHTML(true);
+    $mail->Subject = $subj;
+    $mailContent = $msg;
+    $mail->Body = $mailContent;
+
+    // $mail->msgHTML(do_curl('contents.html'), __DIR__);
+
+    if($mail->send()){
+        return true;
+    }else{
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+        logThis('Mail send error: ' . $mail->ErrorInfo);
+        // files must be in the same dir! $mail->addAttachment('path/to/invoice1.pdf', 'invoice1.pdf');
+    }
 }
 
 ?>

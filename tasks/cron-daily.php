@@ -12,18 +12,18 @@
 define("BASE_DIR",      "https://ebesluit.antwerpen.be");
 define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
 
-// Use the composer autoloader to load dependencies.
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
+// Use the composer autoloader to load dependencies. On GC App Engine paths are different
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../functions.php';
 
 set_time_limit(0); // script runs infinitely
 ini_set('memory_limit', '-1'); // script gets meomory ad infinitely
 
-// mail admin if script halted on the last run
-if (mailWhenScriptHalted()) exit();
+// mail admin if on last script run
+mailWhenScriptResult();
 
 logThis('*************************************************');
-logthis('Running production mode = '. PROD);
+logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );
 logThis('Script started: ' . date('l jS \of F Y h:i:s A'));
 logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
@@ -35,14 +35,18 @@ use Google\Cloud\Firestore\FirestoreClient;
  
 $startDate = new DateTime();
 $stopDate = new DateTime();
+
 // go 30 days back 
+if (!isset($daysToScreen) ) {
+  $daysToScreen = 30;
+}
 $thirtyDaysAgo = new DateInterval('P' . $daysToScreen . 'D');
 $thirtyDaysAgo->invert =1; // make it negative
 $startDate->add($thirtyDaysAgo);
 
-//$data = get_data('https://ebesluit.antwerpen.be/calendar/filter?year=' . $year . '&month=' . $month );
-//$data = get_data('https://ebesluit.antwerpen.be/agenda/18.1122.4613.7270/view?' );
-//$data = get_data( 'https://ebesluit.antwerpen.be/publication/19.0802.4796.5619/detail?');
+//$data = do_curl('https://ebesluit.antwerpen.be/calendar/filter?year=' . $year . '&month=' . $month );
+//$data = do_curl('https://ebesluit.antwerpen.be/agenda/18.1122.4613.7270/view?' );
+//$data = do_curl( 'https://ebesluit.antwerpen.be/publication/19.0802.4796.5619/detail?');
 
 //store our scraped data
 $docList        = array();
@@ -54,7 +58,7 @@ $monthTrail0    = date("m", $timestamp);
 $updateDateDay  = date("j", $timestamp);
 
 // get json list of current month's meetings
-$dom_raw = get_data(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
+$dom_raw = do_curl(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
 $dom_json = json_decode($dom_raw,true);
 
 
@@ -76,7 +80,7 @@ $dom_json = json_decode($dom_raw,true);
             $monthTrail0    = $updateDateMonthTrail0;
             
             // update calender view
-            $dom_raw = get_data(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
+            $dom_raw = do_curl(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
             $dom_json = json_decode($dom_raw,true);
             logThis("Updated the DOM to month ' . $month . ' of year '. $year . ' in calendar view: "); 
         }
@@ -86,15 +90,22 @@ $dom_json = json_decode($dom_raw,true);
         // logThis('Current iter: ' . $iter);
 
         foreach($dom_json as  $obj){
-            foreach($obj[$iter] as $val) { 
-                // logThis("objectId ". $val['objectId']);
-                // get the agenda items
-                $pathToScrape   = $val['url'];
-                $eventDate      = $val['startDateString'];
-                $groupId        = $val['groupId'];
-                $groupName      = $val['className'];
-                $docList = addDocsToList($pathToScrape,$eventDate,$groupId, $groupName,$docList);
+            
+            if (array_key_exists( $iter , $obj )) { // some dates are not present
+
+                foreach($obj[$iter] as $val) { 
+                    // logThis("objectId ". $val['objectId']);
+                    // get the agenda items
+                    $pathToScrape   = $val['url'];
+                    $eventDate      = $val['startDateString'];
+                    $groupId        = $val['groupId'];
+                    $groupName      = $val['className'];
+                    $docList = addDocsToList($pathToScrape,$eventDate,$groupId, $groupName,$docList);
+                }
+
             }
+
+            
         } 
 
         $updateDate->add(new DateInterval('P1D')); //update date
@@ -141,7 +152,7 @@ foreach($docList as $val) {
 
             //ENRICH WITH GEODATA
             $stringLocations = array();
-            $txtExtractAddress = $val['title'] . ' ' . $val['fullText'];
+            $txtExtractAddress = $val['title'] . ' ' . $fullTxt ;
             $stringLocations = extractAddress($txtExtractAddress, $stringLocations);
             
             // var_dump($stringLocations);
@@ -184,7 +195,6 @@ foreach($docList as $val) {
 } 
 
 logThis('Script ended: ' . date('l jS \of F Y h:i:s A'));
-echo '<h1>Production mode = ' .PROD . ' / '. date('l jS \of F Y h:i:s A') . ': Script ended succesfully</h1>';
 logThis('END');
 
 // clean database (delete any location doc without a corresponding decision doc)
