@@ -32,6 +32,8 @@ foreach ($documents as $document) {
                 printf('Document %s does not exist!' . PHP_EOL, $document->id());  
         }
         
+        // var_dump($data['decisionRef']);
+        echo "REF<br>";
         foreach($data['terms'] as $key=>$value){
                 $dbTermOccur = 0;
                 echo $key;
@@ -41,9 +43,9 @@ foreach ($documents as $document) {
                 }
                 // echo ':' . $dbTermOccur . '<br>';
         
-                var_dump($dbTermOccur);
+                // var_dump($dbTermOccur);
                 $IDF = log($totNumbDocs / $dbTermOccur);
-                var_dump($IDF);
+                // var_dump($IDF);
                 $Tfidf = $value * $IDF;
                 var_dump($Tfidf); // http://www.tfidf.com
         }

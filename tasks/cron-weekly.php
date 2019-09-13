@@ -6,4 +6,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../functions.php';
 
-unlink(LOG_PATH); // delete the log
+$logFile = sys_get_temp_dir() . '/log.txt';
+
+unlink($logFile); // delete the log

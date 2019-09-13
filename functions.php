@@ -1,6 +1,8 @@
 <?php
 // setting environment variables
 define("PROD" , false);
+define("BASE_DIR",      "https://ebesluit.antwerpen.be");
+define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
 
 if (PROD == true) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-5e6adab126e2.json');
@@ -22,6 +24,183 @@ use Sk\Geohash\Geohash;
 use Google\Cloud\Core\GeoPoint;
 use Google\Cloud\Core\Timestamp;
 use PHPMailer\PHPMailer\PHPMailer;
+
+
+
+function get_doclist($daysToScreen) {
+    $startDate = new DateTime();
+    $stopDate = new DateTime();
+
+    // go 30 days back 
+    if (!isset($daysToScreen) ) {
+    $daysToScreen = 30;
+    }
+    $thirtyDaysAgo = new DateInterval('P' . $daysToScreen . 'D');
+    $thirtyDaysAgo->invert =1; // make it negative
+    $startDate->add($thirtyDaysAgo);
+
+    //$data = do_curl('https://ebesluit.antwerpen.be/calendar/filter?year=' . $year . '&month=' . $month );
+    //$data = do_curl('https://ebesluit.antwerpen.be/agenda/18.1122.4613.7270/view?' );
+    // https://ebesluit.antwerpen.be/publication/19.0911.5329.2155/download?
+
+    //store our scraped data
+    $docList        = array();
+    $updateDate     = $startDate;
+    $timestamp      = $updateDate->getTimestamp();
+    $year           = date("Y", $timestamp);
+    $month          = date("n", $timestamp);
+    $monthTrail0    = date("m", $timestamp);
+    $updateDateDay  = date("j", $timestamp);
+
+    // get json list of current month's meetings
+    $dom_raw = do_curl(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
+    $dom_json = json_decode($dom_raw,true);
+
+
+        while( $updateDate < $stopDate) {
+
+            $updateDateTimestamp    = $updateDate->getTimestamp();
+            $updateDateFormatted    = date("d-m-Y",$updateDateTimestamp);
+            logThis("Update for date: " . $updateDateFormatted ); 
+
+            $updateDateYear         = date("Y", $updateDateTimestamp);
+            $updateDateMonth        = date("n", $updateDateTimestamp);
+            $updateDateMonthTrail0  = date("m", $updateDateTimestamp);
+            $updateDateDay          = date("j", $updateDateTimestamp);
+
+            if ($year <> $updateDateYear OR $monthTrail0 <> $updateDateMonthTrail0) {
+                // update values
+                $year           = $updateDateYear;
+                $month          = $updateDateMonth;
+                $monthTrail0    = $updateDateMonthTrail0;
+                
+                // update calender view
+                $dom_raw = do_curl(BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $monthTrail0);
+                $dom_json = json_decode($dom_raw,true);
+                logThis("Updated the DOM to month ' . $month . ' of year '. $year . ' in calendar view: "); 
+            }
+    
+            // do stuf for all days of the month
+            $iter = "$year$month$updateDateDay";
+            // logThis('Current iter: ' . $iter);
+
+            foreach($dom_json as  $obj){
+                
+                if (array_key_exists( $iter , $obj )) { // some dates are not present
+
+                    foreach($obj[$iter] as $val) { 
+                        // logThis("objectId ". $val['objectId']);
+                        // get the agenda items
+                        $pathToScrape   = $val['url'];
+                        $eventDate      = $val['startDateString'];
+                        $groupId        = $val['groupId'];
+                        $groupName      = $val['className'];
+                        $docList = addDocsToList($pathToScrape,$eventDate,$groupId, $groupName,$docList);
+                    }
+
+                }
+
+                
+            } 
+
+            $updateDate->add(new DateInterval('P1D')); //update date
+        }
+    
+    // var_dump($docList);
+    logThis('Found ' . count($docList) . ' documents');
+
+    return $docList;
+}
+
+function add_to_db($docList,$doGeoCoding) {
+    // iterate trough doclist and if the doc is not in the db, extract document data, 
+    // optionally enrich with geolocation data
+
+    foreach($docList as $val) {
+
+        // first check if document is in firestore (https://console.cloud.google.com/firestore/data?folder=&organizationId=&project=ob-app-backend)
+        $isInDb =get_document('docId', '=',$val['id']); // returns bool
+        
+        if (!$isInDb) {
+            // scrape if document published, enrich and insert into db
+            if ( $val['published']) {
+                list($fullTxt, $background, $finalDecision,$assDecisions, $amountsAtStake, $addenda) = extractFromPDF($val['id']); // returns fulltext, background, decision
+                // insert and get doc ID (we need it for the location collection)
+            } else { // not published
+                $fullTxt        = 'Niet gepubliceerd';
+                $background     = 'Niet gepubliceerd. <a href="mailto:' . EMAIL_BESLUITVORMING . '?subject="lezen%20besluiten&body=Goede%20dag,%0Aik%20wil%20een%20besluit%20lezen%20op%20pagina:%20https://ebesluit.antwerpen.be/agenda/' . $val['id'] . '/view%20De%20link%20werkt%20helaas%20niet.%20Hoe%20kan%20ik%20het%20lezen?">vraag via email volledige tekst</a>';
+                $finalDecision  = 'Niet gepubliceerd';
+                $assDecisions = array();
+                $amountsAtStake = array();
+                $addenda = array();
+            }
+                $data = [
+                    'title' => $val['title'],
+                    'offTitle' => $val['offTitle'],
+                    'intID' => $val['intId'], 
+                    'status' => $val['status'],
+                    'background' => $background,
+                    'date' => new Timestamp(new DateTime($val['eventDate'])),
+                    'decision' => $finalDecision,
+                    'docId' => $val['id'],
+                    'fullText' => $fullTxt,
+                    'groupId' => $val['groupId'],
+                    'groupName' => $val['groupName'],
+                    'published' => $val['published'],
+                    'hasGeoData' => false,
+                    'sortIndex1' => $val['sortIndex1'],
+                    'assocDecision' => $assDecisions,
+                    'amountsAtStake' => $amountsAtStake,
+                    'addenda' => $addenda
+                ];
+
+                $ID = add_document('decisions',$data); // returns ID
+
+                if ($doGeoCoding) {
+                    //ENRICH WITH GEODATA
+                    $stringLocations = array();
+                    $txtExtractAddress = $val['title'] . ' ' . $fullTxt ;
+                    $stringLocations = extractAddress($txtExtractAddress, $stringLocations);
+                    // var_dump($stringLocations);
+
+                    if (count($stringLocations) > 0) { // lets do some geocoding and add in db
+                        
+                        $geoLocations = geoCode($stringLocations) ;
+
+                        // remove possible duplicates 
+                        $geoLocations = unique_multidim_array($geoLocations, 'formattedAddress') ;
+
+                        $db_temp = new FirestoreClient();
+                        $decisionRef = $db_temp->document('decisions/' . $ID);
+                        
+                        // var_dump($geoLocations);
+
+                        foreach ($geoLocations as $location) {
+
+                            $dataLocation = [
+                                'decisionRef' => $decisionRef,
+                                'formattedAddress' => $location['formattedAddress'],
+                                'point' => [
+                                    'geohash' => $location['geohash'],
+                                    'geopoint' => new GeoPoint($location['lat'],$location['lng'])
+                                    ]
+                                ];
+
+                                add_document('locations',$dataLocation);
+                                
+                                //update decision: indicate has Geo Data
+                                update_document('decisions',$ID);
+                            
+                        }
+                        
+                    }
+                }
+                
+        } // end !$isInDb
+        
+        
+    } 
+}
 
 function do_curl($url) {
 
@@ -61,9 +240,11 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
         $row['eventDate'] = $eventDate;
         $row['groupId'] = $groupId;
         $row['groupName'] = $groupName;
+        $row['offTitle'] = $docTitle;
+        list($row['intId'], $row['title'],$row['status']) = getTitleElements($docTitle) ;
         $row['id'] = $docId;
         $row['published'] = true;
-        $row['title'] = cleanTitle( $docTitle) ;
+        
         
         $row['sortIndex1'] = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         array_push($docList, $row);
@@ -75,12 +256,13 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
         $row['eventDate'] = $eventDate; // format as timestamp
         $row['groupId'] = $groupId;
         $row['groupName'] = $groupName;
-        $row['title'] = cleanTitle($docTitle);
+        $row['offTitle'] = $docTitle;
+        list($row['intId'], $row['title'],$row['status']) = getTitleElements($docTitle) ;
         $row['id'] = null;
         $row['published'] = false;
 
         // non published docs have no id, so create a random id
-        $docId = RandomString(12) ;
+        $docId = RandomString(4) ;
         $row['sortIndex1'] = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         
         array_push($docList,  $row);
@@ -93,18 +275,21 @@ function addDocsToList ($pathToScrape,$eventDate,$groupId, $groupName,$docList){
     return $docList;
 }
 
-function cleanTitle($txt) {
-    //cleanup the official title, split off first part (e.g. 2016_MV_00157 - Mondelinge vraag van raa...)
+function getTitleElements($txt) {
+    //process the official title, split off first part (e.g. 2016_MV_00157 - Mondelinge vraag van raa...)
     $pieces = explode(" - ", $txt);  
+    
+    $intId = trim($pieces[0]);
+
     //escape speciale letters in titel 
     $cleanTitle = str_replace( $pieces[0] . " - " , "" , $txt ); 
                         
     // get decision result
-    // $result = isolateResult($txt);
+    $status = isolateResult($txt);
     // remove result from title to clean title
-    // $cleanTitle = str_ireplace( " - " . $result , "" , $cleanTitle ); //case insensitive replace
+    $cleanTitle = str_ireplace( " - " . $status , "" , $cleanTitle ); //case insensitive replace
     
-    return $cleanTitle;
+    return array($intId, $cleanTitle , $status);
 }
 
 function isolateResult($title) {
@@ -168,11 +353,17 @@ function update_document($collection,$ID){
 
 
 function extractFromPDF($id) {
+
     // Parse pdf file, trim, return entities: fulltext, background, decision
+    // example PDF: https://ebesluit.antwerpen.be/publication/19.0911.6621.028112-09-2019/download
+
     $text ='';
+    $fullTxt='';
+    $background='';
+    $finalDecision ='';
 
     $dir = sys_get_temp_dir();
-    var_dump($dir);
+    var_dump($id);
     $URL = BASE_DIR . '/publication/' . $id .'/download';
     $fileName= '_besluit';
     $path = $dir . '/' . $fileName.'.pdf';
@@ -191,38 +382,126 @@ function extractFromPDF($id) {
 
     $text = $pdf->getText();
 
-    // trim footer delete anything below bijlagen section
-    $arrayText = explode('Bijlagen', $text);
-    $trimedFooterText = $arrayText[0];
-
-    // trim header
-    $arrayText = explode('Aanleiding en context', $trimedFooterText);
-    $trimmedText = $arrayText[1];
-
-    //get out some templated elements
-    $stripTxt       = "Grote Markt 1 - 2000 Antwerpen";
-    $stippedText1   = str_replace($stripTxt,'',$trimmedText);
-    $stripTxt       = "info@antwerpen.be";
-    $clean1Txt      = str_replace($stripTxt,'',$stippedText1);
-
-    //get fulltext
-    $fullTxt = $clean1Txt;
-
-    //get background
-    $arrayBGText = explode('Juridische grond', $clean1Txt);
-    $background = $arrayBGText[0];
-
-    // get decision
-    $artikelPieces = explode('Artikel 1', $arrayBGText[1]);
-    unset($artikelPieces[0]);
-    foreach ($artikelPieces as $piece) {
-        $position = preg_match("/^[A-Z]/", $piece);
-        if ($position = 1) $finalDecision = $piece;
+    $isVerdaagd = false;
+    if ( strpos($text,'Verdaagd') OR strpos($text,'VERDAAGD')) {
+        $isVerdaagd = true;
+        $finalDecision='Verdaagd';
     }
-    // var_dump($finalDecision);
 
-    return array ($fullTxt, $background, $finalDecision);
+    // var_dump($text);
+
+    if (!$isVerdaagd) {
+        // we have someting to process
+        //get out some templated elements 
+        $stripTxt             = array("Grote Markt 1 - 2000 Antwerpen", "info@antwerpen.be");
+        $cleanTxt            = str_replace($stripTxt,'',$text);
+
+        $trimedFooterText   = $cleanTxt;
+        $textStartAtBijlagen = $cleanTxt;
+        if (strpos($cleanTxt ,'Bijlagen') ) {
+            $arrayText = explode('Bijlagen', $cleanTxt );
+            $trimedFooterText = $arrayText[0];
+            $textStartAtBijlagen = $arrayText[1];
+        }
+        // var_dump($textStartAtBijlagen);
+        // trim header
+        $arrayText = explode('Aanleiding en context', $trimedFooterText);
+        $trimmedText = $arrayText[1];
+        $textEndAtAanlCont = $arrayText[0];
+
+        // coupled decisions
+        $assDecisions = array();
+        $assDecisions = get_assoc_decisions($textEndAtAanlCont,$assDecisions);
+
+        //get fulltext
+        $fullTxt = $cleanTxt;
+
+        //get background
+        $breakstring = '';
+        if (strpos($cleanTxt,'Juridische grond')) $breakstring = 'Juridische grond';
+        if (strpos($cleanTxt,'Regelgeving: bevoegdheid')) $breakstring = 'Regelgeving: bevoegdheid';
+        $arrayBGText = explode($breakstring, $cleanTxt);
+        $background = $arrayBGText[0];
+
+        // var_dump($arrayBGText[1]);
+        // get decision
+        $artikelPieces = explode('Artikel 1', $arrayBGText[1]);
+        unset($artikelPieces[0]);
+        foreach ($artikelPieces as $piece) {
+            $position = preg_match("/^[A-Z]/", $piece);
+            if ($position = 1) $finalDecision = 'Artikel 1 ' . $piece;
+        }
+
+        // financial stakes
+        $amountsAtStake = array();
+        $amountsAtStake = get_financials($fullTxt,$amountsAtStake);
+
+        $addenda = array();
+        $addenda = get_addenda($textStartAtBijlagen,$addenda);
+    }
+        
+    // var_dump($textEndAtAanlCont);
+    // var_dump($amountsAtStake);
+
+    return array ($fullTxt, $background, $finalDecision, $assDecisions, $amountsAtStake, $addenda);
 } 
+
+function get_financials($text,$amounts){
+    $amountsClean = array();
+    $pieces = explode (' EUR', $text);
+    $nrElements = count($pieces);
+    //var_dump($pieces);
+
+    $i =0;
+    foreach($pieces as $piece){
+
+        $words = explode(' ', $piece);
+        $amount = array_pop($words);
+
+        if (strpos($amount, ',') ) { // case "10890,67 EUR" round to 10890
+            $parts = explode(',', $amount);
+            $wholeNumber = $parts[0];
+            $integer = intval(str_replace('.','',$wholeNumber));
+        }
+        
+        if ($i < $nrElements-1 && $integer <> 0) array_push($amounts ,$integer);
+        
+        $i++;
+    }
+
+    // var_dump( $amounts );
+    //remove duplicates
+    $amountsClean = array_unique($amounts);
+    
+    var_dump( $amountsClean ); 
+    return $amountsClean;
+}
+
+function get_assoc_decisions($text,$assocDecisions){
+    
+    $focus = 'Gekoppelde besluiten';
+
+    if (strpos($text, $focus)) {
+        $pieces = explode( $focus, $text);
+        preg_match_all( "/([0-9]+\_[A-Z]+_[0-9]+)/", $pieces[1], $matches);
+        $assocDecisions =  $matches[0];
+    }
+    // var_dump($assocDecisions);
+    return $assocDecisions ;
+}
+
+function get_addenda($text,$addenda){
+    
+    /* var_dump($text);
+    preg_match_all("/[0-9]+.\s([a-zA-Z+]+.[a-z]{2,5})\s*\n/", $text, $matches);
+    // "^/[0-9]+.\s(\w+)$/
+    $addenda = $matches[0];
+
+    var_dump($addenda);
+    return $addenda; */
+    
+}
+
 
 function extractAddress($txt, $stringLocations) {
     
@@ -292,8 +571,8 @@ function geoCode($stringLocations) {
         $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
         
         $geoloc = json_decode( do_curl( $requestUrl ));
-       
-        $checkEmpty = $geoloc->LocationResult[0]; // sometimes ["LocationResult"]=> array(0) { }  is returned
+        var_dump($geoloc);
+        $checkEmpty = $geoloc->LocationResult; // sometimes ["LocationResult"]=> array(0) { }  is returned
                
         if (!empty($checkEmpty)){
             
@@ -340,7 +619,9 @@ function unique_multidim_array($array, $key) {
 
 function logThis($data) {
     $msg = date("d-m-Y H:i:s") . ": " . $data ;
-    $save_path = LOG_PATH;
+    
+    $save_path = sys_get_temp_dir() . '/log.txt';
+
     if ($fp = @fopen($save_path, 'a')) {
         // open or create the file for writing and append info
         fputs($fp, "\n$msg"); // write the data in the opened file
@@ -350,20 +631,23 @@ function logThis($data) {
 }
 
 
-function mailWhenScriptResult() {
+function mailScriptResult() {
     
-    $file = escapeshellarg(LOG_PATH); // for the security concious (should be everyone!)
-    $line = `tail -n 1 $file`;
-    
-    ( PROD? $msg= "https://ob-app-db2b6.appspot.com/log" : $msg='file:///Users/Main/Apps/ob-app-back/tasks/log-dev.txt\nhttps://ob-app-db2b6.appspot.com/log-dev' );
+    $subj = "Fred, your latest Log";
 
-    if ( strpos( $line, 'END' ) === false ) {
-        $subj = "Last cron job did not finish completely";
+    // get a joke  “categories”:[“Programming”,“Miscellaneous”,“Dark”,“Any”]
+    $jokeRes = json_decode ( do_curl('https://sv443.net/jokeapi/category/Programming') , true);
+
+    if ($jokeRes['type'] == "single") {
+        $msg = $jokeRes['joke'];
     } else {
-        $subj = "Last cron job did finish!";
-    }
-    
-    mail_this($subj, $msg);
+        $msg= $jokeRes['setup'] . "\n\n" . $jokeRes['delivery'];
+    } 
+
+    $attFilePath = sys_get_temp_dir() . '/log.txt';
+    mail_this($subj, $msg, $attFilePath); // must be local system ref
+
+    // unset();
 }
 
 function RandomString($num) 
@@ -393,7 +677,7 @@ function RandomString($num)
   return $final_string; 
 }
 
-function mail_this($subj, $msg) {
+function mail_this($subj, $msg, $attFilePath) {
 
     $mail = new PHPMailer();
 
@@ -421,6 +705,7 @@ function mail_this($subj, $msg) {
     //headers
     $mail->setFrom('frefeys@gmail.com', 'Frederik Feys');
     $mail->addAddress('frefeys@gmail.com', 'Admin Fred'); 
+    $mail->addAttachment($attFilePath);
     // $mail->addCC('cc1@example.com', 'Elena');
     // $mail->addBCC('bcc1@example.com', 'Alex');
 
