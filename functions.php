@@ -1,6 +1,6 @@
 <?php
 // setting environment variables
-define("PROD" , true);
+define("PROD" , false);
 
 if (PROD == true) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-5e6adab126e2.json');
@@ -441,5 +441,93 @@ function mail_this($subj, $msg) {
         // files must be in the same dir! $mail->addAttachment('path/to/invoice1.pdf', 'invoice1.pdf');
     }
 }
+
+
+function is_ignore($var) {
+
+    global $ignoreElements;
+    return !in_array($var,$ignoreElements);
+}
+
+function is_number ($var) {
+    if ( 0 === preg_match('~[0-9]~', $var) ) return true;
+}
+
+$ignoreElements = array ('','wordt','worden','er','om','','.',',','en', 'van','in','-','het','de','\'t','aan','te','een',
+'twee','te','voor','op','met','tot','zn','binnen','eur','(zn','die','dat','is','door','dit','ook','waar',
+'zijn','toe','of','als','info@antwerpen.be','uit','deze');
+
+function normTermFrequencies($text){
+    // function returns an array of terms with associated normalised frequency
+
+    $punctures = array (';','\'' ,':','-', ',' , '.' , '/',')','('); // case "Stad." -> clean to "Stad"
+
+    $cleanElements =array();
+    $normTermFrequencies = array();
+
+    $elements = explode(' ', $text);
+    $elementsToLower = array_map('strtolower', $elements);
+    
+    $i = 0;
+    foreach($elementsToLower as $element) {
+
+            $strip = $element;
+            $strip1 = preg_replace( "/\r|\n/", "", $strip );
+            $strip2 = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $strip1);
+            $element = preg_replace('/[[:digit:]]/', "", $strip2);
+            $element = trim($element); // removes any whitespace
+            // echo 'before: ' . $element . ' / after: ';
+            // trim punctures . / , -
+            $element = str_replace($punctures , '', $element);  
+            // echo $element . '<br>';
+            // remove dirty element
+            unset($elementsToLower[$i]); 
+            // add clean element
+            array_push($elementsToLower, $element) ;        
+                    
+            $i++;
+            
+    }
+
+    $elementsClean1 = array_filter($elementsToLower, 'is_ignore');
+    // var_dump($elementsClean1);
+
+    $elementsClean2 = array_filter($elementsClean1, 'is_number');
+    // var_dump($elementsClean2); 
+
+    foreach($elementsClean2 as $elementClean){
+            array_push($cleanElements,$elementClean);
+    }
+    // var_dump($cleanElements);
+
+    $termFrequencies = array_count_values($cleanElements);
+
+    // normalize against total number of terms in doc
+    $numberTerms = array_sum ($termFrequencies);   // var_dump($numberTerms);
+    
+    foreach($termFrequencies as $key=>$value) {
+            $normTermFrequency = $value/$numberTerms;
+            // var_dump($normTermFrequency);
+            // create new array
+            $key = utf8_encode($key);
+            $normTermFrequencies[$key] = $normTermFrequency;
+    
+    }  
+    
+    arsort($normTermFrequencies);
+    // var_dump($normTermFrequencies);
+    return $normTermFrequencies;
+
+    unset($normTermFrequencies);
+
+
+}
+
+
+
+
+
+        
+
 
 ?>
