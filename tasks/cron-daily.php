@@ -11,7 +11,7 @@
     Geolocation: some boundary located streets occur in other postal codes too (eg Smetsstraat, 2100 , Smetsstraat, 2140), find relevant one
 */
 
-$doGeoCoding = true;
+$doGeoCoding = false;
 $daysToScreen = 3;
 
 // Use the composer autoloader to load dependencies. On GC App Engine paths are different
@@ -29,14 +29,13 @@ logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );
 logThis('Script started: ' . date('l jS \of F Y h:i:s A'));
 logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
-
 $docList = get_doclist($daysToScreen);
 
 /* 
 $stringData = serialize($docList);
 file_put_contents('doclist.txt',$stringData); 
 
-// read back in:
+// read back in: 
 $string_data = file_get_contents("doclist.txt");
 $docList = unserialize($string_data);  */
 

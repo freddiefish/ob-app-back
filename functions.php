@@ -6,11 +6,9 @@ define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
 
 if (PROD == true) {
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-5e6adab126e2.json');
-    define("LOG_PATH" , __DIR__ . "/tasks/log.txt");
     error_reporting(E_ERROR | E_PARSE);
 } else { // developers mode
     putenv('GOOGLE_APPLICATION_CREDENTIALS='. __DIR__  . '/tasks/ob-app-dev-40dcf7752b62.json');
-    define("LOG_PATH" , __DIR__ . '/tasks/log-dev.txt');
     // show all errors
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -33,7 +31,7 @@ function get_doclist($daysToScreen) {
 
     // go 30 days back 
     if (!isset($daysToScreen) ) {
-    $daysToScreen = 30;
+        $daysToScreen = 30;
     }
     $thirtyDaysAgo = new DateInterval('P' . $daysToScreen . 'D');
     $thirtyDaysAgo->invert =1; // make it negative
