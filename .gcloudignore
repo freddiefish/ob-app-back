@@ -12,7 +12,7 @@
 # below:
 .git
 .gitignore
-/resources/
+/resources/storage/
 
 # PHP Composer dependencies:
 /vendor/

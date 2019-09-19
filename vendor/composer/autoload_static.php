@@ -12,12 +12,36 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '7d8c19660fc7bda7e3f1bb627c20c455' => __DIR__ . '/..' . '/yooper/stop-words/src/StopWordFactory.php',
+        '82b15671fa4352bd2c1ea8902d4c0c5d' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/storage.php',
+        'c2fe535f6d51f069823351f60bd6b280' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/print.php',
+        '34faac671c44560451a381662d8b697c' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/simplified.php',
+        '97c3b78656a7c2fa22581078400c5264' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/helpers.php',
+        '701340487703d077fa1bf3462f5a1343' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/interactive_help.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Y' => 
+        array (
+            'Yooper\\' => 7,
+        ),
+        'W' => 
+        array (
+            'Wamania\\Snowball\\' => 17,
+        ),
+        'T' => 
+        array (
+            'TextAnalysis\\' => 13,
+        ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php73\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\Console\\' => 26,
             'Sk\\Geohash\\' => 11,
         ),
         'R' => 
@@ -28,7 +52,9 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+            'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'Phpml\\' => 6,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
@@ -43,14 +69,18 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Grpc\\Gcp\\' => 9,
             'Grpc\\' => 5,
             'Google\\Protobuf\\' => 16,
+            'Google\\Cloud\\Vision\\' => 20,
+            'Google\\Cloud\\Storage\\' => 21,
             'Google\\Cloud\\Language\\' => 22,
             'Google\\Cloud\\Firestore\\' => 23,
             'Google\\Cloud\\Core\\' => 18,
+            'Google\\CRC32\\' => 13,
             'Google\\Auth\\' => 12,
             'Google\\ApiCore\\' => 15,
             'Google\\' => 7,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
             'GPBMetadata\\Google\\Firestore\\' => 29,
+            'GPBMetadata\\Google\\Cloud\\Vision\\' => 32,
             'GPBMetadata\\Google\\Cloud\\Language\\' => 34,
             'GPBMetadata\\Google\\' => 19,
         ),
@@ -61,9 +91,37 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
     );
 
     public static $prefixDirsPsr4 = array (
+        'Yooper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yooper/nicknames/src',
+        ),
+        'Wamania\\Snowball\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wamania/php-stemmer/src',
+        ),
+        'TextAnalysis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yooper/php-text-analysis/src',
+        ),
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Contracts\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
         ),
         'Sk\\Geohash\\' => 
         array (
@@ -81,9 +139,17 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Phpml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
@@ -117,6 +183,14 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/google/protobuf/src/Google/Protobuf',
         ),
+        'Google\\Cloud\\Vision\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-vision/src',
+        ),
+        'Google\\Cloud\\Storage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-storage/src',
+        ),
         'Google\\Cloud\\Language\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-language/src',
@@ -128,6 +202,10 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'Google\\Cloud\\Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-core/src',
+        ),
+        'Google\\CRC32\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/crc32/src',
         ),
         'Google\\Auth\\' => 
         array (
@@ -148,6 +226,10 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'GPBMetadata\\Google\\Firestore\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-firestore/metadata',
+        ),
+        'GPBMetadata\\Google\\Cloud\\Vision\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-vision/metadata',
         ),
         'GPBMetadata\\Google\\Cloud\\Language\\' => 
         array (
@@ -198,8 +280,11 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
 
     public static $classMap = array (
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
+        'Porter' => __DIR__ . '/..' . '/camspiers/porter-stemmer/src/Porter.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
+        'Sentence' => __DIR__ . '/..' . '/vanderlee/php-sentence/classes/Sentence.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
         'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
         'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',

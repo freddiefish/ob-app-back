@@ -1,11 +1,22 @@
 <?php 
 // TO DO script archives any entries older than 30 days
 // mails the log every week
-// Use the composer autoloader to load dependencies.
-// Use the composer autoloader to load dependencies. On GC App Engine paths are different
+
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../resources/config.php';
+require_once LIBRARY_PATH . '/functions.php';
 
 $logFile = sys_get_temp_dir() . '/log.txt';
 
-unlink($logFile); // delete the log
+if (file_exists($logFile)) {
+    
+    $msg = "Succes!";
+    unlink($logFile); // delete the log
+
+} else {
+    $msg = "Failed!";
+}
+
+$msg .= "\n" . $logFile;
+
+mail_this('Log file deleted?', $msg , '');
