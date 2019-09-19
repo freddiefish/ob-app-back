@@ -17,7 +17,7 @@ $doGeoCoding = true;
 $daysToScreen = 1;
 
 // mail admin on last script run
-mailScriptResult();
+mailLog();
 
 logThis('*************************************************');
 logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );

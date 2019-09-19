@@ -3,8 +3,8 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':
         require 'homepage.php';
         break;
-    case '/cron-test':
-        require 'tasks/cron-test.php';
+    case '/cron-relevance':
+        require 'tasks/cron-relevance.php';
         break;
     case '/cron-daily':
         require 'tasks/cron-daily.php';

@@ -3,12 +3,16 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Google\Cloud\Firestore\FirestoreClient;
 
-$db = new FirestoreClient();
+$firestore = new FirestoreClient();
 $ml = new Ml($app);
-$util = new Util;
+$db = new Database();
 
-$decicionsRef = $db->collection('decisions');
-$query = $decicionsRef->orderBy('date')->limit(1);
+$app->log("*************************************************\n"  
+. ( PROD ? 'Running production mode' : 'Running developer mode') 
+. "\nScript started: " . date('l jS \of F Y h:i:s A'));
+
+$decicionsRef = $firestore->collection('decisions');
+$query = $decicionsRef->where('hasNoRelevance', '=',true);
 $documents = $query->documents();
 
 foreach ($documents as $document) {
@@ -36,13 +40,13 @@ foreach ($documents as $document) {
         ];
                 
         $query = null;
-        $totNumberDocs = $util -> get_number_docs($db, 'decisions',$query);
+        $totNumberDocs = $db -> getNumberDocs($firestore, 'decisions', $query);
         $freqAnalysis = $ml -> freqAnalysis($dataToAnalyze, $data['docId']);
 
         foreach($freqAnalysis as $key=>$val){
                 $IDF = 1; // http://www.tfidf.com
                 $query = ['field' => 'terms.' . $key, 'operator' => '<', 'value' => 1];
-                $overalTermFreq = $util -> get_number_docs($db, 'decisions',$query);
+                $overalTermFreq = $db -> getNumberDocs($firestore, 'decisions',$query);
                 if ($overalTermFreq <> 0) {
                         $IDF = log($totNumberDocs / $overalTermFreq);
                 }
@@ -85,12 +89,14 @@ foreach ($documents as $document) {
                 array_push($mostRelTermsResults, $finalData);
         }
         
-        unset($sortedResults);
 
-        $decisionRef = $db->collection('decisions')->document($document->id());
+        $decisionRef = $firestore->collection('decisions')->document($document->id());
         $decisionRef->update([
-                ['path' => 'terms', 'value' => $mostRelTermsResults]
+                ['path' => 'terms', 'value' => $mostRelTermsResults],
+                ['path' => 'hasNoRelevance', 'value' => false]
                 ]);
         $app->log('Updated the terms field for doc ' . $document->id() );
         // set tagged true? in documents
 }
+
+mailLog();

@@ -133,10 +133,12 @@ function add_to_db($docList,$doGeoCoding) {
                     'groupName' => $val['groupName'],
                     'published' => $val['published'],
                     'hasGeoData' => false,
+                    'hasNoRelevance' => true,
                     'sortIndex1' => $val['sortIndex1'],
                     'assocDecision' => $assDecisions,
                     'amountsAtStake' => $amountsAtStake,
-                    'addenda' => $addenda
+                    'addenda' => $addenda,
+                    'random' => RandomString(12) 
                 ];
 
                 $ID = add_document('decisions',$data); // returns ID
@@ -306,7 +308,7 @@ function get_document($field,$op, $val)
             return true;
         } else {
             logThis('Document ' . $document->id() . ' does not exist!' ); 
-        return false;
+            return false;
         }
     }
 }
@@ -619,7 +621,7 @@ function logThis($data) {
 }
 
 
-function mailScriptResult() {
+function mailLog() {
     $subj = "Fred, your latest Log";
 
     // get a joke  “categories”:[“Programming”,“Miscellaneous”,“Dark”,“Any”]
@@ -631,7 +633,7 @@ function mailScriptResult() {
         $msg= $jokeRes['setup'] . "\n\n" . $jokeRes['delivery'];
     } 
 
-    $attFilePath = sys_get_temp_dir() . '/log.txt';
+    $attFilePath = ROOT_DIR . '/log.txt';
     if (file_exists($attFilePath)) {
         mail_this($subj, $msg, $attFilePath); // must be local system ref
     } else {

@@ -18,7 +18,7 @@
          * @todo split cases like "GoedkeuringMotiveringAanleiding"
         */
 
-        public function get_terms($fullText, $docId, $unique){
+        public function getTerms($fullText, $docId, $unique){
             
             $punctures = array (';','\'','',':','-', ',' , '.' , '/',')','('); // case "Stad." -> clean to "Stad"
             $cleanTerms =array();
@@ -91,7 +91,7 @@
          * @return array sample
          */
 
-        public function get_sample ($array, $ratio , $limit){
+        public function getSample ($array, $ratio , $limit){
 
             $numCases = count($array);
             $sample = array_intersect_key( $array, array_flip( array_rand( $array, ($numCases / $ratio) ) ) ) ;
@@ -112,7 +112,7 @@
          * @return  mixed    docIdList, bool
          */
         
-        function get_docId_list($docList) {
+        function getDocIdList($docList) {
              
             $docIdList = array();
 
@@ -135,7 +135,7 @@
          * @return void
          */
         
-        public function download_doc($docId){
+        public function downloadDoc($docId){
             // downloads a single doc and puts it in a directory
             
             $fileName= '_besluit_' . $docId . '.pdf';
@@ -159,7 +159,7 @@
          * @return  array   docFullText
          */
 
-        public function extract_text($docId){
+        public function extractText($docId){
 
             $fullText = '';
             $fileName = $this->app->pubDir . '/_besluit_' . $docId . '.pdf';
@@ -198,7 +198,7 @@
          * @return  array   index
          */
         
-        public function add_to_index($terms, $index){
+        public function addToIndex($terms, $index){
 
             $i= 0;
         
@@ -244,7 +244,7 @@
 
                 $i = 0;
                 while($i < $weight) {
-                    $termsChild = $this -> get_terms($text, $id, false);
+                    $termsChild = $this -> getTerms($text, $id, false);
                     foreach($termsChild as $termChild) {
                         array_push($terms, $termChild);
                     }
@@ -275,6 +275,20 @@
             unset($normTermFreqList);
             unset($termFreqList);
         
+        }
+
+        /**
+         * stores a .csv file that has matched terms for every document
+         * @param string documents
+         * @return void 
+         */
+
+        public function getMatchedTerms($documents) {
+
+            foreach($documents as $document) {
+                $text = $documents['fullText'];
+                $this->getTerms($text, 'analysis', $unique);
+            };
         }
 
         

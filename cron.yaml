@@ -10,3 +10,10 @@ cron:
   url: /cron-weekly
   schedule: every monday 09:00
   timezone: Europe/Brussels
+- description: "daily indexing docs for relevance terms"
+  url: /cron-relevance
+  schedule: every 24 hours
+  timezone: Europe/Brussels
+  retry_parameters:
+    min_backoff_seconds: 10
+    max_doublings: 3
