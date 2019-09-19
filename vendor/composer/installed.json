@@ -1,5 +1,37 @@
 [
     {
+        "name": "camspiers/porter-stemmer",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/camspiers/porter-stemmer.git",
+            "reference": "588088e9aaa6d81d711098cf60af2ef18b1a5798"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/camspiers/porter-stemmer/zipball/588088e9aaa6d81d711098cf60af2ef18b1a5798",
+            "reference": "588088e9aaa6d81d711098cf60af2ef18b1a5798",
+            "shasum": ""
+        },
+        "time": "2013-02-06T21:39:08+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Richard Heyes",
+                "email": "support@rgraph.net"
+            }
+        ],
+        "description": "Porter Stemmer created by Richard Heyes"
+    },
+    {
         "name": "firebase/php-jwt",
         "version": "v5.0.0",
         "version_normalized": "5.0.0.0",
@@ -271,6 +303,113 @@
         "description": "Cloud Natural Language Client for PHP"
     },
     {
+        "name": "google/cloud-storage",
+        "version": "v1.14.0",
+        "version_normalized": "1.14.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-cloud-php-storage.git",
+            "reference": "7315239270318e618f025791b20ac8cc2586ccf0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/7315239270318e618f025791b20ac8cc2586ccf0",
+            "reference": "7315239270318e618f025791b20ac8cc2586ccf0",
+            "shasum": ""
+        },
+        "require": {
+            "google/cloud-core": "^1.31",
+            "google/crc32": "^0.1.0"
+        },
+        "require-dev": {
+            "erusev/parsedown": "^1.6",
+            "google/cloud-pubsub": "^1.0",
+            "phpdocumentor/reflection": "^3.0",
+            "phpseclib/phpseclib": "^2",
+            "phpunit/phpunit": "^4.8|^5.0",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "suggest": {
+            "google/cloud-pubsub": "May be used to register a topic to receive bucket notifications.",
+            "phpseclib/phpseclib": "May be used in place of OpenSSL for creating signed Cloud Storage URLs. Please require version ^2."
+        },
+        "time": "2019-08-07T20:57:43+00:00",
+        "type": "library",
+        "extra": {
+            "component": {
+                "id": "cloud-storage",
+                "target": "googleapis/google-cloud-php-storage.git",
+                "path": "Storage",
+                "entry": "src/StorageClient.php"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Google\\Cloud\\Storage\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Cloud Storage Client for PHP"
+    },
+    {
+        "name": "google/cloud-vision",
+        "version": "v0.24.0",
+        "version_normalized": "0.24.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/googleapis/google-cloud-php-vision.git",
+            "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
+            "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
+            "shasum": ""
+        },
+        "require": {
+            "google/cloud-core": "^1.31",
+            "google/gax": "^1.1"
+        },
+        "require-dev": {
+            "erusev/parsedown": "^1.6",
+            "google/cloud-storage": "^1.12",
+            "phpdocumentor/reflection": "^3.0",
+            "phpunit/phpunit": "^4.8|^5.0",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "suggest": {
+            "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
+            "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions.",
+            "google/cloud-storage": "Annotate images stored in Google Cloud Storage"
+        },
+        "time": "2019-09-16T21:17:30+00:00",
+        "type": "library",
+        "extra": {
+            "component": {
+                "id": "cloud-vision",
+                "target": "googleapis/google-cloud-php-vision.git",
+                "path": "Vision",
+                "entry": "src/VisionClient.php"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Google\\Cloud\\Vision\\": "src",
+                "GPBMetadata\\Google\\Cloud\\Vision\\": "metadata"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Cloud Vision Client for PHP"
+    },
+    {
         "name": "google/common-protos",
         "version": "1.1",
         "version_normalized": "1.1.0.0",
@@ -310,6 +449,50 @@
         "keywords": [
             "google"
         ]
+    },
+    {
+        "name": "google/crc32",
+        "version": "v0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/google/php-crc32.git",
+            "reference": "a8525f0dea6fca1893e1bae2f6e804c5f7d007fb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/google/php-crc32/zipball/a8525f0dea6fca1893e1bae2f6e804c5f7d007fb",
+            "reference": "a8525f0dea6fca1893e1bae2f6e804c5f7d007fb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^1.13 || v2.14.2",
+            "paragonie/random_compat": ">=2",
+            "phpunit/phpunit": "^4"
+        },
+        "time": "2019-05-09T06:24:58+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Google\\CRC32\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Andrew Brampton",
+                "email": "bramp@google.com"
+            }
+        ],
+        "description": "Various CRC32 implementations",
+        "homepage": "https://github.com/google/php-crc32"
     },
     {
         "name": "google/gax",
@@ -863,6 +1046,63 @@
         ]
     },
     {
+        "name": "php-ai/php-ml",
+        "version": "0.8.0",
+        "version_normalized": "0.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-ai/php-ml.git",
+            "reference": "5e02b893e904761cd7e2415b11778cd421494c07"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-ai/php-ml/zipball/5e02b893e904761cd7e2415b11778cd421494c07",
+            "reference": "5e02b893e904761cd7e2415b11778cd421494c07",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "phpbench/phpbench": "^0.14.0",
+            "phpstan/phpstan-phpunit": "^0.10",
+            "phpstan/phpstan-shim": "^0.10",
+            "phpstan/phpstan-strict-rules": "^0.10",
+            "phpunit/phpunit": "^7.0.0",
+            "symplify/coding-standard": "^5.1",
+            "symplify/easy-coding-standard": "^5.1"
+        },
+        "time": "2019-03-20T22:22:45+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phpml\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arkadiusz Kondas",
+                "email": "arkadiusz.kondas@gmail.com"
+            }
+        ],
+        "description": "PHP-ML - Machine Learning library for PHP",
+        "homepage": "https://github.com/php-ai/php-ml",
+        "keywords": [
+            "Neural network",
+            "artificial intelligence",
+            "computational learning theory",
+            "data science",
+            "feature extraction",
+            "machine learning",
+            "pattern recognition"
+        ]
+    },
+    {
         "name": "phpmailer/phpmailer",
         "version": "v6.0.7",
         "version_normalized": "6.0.7.0",
@@ -976,6 +1216,57 @@
             "cache",
             "psr",
             "psr-6"
+        ]
+    },
+    {
+        "name": "psr/container",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/container.git",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-02-14T16:28:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Container\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common Container Interface (PHP FIG PSR-11)",
+        "homepage": "https://github.com/php-fig/container",
+        "keywords": [
+            "PSR-11",
+            "container",
+            "container-interface",
+            "container-interop",
+            "psr"
         ]
     },
     {
@@ -1404,6 +1695,83 @@
         ]
     },
     {
+        "name": "symfony/console",
+        "version": "v4.3.4",
+        "version_normalized": "4.3.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/console.git",
+            "reference": "de63799239b3881b8a08f8481b22348f77ed7b36"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/console/zipball/de63799239b3881b8a08f8481b22348f77ed7b36",
+            "reference": "de63799239b3881b8a08f8481b22348f77ed7b36",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/polyfill-mbstring": "~1.0",
+            "symfony/polyfill-php73": "^1.8",
+            "symfony/service-contracts": "^1.1"
+        },
+        "conflict": {
+            "symfony/dependency-injection": "<3.4",
+            "symfony/event-dispatcher": "<4.3",
+            "symfony/process": "<3.3"
+        },
+        "provide": {
+            "psr/log-implementation": "1.0"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~3.4|~4.0",
+            "symfony/dependency-injection": "~3.4|~4.0",
+            "symfony/event-dispatcher": "^4.3",
+            "symfony/lock": "~3.4|~4.0",
+            "symfony/process": "~3.4|~4.0",
+            "symfony/var-dumper": "^4.3"
+        },
+        "suggest": {
+            "psr/log": "For using the console logger",
+            "symfony/event-dispatcher": "",
+            "symfony/lock": "",
+            "symfony/process": ""
+        },
+        "time": "2019-08-26T08:26:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.3-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Console\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "https://symfony.com"
+    },
+    {
         "name": "symfony/polyfill-ctype",
         "version": "v1.12.0",
         "version_normalized": "1.12.0.0",
@@ -1461,6 +1829,187 @@
             "ctype",
             "polyfill",
             "portable"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.12.0",
+        "version_normalized": "1.12.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/b42a2f66e8f1b15ccf25652c3424265923eb4f17",
+            "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2019-08-06T08:03:45+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.12-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-php73",
+        "version": "v1.12.0",
+        "version_normalized": "1.12.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-php73.git",
+            "reference": "2ceb49eaccb9352bff54d22570276bb75ba4a188"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/2ceb49eaccb9352bff54d22570276bb75ba4a188",
+            "reference": "2ceb49eaccb9352bff54d22570276bb75ba4a188",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2019-08-06T08:03:45+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.12-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Php73\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ],
+            "classmap": [
+                "Resources/stubs"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/service-contracts",
+        "version": "v1.1.6",
+        "version_normalized": "1.1.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/service-contracts.git",
+            "reference": "ea7263d6b6d5f798b56a45a5b8d686725f2719a3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
+            "reference": "ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "psr/container": "^1.0"
+        },
+        "suggest": {
+            "symfony/service-implementation": ""
+        },
+        "time": "2019-08-20T14:44:19+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Contracts\\Service\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Generic abstractions related to writing services",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "abstractions",
+            "contracts",
+            "decoupling",
+            "interfaces",
+            "interoperability",
+            "standards"
         ]
     },
     {
@@ -1526,5 +2075,238 @@
             "pdf417",
             "qrcode"
         ]
+    },
+    {
+        "name": "vanderlee/php-sentence",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vanderlee/php-sentence.git",
+            "reference": "fb201102977b2bda93ec49896ff52f97d5fe92a5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vanderlee/php-sentence/zipball/fb201102977b2bda93ec49896ff52f97d5fe92a5",
+            "reference": "fb201102977b2bda93ec49896ff52f97d5fe92a5",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^3.6.12"
+        },
+        "time": "2017-10-14T07:14:42+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "classes/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Simple text sentence splitting and counting. Supports atleast english, german and dutch, possibly more.",
+        "homepage": "https://github.com/vanderlee/php-sentence.git",
+        "keywords": [
+            "boundary",
+            "count",
+            "disambiguation",
+            "segmentation",
+            "sentence",
+            "split"
+        ]
+    },
+    {
+        "name": "wamania/php-stemmer",
+        "version": "1.2",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/wamania/php-stemmer.git",
+            "reference": "6cc76829bddd46f7ae7678e0bf87a0c872c8cf58"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/wamania/php-stemmer/zipball/6cc76829bddd46f7ae7678e0bf87a0c872c8cf58",
+            "reference": "6cc76829bddd46f7ae7678e0bf87a0c872c8cf58",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2017-01-27T17:16:44+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Wamania\\Snowball\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Wamania",
+                "homepage": "http://wamania.com"
+            }
+        ],
+        "description": "Native PHP5 Stemmer",
+        "keywords": [
+            "php",
+            "porter",
+            "stemmer"
+        ]
+    },
+    {
+        "name": "yooper/nicknames",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yooper/nicknames.git",
+            "reference": "7daf7eab54e1c94baa4c1aa18a9158759dbd66fb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yooper/nicknames/zipball/7daf7eab54e1c94baa4c1aa18a9158759dbd66fb",
+            "reference": "7daf7eab54e1c94baa4c1aa18a9158759dbd66fb",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "6.0.*"
+        },
+        "time": "2017-11-09T18:48:35+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Yooper\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Dan Cardin",
+                "email": "dcardin2007@gmail.com"
+            }
+        ],
+        "description": "Give a name and get back a list of nick names"
+    },
+    {
+        "name": "yooper/php-text-analysis",
+        "version": "1.5.1",
+        "version_normalized": "1.5.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yooper/php-text-analysis.git",
+            "reference": "d217a9dd925e3986db569be9986f3a575586d1c5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yooper/php-text-analysis/zipball/d217a9dd925e3986db569be9986f3a575586d1c5",
+            "reference": "d217a9dd925e3986db569be9986f3a575586d1c5",
+            "shasum": ""
+        },
+        "require": {
+            "camspiers/porter-stemmer": "~1",
+            "php": ">=7.1",
+            "symfony/console": "~4.0",
+            "vanderlee/php-sentence": "~1.0",
+            "wamania/php-stemmer": "~1",
+            "yooper/nicknames": "~1",
+            "yooper/stop-words": "~1"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1",
+            "phpunit/phpunit": "^8"
+        },
+        "time": "2019-07-01T19:01:21+00:00",
+        "bin": [
+            "textconsole"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "TextAnalysis\\": "src/"
+            },
+            "files": [
+                "src/helpers/storage.php",
+                "src/helpers/print.php",
+                "src/helpers/simplified.php",
+                "src/helpers/helpers.php",
+                "src/helpers/interactive_help.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "yooper",
+                "email": "dcardin2007@gmail.com"
+            }
+        ],
+        "description": "PHP Text Analysis is a library for performing Information Retrieval (IR) and Natural Language Processing (NLP) tasks using the PHP language",
+        "keywords": [
+            "ir",
+            "natural language processing",
+            "nlp",
+            "text analysis",
+            "text classification"
+        ]
+    },
+    {
+        "name": "yooper/stop-words",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yooper/stop-words.git",
+            "reference": "94cd72a477193171611e373b9c2b5744cd349155"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yooper/stop-words/zipball/94cd72a477193171611e373b9c2b5744cd349155",
+            "reference": "94cd72a477193171611e373b9c2b5744cd349155",
+            "shasum": ""
+        },
+        "time": "2017-10-19T17:41:39+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/StopWordFactory.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache2"
+        ],
+        "authors": [
+            {
+                "name": "yooper",
+                "email": "dcardin2007@gmail.com"
+            }
+        ],
+        "description": "Stop words "
     }
 ]
