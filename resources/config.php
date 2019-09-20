@@ -1,5 +1,5 @@
 <?php
-define("PROD" , false);
+define("PROD" , true);
 define('ROOT_DIR', realpath(__DIR__.'/..'));
 define("BASE_DIR",      "https://ebesluit.antwerpen.be");
 define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");

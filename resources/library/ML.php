@@ -3,6 +3,7 @@
     class Ml {
 
         const TRESHHOLD = 3;
+        const MIN_DOCUMENT_FREQUENCY = 2;
         var $noNewTerms = 0;
 
         public function __construct(App $app){
@@ -15,7 +16,9 @@
          * @param string    docId
          * @param bool  unique
          * @return  array   Array of terms
-         * @todo split cases like "GoedkeuringMotiveringAanleiding"
+         * @todo clean text on text level first
+         * split cases like "GoedkeuringMotiveringAanleiding"
+         *      also get bi-grams
         */
 
         public function getTerms($fullText, $docId, $unique){
@@ -256,7 +259,7 @@
             
 
             $termFreqList = array_count_values($terms);
-        
+            // apply  MIN_DOCUMENT_FREQUENCY = 2
             // normalize against total number of terms in doc
             $totalNrTermsInDoc = array_sum ($termFreqList);   
             

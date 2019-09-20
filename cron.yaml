@@ -1,19 +1,23 @@
 cron:
 - description: "daily decisions extraction"
-  url: /cron-daily
+  url: /scrape
   schedule: every 24 hours
   timezone: Europe/Brussels
   retry_parameters:
     min_backoff_seconds: 10
     max_doublings: 3
 - description: "weekly delete log"
-  url: /cron-weekly
+  url: /delete-log
   schedule: every monday 09:00
   timezone: Europe/Brussels
 - description: "daily indexing docs for relevance terms"
-  url: /cron-relevance
+  url: /doc-relevance
   schedule: every 24 hours
   timezone: Europe/Brussels
   retry_parameters:
     min_backoff_seconds: 10
     max_doublings: 3
+- description: "mail log daily"
+  url: /mail-log
+  schedule: every day 07:00
+  timezone: Europe/Brussels

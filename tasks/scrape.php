@@ -14,7 +14,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 $doGeoCoding = true;
-$daysToScreen = 1;
+$daysToScreen = 30;
 
 // mail admin on last script run
 mailLog();

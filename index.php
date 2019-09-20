@@ -3,14 +3,17 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':
         require 'homepage.php';
         break;
-    case '/cron-relevance':
-        require 'tasks/cron-relevance.php';
+    case '/doc-relevance':
+        require 'tasks/doc-relevance.php';
         break;
-    case '/cron-daily':
-        require 'tasks/cron-daily.php';
+    case '/scrape':
+        require 'tasks/scrape.php';
         break;
-    case '/cron-weekly':
-        require 'tasks/cron-weekly.php';
+    case '/delete-log':
+        require 'tasks/delete-log.php';
+        break;
+    case '/mail-log':
+        require 'tasks/mail-log.php';
         break;
     default:
         http_response_code(404);

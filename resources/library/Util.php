@@ -1,9 +1,13 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
     class Util {
 
         /**
          * do_curl, mail
          */
+
 
         /**
          * takes a path and an array to store to file and retruns true
@@ -60,6 +64,55 @@
             } 
             
             return $final_string; 
+        }
+
+        /**
+         * sends an email
+         * @param string subj
+         * @param string msg
+         * @param string attFilePath (must be local file ref)
+         * @return mixed true or logs error
+         */
+
+        function mailThis($subj, $msg, $attFilePath) {
+
+            $mail = new PHPMailer();
+        
+            ( PROD ? $debugMode = 1 : $debugMode = 2 );
+            $mail->SMTPDebug = $debugMode;
+        
+            //setup mailjet
+            $mail->isSMTP();
+            $mail->Host = 'in-v3.mailjet.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = '08f0ffd5a702d5b663f39b69f213f40b'; 
+            $mail->Password = '20b9614eed9a3fb48ce428ae25eba13c' ; 
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+        
+            //headers
+            $mail->setFrom(EMAIL_ADMIN, 'Frederik Feys');
+            $mail->addAddress(EMAIL_ADMIN, 'Admin Fred'); 
+            if (!empty($attFilePath)) $mail->addAttachment($attFilePath);
+            // $mail->addCC('cc1@example.com', 'Elena');
+            // $mail->addBCC('bcc1@example.com', 'Alex');
+        
+            // mail
+            $mail->isHTML(true);
+            $mail->Subject = $subj;
+            $mailContent = $msg;
+            $mail->Body = $mailContent;
+        
+            // $mail->msgHTML(do_curl('contents.html'), __DIR__);
+        
+            if($mail->send()){
+                return true;
+            }else{
+                echo 'Message could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+                logThis('Mail send error: ' . $mail->ErrorInfo);
+                // files must be in the same dir! $mail->addAttachment('path/to/invoice1.pdf', 'invoice1.pdf');
+            }
         }
 
 
