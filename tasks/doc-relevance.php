@@ -98,5 +98,3 @@ foreach ($documents as $document) {
         $app->log('Updated the terms field for doc ' . $document->id() );
         // set tagged true? in documents
 }
-
-mailLog();

@@ -16,9 +16,6 @@ require_once __DIR__ . '/../bootstrap.php';
 $doGeoCoding = true;
 $daysToScreen = 30;
 
-// mail admin on last script run
-mailLog();
-
 logThis('*************************************************');
 logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );
 logThis('Script started: ' . date('l jS \of F Y h:i:s A'));

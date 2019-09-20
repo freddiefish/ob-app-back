@@ -13,6 +13,7 @@
 .git
 .gitignore
 /resources/storage/
+log.txt
 
 # PHP Composer dependencies:
 /vendor/
