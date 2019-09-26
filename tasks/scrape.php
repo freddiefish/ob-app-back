@@ -13,8 +13,10 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-$doGeoCoding = true;
-$daysToScreen = 30;
+$dl = new Downloader();
+
+$doGeoCoding = false;
+$daysToScreen = 2;
 
 logThis('*************************************************');
 logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );
@@ -23,6 +25,7 @@ logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
 $docList = get_doclist($daysToScreen);
 
+$dl->downloadDocs($docList);
 
 /* $stringData = serialize($docList);
 file_put_contents('doclist-dev.txt',$stringData); 

@@ -373,7 +373,7 @@ function extractFromPDF($id) {
     $text = $pdf->getText();
 
     $isVerdaagd = false;
-    if ( strpos($text,'Verdaagd') OR strpos($text,'VERDAAGD')) {
+    if ( strpos($text,'Verdaagd') OR strpos($text,'VERDAAGD') OR strpos($text,'Afgevoerd')) {
         $isVerdaagd = true;
         $finalDecision='Verdaagd';
     }

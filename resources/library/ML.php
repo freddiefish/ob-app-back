@@ -132,67 +132,6 @@
             
         }
 
-        /**
-         * checks if a doc exists in directory, else will download it
-         * @param string docId
-         * @return void
-         */
-        
-        public function downloadDoc($docId){
-            // downloads a single doc and puts it in a directory
-            
-            $fileName= '_besluit_' . $docId . '.pdf';
-            $path = $this->app->pubDir . '/' . $fileName;
-        
-            // dwonload if PDF is in local directory
-            if (!file_exists($path)) {
-        
-                $URL = BASE_DIR . '/publication/' . $docId .'/download';
-                $file__download= do_curl($URL);
-                file_put_contents($path, $file__download); 
-                $this->app->log('Downloaded ' . $fileName);
-            }
-            
-        }
-
-        /**
-         * Checks if a PDF file exists locally, extracts text, returns id and text
-         * @param   string  docId
-         * @param   array   docFullText
-         * @return  array   docFullText
-         */
-
-        public function extractText($docId){
-
-            $fullText = '';
-            $fileName = $this->app->pubDir . '/_besluit_' . $docId . '.pdf';
-
-            $parser = new \Smalot\PdfParser\Parser();
-        
-            if (file_exists($fileName)) {
-        
-                $pdf = $parser->parseFile($fileName);
-        
-                $fullText = $pdf->getText(); 
-                //strip from anything below "Bijlagen"
-                if (strpos($fullText ,'Bijlagen') ) {
-                    $arrayText = explode('Bijlagen', $fullText );
-                    $fullText= $arrayText[0];
-                } 
-        
-                $data = [
-                    'id' => $docId,
-                    'fullText' => $fullText
-                ];
-        
-        
-            }
-        
-            return $data ;
-        
-        }
-
-
         
         /**
          * takes terms, if a term is new, adds it to index of terms
