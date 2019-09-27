@@ -1,4 +1,5 @@
 <?php
+use Sk\Geohash\Geohash;
 
 class Extractor {
 
@@ -22,7 +23,7 @@ class Extractor {
      * @return  string   docFullText
      */
 
-    public function extractText($docId){
+    public function text($docId){
 
         $fileName = $this->app->pubDir . '/_besluit_' . $docId . '.pdf';
         $parser = new \Smalot\PdfParser\Parser();
@@ -39,7 +40,7 @@ class Extractor {
     public function insertArray($array, $arrayNew, $offset) {
         $length = count($array);
         $head = array_slice($array, 0, $offset ) ;
-        /** @todo take care of cases with three elements */ 
+        /** @todo take care of cases with three pieces */ 
         $insert = array( $offset-1 => $arrayNew[0], $offset => $arrayNew[1]);
         if (count($arrayNew) == 3) {
             array_push($insert, $arrayNew[2]);
@@ -120,7 +121,7 @@ class Extractor {
 
    
 
-    public function extractTextParts($textChops) {
+    public function textParts($textChops) {
 
         $tmplParts = $this->doc->tplParts;
         $extrParts = [];
@@ -140,7 +141,7 @@ class Extractor {
                 // any postprocessing?
                 if (!empty($heading) ) {
                     $gluedText = $this->postProces($heading, $gluedText);
-                    array_push($extrParts, array($heading => $gluedText));
+                    array_push($extrParts, array('header' => $heading, 'text' => $gluedText));
                 }
                 $heading = $textChop;
                 $gluedText = '';
@@ -163,7 +164,7 @@ class Extractor {
                         }
                         $gluedText .= '<p>' . $textChop . '</p>';
                         $gluedText = $this->postProces($heading, $gluedText);
-                        array_push($extrParts, array($heading => $gluedText));
+                        array_push($extrParts, array('header' => $heading, 'text' => $gluedText));
                     } else {
                         $gluedText .= '<p>'. $textChop . '</p>';
                     }
@@ -174,25 +175,28 @@ class Extractor {
         $i++; 
         }
 
-        return $extrParts;     
+        $this->doc->textParts = $extrParts;     
     }
 
 
-    public function processAddenda($text) {
+    public function addenda($text) {
         $pieces = preg_split('/(?<=Bijlagen)(?=1)/', $text);        
         $text = $pieces[0];
         if(!empty($pieces[1])) { // we have addenda
-            $this->setAddenda($pieces[1]);
+            $this->filesList($pieces[1]);
         }
         
         return $text;
     }
 
 
-    public function setAddenda($text) {
-        $links = [];
-        $links = preg_split('/(?<=.pdf|.doc|.docx|.ppt|.pptx)(?=[0-9][.])/', $text, -1, PREG_SPLIT_NO_EMPTY);
-        $this->doc->addenda =  $links;   
+    public function filesList($text) {
+        $files = [];
+        preg_match_all('/([a-zA-Z0-9-_]+\.(pdf|doc|docx|ppt|pptx))/', $text, $matches);
+        foreach ($matches[0] as $match) {
+            array_push($files, $match);
+        }
+        $this->doc->addenda =  $files;  
     }
 
 
@@ -203,27 +207,189 @@ class Extractor {
      * 
      */
 
-    public function extractDoc($docId) {
-        $text ="Artikel 4Dit besluit heeft in principe geen financiële gevolgen.Bijlagen1. algemene voorwaarden + formaliteiten vergunning.pdf2. beroepsmogelijkheden en verval.pdf3. plannenoverzicht_2019083393.pdf
-        
-        Algemene voorwaarden / c	ontrolelijst vóór u start met de vergunde handelingen	 	
-             
-        U hebt een omgevingsvergunning gekregen	. 	
-        Wat moet u eerst doen of aan denken voor u start met de uitvoering van de vergunde handelingen?	 	
-        We raden u aan om even stil te staan 	bij een aantal noodzakelijke acties of informatieve punten.	 Deze verplichtingen gelden als voorwaarden bij uw 	
-        vergunning. Het niet naleven ervan is een bouwovertreding!	";
-        $text = $this->extractText($docId);
+    public function document($docId) {
+        $text = $this->text($docId);
         $text = $this->filter->removeTpl($text);
         $text = $this->filter->whiteSpaceFilter($text);
-        // list($text, $table) = $this->filter->tableFilter($text); // works only after whiteSpacefileter
         $text = $this->filter->indicateListItems($text);
-        $text = $this->processAddenda($text);
+        $text = $this->addenda($text);
         $textChops = $this->chopText($text);
-        $extrParts = $this->extractTextParts($textChops);  
-        // $text = $this->filter->makeHTMLList($text); */
-        //return $textChops; */
+        $this->textParts($textChops);
+        $this->organisations($this->doc->textParts); // run before table filter
+        $this->financials($this->doc->textParts); 
+        $this->locations($this->doc->textParts) ; 
+          // $this->filter->table($text);
         return $text;
     }
+
+    public function financials($textParts){
+
+        $partsToCheck = array('Algemene financiële opmerkingen','Besluit');
+        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
+        
+        $financials = [];
+        $amounts = [];
+        $pieces = explode ('EUR', $textToScreen);
+        $nrpieces = count($pieces);
+
+        $i =0;
+        foreach($pieces as $piece){
+            $piece = trim($piece);
+            $words = explode(' ', $piece);
+            $amount = array_pop($words);
+            
+            if (strpos($amount, ',') ) { // case "10890,67 EUR" round to 10890
+                $parts = explode(',', $amount);
+                $amount = $parts[0];
+            } 
+            $amount = intval(str_replace('.','',$amount));
+            
+            if ($i < $nrpieces-1 && $amount <> 0) {
+                array_push($amounts ,$amount);
+                $amount = '';
+            }
+            $i++;
+        }
+        //remove duplicates
+        $financials = array_unique($amounts);
+        if (!empty($financials)) $this->doc->financials = $financials;
+    }
+    
+    private function textToScreen($textParts, $toSreenTextParts) {
+
+        $textToScreen = '';
+
+        foreach ($textParts as $textPart) { // first glue all required textparts
+            if(in_array($textPart['header'], $toSreenTextParts)) {
+                $textToScreen .= $textPart['text'];
+            }
+        }
+
+        return $textToScreen;
+    }
+    /**
+     * extracts KBO number of organisation 
+     */
+
+    public function organisations($textParts) {
+        $partsToCheck = array('Besluit');
+        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
+
+        $organisations = $this->KBONumber($textToScreen);
+        
+        if (!empty($organisations)) $this->doc->organisations = $organisations;
+    }
+
+    function KBONumber ($text) {
+        $data = [];
+        $KBOs = [];
+        preg_match_all('/([01][0-9]{3}\.*\s*[0-9]{3}\.\s*[0-9]{3})/', $text, $matches);
+        if (!empty($matches[0])) {
+            foreach ($matches[0] as $match) {
+                //standardize formatting
+                $match = $this->filter->punctuations($match);
+                $match = $this->filter->whiteSpace($match);
+                array_push($data, $match);
+            }
+            $KBOs = array_unique($data);
+        }
+
+        return $KBOs;
+    }
+
+    public function streets(){
+        $file           = LIBRARY_PATH . '/straatnamen.txt';
+        $contents       = file_get_contents($file);
+        $streets        = explode("\n", $contents); // this is your array of words
+        return $streets;
+    }
+
+      public function locations($textParts) {
+    
+        $partsToCheck = array('Aanleiding en context','Argumentatie','Besluit');
+        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
+        $textToScreen .= $this->doc->title ;
+
+        $locations = [];
+        $streets = $this->streets();
+        
+        foreach($streets as $street) {
+            $pieces   = explode(",", $street);
+            $streetName = $pieces[0];
+            $streetZIP  = $pieces[1];
+            $match = false;
+            
+            if (strpos($textToScreen, $streetName) ) {
+                // we have a match, see if house number is available
+                $match = true;
+                $piecestextToScreen  = explode($streetName, $textToScreen);
+                $pieces2    = explode(' ', $piecestextToScreen[1]);
+                $pieceNextToStreet = $pieces2[1];
+                $returnNeedle = $streetName;
+                
+                if ( preg_match( '/\d/', $pieceNextToStreet) && is_numeric(substr($pieceNextToStreet, 0, 1)) ) { //validate if this piece contains al least one integer AND first char is numeric -> we have a streetNr (syntax can be 12a)!
+                    $pieceNextToStreet = $this->filter->punctuations($pieceNextToStreet);
+                    // cases "Oever 13-17" trim to "Oever 13"
+                    if (strpos($pieceNextToStreet,'-')){
+                        logThis('Clean double house numbers: ' . $pieceNextToStreet);
+                        $piecesNextToStreet = explode('-',$pieceNextToStreet);
+                        $pieceNextToStreet = $piecesNextToStreet[0];
+                    }
+                    //cases "Schutstraat 39/1" trim to "Schutstraat 39"
+                    if (strpos($pieceNextToStreet, '/')) {
+                        logThis('Clean / out of house number: ' . $pieceNextToStreet);
+                        $piecesNextToStreet = explode('/', $pieceNextToStreet);
+                        $pieceNextToStreet = $piecesNextToStreet[0];
+                    }
+                    $returnNeedle .= ' ' . $pieceNextToStreet; //eg: Wolstraat 15a
+                }
+                $result = $returnNeedle . ', ' . $streetZIP ;
+                /**
+                 * @todo maybe more than one location found, so make array to hash next
+                 * 
+                 * */
+                // $this->geoCode($result);
+            }        
+        }
+    }
+
+    /**
+     * returns array of lat, lng, geohash out of given array with address string
+     */
+
+    public function geoCode($address) {
+        
+        $searchString       = $address;
+        $needleEncoded      = urlencode($searchString);
+        $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
+        
+        $geoloc = json_decode( do_curl( $requestUrl ));
+                
+        if (!empty($geoloc->LocationResult)){ // sometimes ["LocationResult"]=> array(0) { }  is returned
+            
+            $formattedAddress   = $geoloc->LocationResult[0]->FormattedAddress;
+            $lat                = $geoloc->LocationResult[0]->Location->Lat_WGS84;
+            $lng                = $geoloc->LocationResult[0]->Location->Lon_WGS84;
+
+            $geoHash = new Geohash();
+            $g = $geoHash->encode($lat, $lng, 8);
+
+            $location['formattedAddress']    = $formattedAddress;
+            $location['lat']                 = $lat;
+            $location['lng']                 = $lng;
+            $location['geohash']             = $g;
+            logThis('Geopoint API has result. Encoded: ' . $location['formattedAddress']);
+            array_push( $geoLocations, $location);
+
+        } else {
+        
+            logThis('Geopoint API has NO result');
+        }
+    
+
+        $this->doc->locations = $location;
+    }
+   
 
 
 }
