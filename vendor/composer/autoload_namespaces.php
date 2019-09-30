@@ -10,4 +10,5 @@ return array(
     'Smalot\\PdfParser\\' => array($vendorDir . '/smalot/pdfparser/src'),
     'Rize\\UriTemplate' => array($vendorDir . '/rize/uri-template/src'),
     'Mailjet' => array($vendorDir . '/mailjet/mailjet-apiv3-php/src'),
+    'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
 );

@@ -15,7 +15,10 @@ class Document {
     public $title;
     public $textParts;
     public $addenda;
-    public $tplParts = array('Gekoppelde besluiten', 'Aanleiding en context', 'Omschrijving stedenbouwkundige handelingen','Juridische grond', 'Regelgeving: bevoegdheid', 'Openbaar onderzoek', 'Argumentatie', 'Financiële gevolgen', 'Algemene financiële opmerkingen', 'Strategisch kader', 'Adviezen', 'Besluit','Bijlagen');
+    public $tables;
+
+    // public $categories = array('Stedelijk bedrijfsvastgoed', 'Omgevingsvergunning', 'Politiezone Antwerpen')
+    public $tplParts = array(0 => 'Gekoppelde besluiten', 1 => 'Aanleiding en context', 2 => 'Omschrijving stedenbouwkundige handelingen', 3 => 'Juridische grond', 4 => 'Regelgeving: bevoegdheid', 5 => 'Openbaar onderzoek', 6 => 'Argumentatie', 7 => 'Financiële gevolgen', 8 => 'Algemene financiële opmerkingen', 9 => 'Strategisch kader', 10 => 'Adviezen', 11 => 'Besluit', 12 =>'Bijlagen');
 
     public function __contruct(){
         

@@ -6,15 +6,17 @@ class Extractor {
     private $app;
     private $doc;
     private $filter;
+    private $util;
 
     /**
      * DOM scraping, PDF, Financial, Location, Person, Organisation, Associated refs
      */
 
-    public function __construct($app, $doc, $filter){
+    public function __construct($app, $doc, $filter, $util){
         $this -> app = $app;
         $this -> doc = $doc;
         $this -> filter = $filter;
+        $this -> util = $util;
     }
 
             /**
@@ -37,18 +39,7 @@ class Extractor {
 
     }
 
-    public function insertArray($array, $arrayNew, $offset) {
-        $length = count($array);
-        $head = array_slice($array, 0, $offset ) ;
-        /** @todo take care of cases with three pieces */ 
-        $insert = array( $offset-1 => $arrayNew[0], $offset => $arrayNew[1]);
-        if (count($arrayNew) == 3) {
-            array_push($insert, $arrayNew[2]);
-        }
-        $tail = array_slice($array, $offset+1, $length); 
-        $res = array_merge($head, $insert, $tail);
-        return $res;
-    }
+
 
     public function chopProcess($textChops) {
 
@@ -73,7 +64,7 @@ class Extractor {
                                 $textChopSplits = array($pieces[0], $tplPart, $pieces[1]);
                                 $offset = $i+3;
                             }
-                            $textChops = $this->insertArray($textChops, $textChopSplits, $i);
+                            $textChops = $this->util->insertArray($textChops, $textChopSplits, $i);
                         }
                     // leave the foreach loop
                     break;
@@ -94,11 +85,36 @@ class Extractor {
     }
 
     public function postProces($heading, $gluedText) {
-        if ($heading == 'Besluit') { // makes sure we have Artikel headings
-            $replText = preg_replace('/(?<=\.\s)(?=Artikel)/', '</p><p>', $gluedText);
-            $gluedText = $replText;
+
+        $subHeadings = [];
+
+        if ($heading == 'Besluit') { // makes sure we have array with "Artikel" headings
+           
+            $continue = true;
+
+            for($i=1; $continue; $i++) {
+                $pattern = "/(<p>)*Artikel " . $i . "(<\/p>)*/";
+                $splits= preg_split($pattern, $gluedText);
+                if ($i==1) {
+                    $introText = $splits[0]; 
+                }
+                
+                if (count($splits)<2){
+                    $continue = false;
+                } else {
+                    $next = $i+1;
+                    $patternNext = "/(<p>)*Artikel " . $next . "(<\/p>)*/";
+                    $splitsNext= preg_split($patternNext, $splits[1]);
+                    if (count($splitsNext)>1) { // we have a next header
+                        $subHeadings['Artikel ' . $i] = $splitsNext[0];
+                    } else {
+                        $subHeadings['Artikel ' . $i] = $splits[1];
+                    }
+                }
+            }
+            
         }
-        return $gluedText;
+        return array($introText, $subHeadings);
     }
 
     public function setCategory($docTitle) {
@@ -123,26 +139,27 @@ class Extractor {
 
     public function textParts($textChops) {
 
-        $tmplParts = $this->doc->tplParts;
-        $extrParts = [];
-        $glue = false;
-        $heading = '';
-        $gluedText = '';
-        $textChop = '';
+        $tmplParts   = $this->doc->tplParts;
+        $extrParts   = [];
+        $heading     = '';
+        $gluedText   = '';
+        $textChop    = '';
         $nrTextChops = count($textChops);
-        $i=0;
-        $docTitle = $textChops[0];
+        $i           = 0;
+        
+        /**
+         * @todo process title
+         */
+        $docTitle    = $textChops[0];
         $docCat = $this->setCategory($docTitle);
 
         foreach($textChops as $textChop) {
             
             if (in_array($textChop,  $tmplParts))  {
-                $glue = true;
-                // any postprocessing?
-                if (!empty($heading) ) {
-                    $gluedText = $this->postProces($heading, $gluedText);
-                    array_push($extrParts, array('header' => $heading, 'text' => $gluedText));
-                }
+                if (!empty($heading) ) array_push($extrParts, array(
+                        'id' => array_search($heading, $tmplParts) ,
+                        'name' => $heading,
+                        'text' => $gluedText) );
                 $heading = $textChop;
                 $gluedText = '';
                 if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === 0 ) { // a new text part that starts with bullet list 
@@ -150,7 +167,7 @@ class Extractor {
                 }   
             } 
             
-            if (!in_array($textChop, $tmplParts ) && $glue) {
+            if (!in_array($textChop, $tmplParts )) {
                 $pos = strpos($textChop, '<li>');  
                 if ($pos === 0) { // we have a lis item
                     $gluedText .= $textChop . '</li>';
@@ -163,8 +180,12 @@ class Extractor {
                             $textChop = $this->getBijlagen($textChop);
                         }
                         $gluedText .= '<p>' . $textChop . '</p>';
-                        $gluedText = $this->postProces($heading, $gluedText);
-                        array_push($extrParts, array('header' => $heading, 'text' => $gluedText));
+                        list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
+                        array_push($extrParts, array(
+                            'id' => array_search($heading, $tmplParts) ,
+                            'name' => $heading,
+                            'text' => $introText,
+                            'headings' => $subHeadings ) );
                     } else {
                         $gluedText .= '<p>'. $textChop . '</p>';
                     }
@@ -218,7 +239,7 @@ class Extractor {
         $this->organisations($this->doc->textParts); // run before table filter
         $this->financials($this->doc->textParts); 
         $this->locations($this->doc->textParts) ; 
-          // $this->filter->table($text);
+        $this->filter->tables($this->doc->textParts);
         return $text;
     }
 
@@ -255,13 +276,19 @@ class Extractor {
         if (!empty($financials)) $this->doc->financials = $financials;
     }
     
-    private function textToScreen($textParts, $toSreenTextParts) {
+    private function textToScreen($textParts, $partsToCheck) {
 
         $textToScreen = '';
 
         foreach ($textParts as $textPart) { // first glue all required textparts
-            if(in_array($textPart['header'], $toSreenTextParts)) {
-                $textToScreen .= $textPart['text'];
+            if( in_array($textPart['id'], $partsToCheck)  ) {
+                if ( $textPart['id'] == 11 ) { // besluit textpart has subheadings
+                    foreach($textPart['headings'] as $key=>$val) {
+                        $textToScreen .= $key . ' ' . $val . ' ';
+                    } 
+                } else {
+                    $textToScreen .= $textPart['text'] . ' ';
+                }                
             }
         }
 
@@ -272,7 +299,7 @@ class Extractor {
      */
 
     public function organisations($textParts) {
-        $partsToCheck = array('Besluit');
+        $partsToCheck = array(11); // Besluit part only
         $textToScreen = $this->textToScreen($textParts, $partsToCheck);
 
         $organisations = $this->KBONumber($textToScreen);
@@ -304,92 +331,94 @@ class Extractor {
         return $streets;
     }
 
-      public function locations($textParts) {
+    public function locations($textParts) {
     
+        $textToScreen = $this->doc->title ;
         $partsToCheck = array('Aanleiding en context','Argumentatie','Besluit');
-        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
-        $textToScreen .= $this->doc->title ;
-
+        $textToScreen .= $this->textToScreen($textParts, $partsToCheck);
+        
         $locations = [];
         $streets = $this->streets();
         
         foreach($streets as $street) {
+
             $pieces   = explode(",", $street);
             $streetName = $pieces[0];
             $streetZIP  = $pieces[1];
-            $match = false;
-            
+
             if (strpos($textToScreen, $streetName) ) {
                 // we have a match, see if house number is available
-                $match = true;
                 $piecestextToScreen  = explode($streetName, $textToScreen);
                 $pieces2    = explode(' ', $piecestextToScreen[1]);
                 $pieceNextToStreet = $pieces2[1];
                 $returnNeedle = $streetName;
                 
-                if ( preg_match( '/\d/', $pieceNextToStreet) && is_numeric(substr($pieceNextToStreet, 0, 1)) ) { //validate if this piece contains al least one integer AND first char is numeric -> we have a streetNr (syntax can be 12a)!
+                if ( preg_match( '/^\d+/', $pieceNextToStreet)  ) { //validate string starts with at least one integer (syntax can be 12a)!
                     $pieceNextToStreet = $this->filter->punctuations($pieceNextToStreet);
                     // cases "Oever 13-17" trim to "Oever 13"
                     if (strpos($pieceNextToStreet,'-')){
-                        logThis('Clean double house numbers: ' . $pieceNextToStreet);
+                        // logThis('Clean double house numbers: ' . $pieceNextToStreet);
                         $piecesNextToStreet = explode('-',$pieceNextToStreet);
                         $pieceNextToStreet = $piecesNextToStreet[0];
                     }
                     //cases "Schutstraat 39/1" trim to "Schutstraat 39"
                     if (strpos($pieceNextToStreet, '/')) {
-                        logThis('Clean / out of house number: ' . $pieceNextToStreet);
+                        // logThis('Clean / out of house number: ' . $pieceNextToStreet);
                         $piecesNextToStreet = explode('/', $pieceNextToStreet);
                         $pieceNextToStreet = $piecesNextToStreet[0];
                     }
                     $returnNeedle .= ' ' . $pieceNextToStreet; //eg: Wolstraat 15a
                 }
                 $result = $returnNeedle . ', ' . $streetZIP ;
-                /**
-                 * @todo maybe more than one location found, so make array to hash next
-                 * 
-                 * */
-                // $this->geoCode($result);
+                array_push($locations, $result);
+
             }        
         }
+        $this->geoCode($locations);
     }
 
     /**
      * returns array of lat, lng, geohash out of given array with address string
      */
 
-    public function geoCode($address) {
-        
-        $searchString       = $address;
-        $needleEncoded      = urlencode($searchString);
-        $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
-        
-        $geoloc = json_decode( do_curl( $requestUrl ));
-                
-        if (!empty($geoloc->LocationResult)){ // sometimes ["LocationResult"]=> array(0) { }  is returned
+    public function geoCode($locations) {
+
+        $geoLocations = [];
+
+        foreach($locations as $location) {
+
+            $searchString       = $location;
+            $needleEncoded      = urlencode($searchString);
+            $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
             
-            $formattedAddress   = $geoloc->LocationResult[0]->FormattedAddress;
-            $lat                = $geoloc->LocationResult[0]->Location->Lat_WGS84;
-            $lng                = $geoloc->LocationResult[0]->Location->Lon_WGS84;
+            $geoloc = json_decode( do_curl( $requestUrl ));
+                    
+            if (!empty($geoloc->LocationResult)){ // sometimes ["LocationResult"]=> array(0) { }  is returned
+                
+                $formattedAddress   = $geoloc->LocationResult[0]->FormattedAddress;
+                $lat                = $geoloc->LocationResult[0]->Location->Lat_WGS84;
+                $lng                = $geoloc->LocationResult[0]->Location->Lon_WGS84;
 
-            $geoHash = new Geohash();
-            $g = $geoHash->encode($lat, $lng, 8);
+                $geoHash = new Geohash();
+                $g = $geoHash->encode($lat, $lng, 8);
 
-            $location['formattedAddress']    = $formattedAddress;
-            $location['lat']                 = $lat;
-            $location['lng']                 = $lng;
-            $location['geohash']             = $g;
-            logThis('Geopoint API has result. Encoded: ' . $location['formattedAddress']);
-            array_push( $geoLocations, $location);
+                $geoLocation['formattedAddress']    = $formattedAddress;
+                $geoLocation['lat']                 = $lat;
+                $geoLocation['lng']                 = $lng;
+                $geoLocation['geohash']             = $g;
+                // logThis('Geopoint API has result. Encoded: ' . $geoLocation['formattedAddress']);
+                array_push( $geoLocations, $geoLocation);
 
-        } else {
-        
-            logThis('Geopoint API has NO result');
+            } else {
+            
+                logThis('Geopoint API has NO result');
+            }
         }
-    
 
-        $this->doc->locations = $location;
+        if (!empty($geoLocations)) $this->doc->locations = $geoLocations;
     }
    
+    
 
 
 }

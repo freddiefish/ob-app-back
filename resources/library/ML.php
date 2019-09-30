@@ -94,16 +94,17 @@
          * @return array sample
          */
 
-        public function getSample ($array, $ratio , $limit){
-
-            $numCases = count($array);
-            $sample = array_intersect_key( $array, array_flip( array_rand( $array, ($numCases / $ratio) ) ) ) ;
-            if($limit <> 0) { // we have a limit
-                $sample = array_slice($sample, 0, $limit);
+        public function getSample ($array, $limit){
+            $randarray = [];
+            $cases = count($array);
+            $randDocKeys = array_rand($array,$limit);
+            foreach($randDocKeys as $key) {
+                array_push($randarray, $array[$key]);
             }
-            $this->app->log('Sampled ' . count ($sample) . ' cases');
+
+            $this->app->log('Sampled ' . $limit . " from " . $cases . " cases\n");
             
-            return $sample;
+            return $randarray;
         
         }
 
@@ -126,7 +127,7 @@
                 }
             }
 
-            $this->app->log('Stored ' . count ($docIdList) . ' docs in docIDList'); 
+            $this->app->log('Stored ' . count ($docIdList) . " array in docIDList\n"); 
     
             return $docIdList;
             
@@ -157,14 +158,14 @@
                 $this->noNewTerms++;
                 $this->app->log($this->noNewTerms . ' iterations with no new terms added to index');
             }
-            $this->app->log('Added ' . $i . ' new terms to index');
+            $this->app->log('Added ' . $i . " new terms to index\n");
         
             return $index;
         
         }
 
         /**
-         * takes a text, calculates the normalised frequency of terms in text, its relevance against all docs in db, and the position of the terms in the text
+         * takes a text, calculates the normalised frequency of terms in text, its relevance against all array in db, and the position of the terms in the text
          * @param array data
          * @param string id 
          * @return array freqAnalysis

@@ -115,5 +115,57 @@ use PHPMailer\PHPMailer\PHPMailer;
             }
         }
 
+        function array_sort($array, $on, $order=SORT_ASC)
+        {
+            $new_array = array();
+            $sortable_array = array();
+
+            if (count($array) > 0) {
+                foreach ($array as $k => $v) {
+                    if (is_array($v)) {
+                        foreach ($v as $k2 => $v2) {
+                            if ($k2 == $on) {
+                                $sortable_array[$k] = $v2;
+                            }
+                        }
+                    } else {
+                        $sortable_array[$k] = $v;
+                    }
+                }
+
+                switch ($order) {
+                    case SORT_ASC:
+                        asort($sortable_array);
+                    break;
+                    case SORT_DESC:
+                        arsort($sortable_array);
+                    break;
+                }
+
+                foreach ($sortable_array as $k => $v) {
+                    $new_array[$k] = $array[$k];
+                }
+            }
+
+            return $new_array;
+        }
+
+        /**
+         * inserts array into existing array at $offset point
+         */
+        
+        public function insertArray($array, $arrayNew, $offset) {
+            $length = count($array);
+            $head = array_slice($array, 0, $offset ) ;
+            /** @todo take care of cases with three pieces */ 
+            $insert = array( $offset-1 => $arrayNew[0], $offset => $arrayNew[1]);
+            if (count($arrayNew) == 3) {
+                array_push($insert, $arrayNew[2]);
+            }
+            $tail = array_slice($array, $offset+1, $length); 
+            $res = array_merge($head, $insert, $tail);
+            return $res;
+        }
+
 
     }

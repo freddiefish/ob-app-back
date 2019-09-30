@@ -6,4 +6,4 @@ require_once LIBRARY_PATH . '/functions.php';
 
 $app = new App($config);
 
-echo 'Welcome ' . $app->name;
+echo 'Welcome ' . $app->name . "\n";
