@@ -11,9 +11,8 @@
         }
         
         /** 
-         * Clean a text into a array of terms, unique terms or not
+         * Clean (does trim) a text into a array of terms, default on unique terms 
          * @param string    fullText
-         * @param string    docId
          * @param bool  unique
          * @return  array   Array of terms
          * @todo clean text on text level first
@@ -21,7 +20,7 @@
          *      also get bi-grams
         */
 
-        public function getTerms($fullText, $docId, $unique){
+        public function getTerms($fullText, $unique = true){
             
             $punctures = array (';','\'','',':','-', ',' , '.' , '/',')','('); // case "Stad." -> clean to "Stad"
             $cleanTerms =array();
@@ -39,15 +38,6 @@
                 
                 // trim punctures . / , -
                 $term = str_replace($punctures , '', $term); 
-                // var_dump($term);
-                /*$matches = array();
-                split cases: "GoedkeuringMotiveringAanleiding"
-                 preg_match_all('/([A-Z]{1})[a-z]+/', $term, $matches); 
-                if (!empty($matches)) {
-                    var_dump($matches);
-                    // echo val($matches[0]);
-                    unset($matches);    
-                } */
                 
                 // make lowercase
                 $term = strtolower($term);
@@ -80,11 +70,12 @@
             }
             $cleanTerms = array_filter($cleanTerms);
         
-            $this->app->log('Found ' .  count($cleanTerms) . ' terms in doc ' . $docId);
+            $this->app->log('Found ' .  count($cleanTerms) );
         
             return $cleanTerms;
         
         }
+
         
         /**
          * takes ratio sample of given list with given limit (if limit = 0, no limit applied)
@@ -141,37 +132,37 @@
          * @return  array   index
          */
         
-        public function addToIndex($terms, $index){
+        public function addToIndex($terms, $index, $unique = true){
 
             $i= 0;
         
             foreach($terms as $key=>$val) {
-                if ( !in_array($val, $index)) {
-                    $i = $i + 1;
+                if ( !in_array($val, $index) && $unique) {
                     array_push ($index , $val); 
-                } else {
-                    // $this->app->log($val . ' already in index');
+                } else if (!$unique) {
+                    array_push ($index , $val);
                 }
+                $i = $i + 1;
             }
             
             if ($i == 0){
                 $this->noNewTerms++;
                 $this->app->log($this->noNewTerms . ' iterations with no new terms added to index');
             }
-            $this->app->log('Added ' . $i . " new terms to index\n");
+            // $this->app->log('Added ' . $i . " new terms to index\n");
         
             return $index;
         
         }
 
         /**
-         * takes a text, calculates the normalised frequency of terms in text, its relevance against all array in db, and the position of the terms in the text
+         * takes a array with text and weight, calculates the normalised frequency of terms in text, its relevance against all array in db, and the position of the terms in the text
          * @param array data
          * @param string id 
          * @return array freqAnalysis
          */
 
-        public function freqAnalysis($data, $id){
+        public function freqAnalysis($data){
             
             $terms = [];
             $termsChild = [];
@@ -187,7 +178,7 @@
 
                 $i = 0;
                 while($i < $weight) {
-                    $termsChild = $this -> getTerms($text, $id, false);
+                    $termsChild = $this -> getTerms($text, false);
                     foreach($termsChild as $termChild) {
                         array_push($terms, $termChild);
                     }

@@ -179,6 +179,8 @@ use PHPMailer\PHPMailer\PHPMailer;
             return false;
         }
         
-
+        function startsWithNumber($str) {
+            return preg_match('/^\d/', $str) === 1;
+        }
 
     }

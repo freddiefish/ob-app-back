@@ -41,7 +41,7 @@ foreach ($documents as $document) {
                 
         $query = null;
         $totNumberDocs = $db -> getNumberDocs($firestore, 'decisions', $query);
-        $freqAnalysis = $ml -> freqAnalysis($dataToAnalyze, $data['docId']);
+        $freqAnalysis = $ml -> freqAnalysis($dataToAnalyze);
 
         foreach($freqAnalysis as $key=>$val){
                 $IDF = 1; // http://www.tfidf.com

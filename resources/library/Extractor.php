@@ -191,10 +191,12 @@ class Extractor {
 
     public function textParts($textChops) {
 
-        $tmplParts   = $this->doc->tplParts;
+        $tplParts   = $this->doc->tplParts;
+        $tplDocument = false; // some docs have no template and will be handled different.
         $extrParts   = [];
         $heading     = '';
         $gluedText   = '';
+        $notTplDocGluedText = '';
         $textChop    = '';
         $nrTextChops = count($textChops);
         $i           = 0;
@@ -208,18 +210,19 @@ class Extractor {
 
         foreach($textChops as $textChop) {
             
-            if (in_array($textChop,  $tmplParts))  {
+            if (in_array($textChop,  $tplParts))  {
+                $tplDocument = true;
                 if (!empty($heading) ) {
                     if ($heading == 'Besluit') { // postprocessing needed
                         list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tmplParts) ,
+                            'id' => array_search($heading, $tplParts) ,
                             'name' => $heading,
                             'text' => $introText,
                             'headings' => $subHeadings ) );
                     } else {
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tmplParts) ,
+                            'id' => array_search($heading, $tplParts) ,
                             'name' => $heading,
                             'text' => $gluedText) );
                     }
@@ -235,7 +238,7 @@ class Extractor {
                 }   
             } 
             
-            if (!in_array($textChop, $tmplParts )) {
+            if (!in_array($textChop, $tplParts ) && $tplDocument) {
                 $pos = strpos($textChop, '<li>');  
                 if ($pos === 0) { // we have a list item
                     $gluedText .= $textChop . '</li>';
@@ -258,7 +261,7 @@ class Extractor {
                         $gluedText .= '<p>' . $textChop . '</p>';
                         list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tmplParts) ,
+                            'id' => array_search($heading, $tplParts) ,
                             'name' => $heading,
                             'text' => $introText,
                             'headings' => $subHeadings ) );
@@ -269,7 +272,17 @@ class Extractor {
                 }   
             }
 
+            if(!$tplDocument && $i > 0) { // no need for title on $i = 0 
+                $notTplDocGluedText .= '<p>'. $textChop . '</p>';
+            }
+
         $i++; 
+        }
+        if(!$tplDocument) {
+            array_push($extrParts, array(
+                'id' => 11 ,
+                'name' => 'Besluit',
+                'text' => $notTplDocGluedText ));
         }
         $this->doc->textParts = $extrParts;     
     }
