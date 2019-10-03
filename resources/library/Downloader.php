@@ -30,7 +30,7 @@
             $data = curl_exec($ch);
             if (curl_errno($ch)) {
                 $errorMsg = curl_error($ch);
-                $this -> app -> log($errorMsg);
+                $this -> app -> log('doCurl: ' . $errorMsg);
             }
             curl_close($ch);
 

@@ -5,6 +5,7 @@ use Sunra\PhpSimple\HtmlDomParser;
 class Extractor {
 
     private $app;
+    private $dl;
     private $doc;
     private $filter;
     private $util;
@@ -13,33 +14,59 @@ class Extractor {
      * DOM scraping, PDF, Financial, Location, Person, Organisation, Associated refs
      */
 
-    public function __construct($app, $doc, $filter, $util){
+    public function __construct($app, $dl, $doc, $filter, $util){
         $this -> app = $app;
+        $this -> dl = $dl;
         $this -> doc = $doc;
         $this -> filter = $filter;
         $this -> util = $util;
     }
 
+    public function APICheckOK() {
+        $APIList = array(
+            'https://ebesluit.antwerpen.be',
+            'http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=NL&iso=NL&vat=152239108B01&name=&companyType=&street1=&postcode=&city=&BtnSubmitVat=Verify',
+            'https://www.btw-opzoeken.be/VATSearch/Search?KeyWord=0643479093',
+            'http://loc.geopunt.be/geolocation/location?q=kerkstraat');
+        
+        foreach ($APIList as $url) {
+            $response = $this->dl->doCurl($url);
+            if (empty($response)){
+                $this->app->log('APICheck failed with ' . $url);
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
     /**
      * take a docId, downloads to storage, parses the text, cleans text, extracts (text paragraphs, addenda, associated docs, financial stakes
      * @param string    docId
-     * @return  array   fullTxt, background, finalDecision, assDecisions, amountsAtStake, addenda
+     * @return  array   fullTxt, background, finalDecision, assDecisions, dataAtStake, addenda
      * 
      */
 
     public function document($docId) {
-        $text = $this->text($docId);
-        $text = $this->filter->removeTpl($text);
-        $text = $this->filter->whiteSpaceFilter($text);
-        $text = $this->filter->indicateListItems($text);
-        $text = $this->addenda($text);
-        $textChops = $this->chopText($text);
-        $this->textParts($textChops);
-        $this->organisations($this->doc->textParts); // run before table filter
-        $this->financials($this->doc->textParts); 
-        $this->locations($this->doc->textParts) ; 
-        /* $this->filter->tables($this->doc->textParts);   */
-        return $text;
+
+        try {
+            if(!$this->APICheckOK()){
+                throw new Exception('APIs health check failed');
+            }
+
+            $text = $this->text($docId);
+            $text = $this->filter->removeTpl($text);
+            $text = $this->filter->whiteSpaceFilter($text);
+            $text = $this->filter->indicateListItems($text);
+            $textChops = $this->chopText($text);
+            $this->textParts($textChops);
+            $this->whoGetsWhat($this->doc->textParts);
+            $this->locations($this->doc->textParts) ; 
+
+            } catch(Exception $e) {
+                $this->app->log('Document scraping failed: ' . $e->getMessage());
+            }
+
     }
 
     /**
@@ -102,7 +129,8 @@ class Extractor {
 
     public function chopText($text) {
         $textChops = [];
-        $textChops = preg_split('/(?<=[a-z.:;])(?<![A-Z0-9]\.)(?=[A-Z<][a-z.])|(?<=[:;])(?=[0-9])|(?<=[a-z])(?=[0-9]\.)/', $text, -1, PREG_SPLIT_NO_EMPTY);
+        // echo $text;
+        $textChops = preg_split('/(?<=[a-z.:;])(?<![A-Z0-9]\.)(?=[A-Z<][a-z.])|(?<=[:;])(?=[0-9])|(?<=[a-z])(?=[0-9]\.)|(?<=[A-Z]\.)(?=Artikel)/', $text, -1, PREG_SPLIT_NO_EMPTY);
         $textChops = $this->chopProcess($textChops);
         return $textChops;   
     }
@@ -173,9 +201,10 @@ class Extractor {
         
         /**
          * @todo process title
+         * @todo format some "aanleiding en context" as timeline
          */
-        $docTitle    = $textChops[0];
-        $docCat = $this->setCategory($docTitle);
+        // $docTitle    = $textChops[0];
+        // $docCat = $this->setCategory($docTitle);
 
         foreach($textChops as $textChop) {
             
@@ -196,8 +225,10 @@ class Extractor {
                     }
                 }
                 
-                
                 $heading = $textChop;
+                if ($heading == 'Gekoppelde besluiten') {
+                    //process like bijlagen
+                }
                 $gluedText = '';
                 if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === 0 ) { // a new text part that starts with bullet list 
                         $gluedText .= '<ul>';  
@@ -206,16 +237,24 @@ class Extractor {
             
             if (!in_array($textChop, $tmplParts )) {
                 $pos = strpos($textChop, '<li>');  
-                if ($pos === 0) { // we have a lis item
+                if ($pos === 0) { // we have a list item
                     $gluedText .= $textChop . '</li>';
                     if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === false ) { // if next textChop is not a list item, close list 
                             $gluedText .= '</ul>';
                         }
                 } else { // we have a paragraph text
-                    if($i+1 == $nrTextChops){ // last run, so finalize the textParts
-                        if ( $heading == 'Bijlagen') {
-                            $textChop = $this->getBijlagen($textChop);
+                    if($heading == 'Bijlagen'){ // send any remaining textChops to the method
+                        $remaingText = '';
+                        foreach($textChops as $key=>$val){
+                            if ($key >= $i){
+                                $remaingText .= $val . ' ';
+                            }
                         }
+                        $this->addenda($remaingText);
+                        break;
+                    }
+                    if($i+1 == $nrTextChops){ // works best when no  bijlagen ! last run, so finalize the textParts
+                        
                         $gluedText .= '<p>' . $textChop . '</p>';
                         list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
                         array_push($extrParts, array(
@@ -232,19 +271,17 @@ class Extractor {
 
         $i++; 
         }
-
         $this->doc->textParts = $extrParts;     
     }
 
 
     public function addenda($text) {
-        $pieces = preg_split('/(?<=Bijlagen)(?=1)/', $text);        
-        $text = $pieces[0];
-        if(!empty($pieces[1])) { // we have addenda
-            $this->filesList($pieces[1]);
+         
+        $text = strip_tags($text);
+        if(!empty($text)) { // we have addenda
+            $this->filesList($text);
         }
         
-        return $text;
     }
 
 
@@ -254,80 +291,88 @@ class Extractor {
         foreach ($matches[0] as $match) {
             array_push($files, $match);
         }
-        $this->doc->addenda =  $files;  
+        $this->doc->addenda = $files;  
     }
 
+    public function financials($text){
 
-    public function financials($textParts){
-
-        $partsToCheck = array(11);
-        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
-        echo $textToScreen;
         $financials = [];
-        $amounts = [];
-        $pieces = explode ('EUR', $textToScreen);
-        $nrpieces = count($pieces);
+        $data = [];
 
-        $i =0;
-        foreach($pieces as $piece){
-            $piece = trim($piece);
-            $words = explode(' ', $piece);
-            $amount = array_pop($words);
+        // get out numbers that might interfere with extraction
+        // IBAN rekeningnummer
+        // Years
+        $text = preg_replace('/(BE\s*[0-9]{2}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})/', 'IBAN', $text);
+        $text = preg_replace('/([12][0-9]{3})/', 'YEAR', $text);
+        preg_match_all('/([0-9.,\s]+)(E\s*U\s*R)/', $text, $matches);
+    
+        foreach($matches[1] as $match){
+            $piece = trim($match);
+            $amount = $this->filter->whiteSpace($piece);
             
             if (strpos($amount, ',') ) { // case "10890,67 EUR" round to 10890
                 $parts = explode(',', $amount);
-                $amount = $parts[0];
+                $wholeAmount = $parts[0];
             } 
+
             $amount = intval(str_replace('.','',$amount));
+            array_push($data ,$amount);
             
-            if ($i < $nrpieces-1 && $amount <> 0) {
-                array_push($amounts ,$amount);
-                $amount = '';
-            }
-            $i++;
         }
-        //remove duplicates
-        $financials = array_unique($amounts);
-        if (!empty($financials)) $this->doc->financials = $financials;
+        //remove duplicates?
+        $financials = $data;
+        
+        return $financials;
     }
     
-    private function textToScreen($textParts, $partsToCheck) {
 
-        $textToScreen = '';
+    public function whoGetsWhat($textParts) {
+        $whoGetsWhat= [];
 
-        foreach ($textParts as $textPart) { // first glue all required textparts
-            if( in_array($textPart['id'], $partsToCheck)  ) {
-                if ( $textPart['id'] == 11 ) { // besluit textpart has subheadings
-                    foreach($textPart['headings'] as $key=>$val) {
-                        $textToScreen .= $key . ' ' . $val . ' ';
+        // see if we have a table to extract
+        $tables = $this->filter->tables($textParts);
+
+        if(!empty($tables)) {
+
+            foreach($tables as $table) {
+
+                list($KBOs, $text) = $this->KBONumbers($table);
+                $financials = $this->financials($text);
+                try {
+                    if (!count($KBOs) === count($financials)) {
+                        throw new Exception('Number of KBOs do not match number of financials.');
                     } 
-                } else {
-                    $textToScreen .= $textPart['text'] . ' ';
-                }                
+                    if (count($KBOs) === 0 ){
+                        throw new Exception('Found no KBOs in this table.');
+                    }
+                    
+                    $KBODetails = $this->getKBODetails($KBOs);
+                    $i = 0;
+                    foreach($KBOs as $KBO) {
+                        $whoGetsWhat[$i] = array(
+                            'VAT' => $KBODetails[$i]["VAT"], 
+                            'Name' => $KBODetails[$i]["Name"], 
+                            'JuridicalForm' => $KBODetails[$i]["JuridicalForm"], 
+                            'Address' => $KBODetails[$i]["Address"], 
+                            'Amount' => $financials[$i] );
+                        $i++;
+                    }
+                    if (!empty($whoGetsWhat)) $this->doc->financialStakeholders = $whoGetsWhat;
+                }
+                catch (Exception $e) { 
+                    $this->app->log('Caught exception: ' . $e->getMessage());
+                }
+
             }
+
         }
-
-        return $textToScreen;
-    }
-    /**
-     * extracts KBO number of organisation 
-     */
-
-    public function organisations($textParts) {
-        $partsToCheck = array(11); // Besluit part only
-        $textToScreen = $this->textToScreen($textParts, $partsToCheck);
-        
-        $KBOs = $this->KBONumbers($textToScreen);
-
-        $organisations = $this->getKBODetails($KBOs);
-        
-        if (!empty($organisations)) $this->doc->organisations = $organisations;
     }
 
     function KBONumbers ($text) {
         $data = [];
         $KBOs = [];
-        $patterns = array('((BE)*\s*[01][0-9]{3}\.*\s*[0-9]{3}\.\s*[0-9]{3})', '(NL*\s*[0-9]{9}B[0-9]{2})');
+        
+        $patterns = array('((BE)*\s*[01][0-9]{3}\.*\s[0-9]{3}\.*\s[0-9]{3})|((BE)*\s*[01][0-9]{3}\.[0-9]{3}\.[0-9]{3})', '(NL*\s*[0-9]{9}B[0-9]{2})');
         
         foreach ($patterns as $pattern) {
             preg_match_all('/'. $pattern .'/', $text, $matches);
@@ -341,11 +386,13 @@ class Extractor {
                     }
                     array_push($data, $match);
                 }
-                $KBOs = array_unique($data);
+                $KBOs = $data;
+                // remove all KBOs out of text to make financial extraction easier
+                $text = str_replace($matches[0], '', $text);
             }
         }
         
-        return $KBOs;
+        return array($KBOs, $text);
     }
 
     private function requestVIES($KBO) {
@@ -434,8 +481,9 @@ class Extractor {
     
         $textToScreen = $this->doc->title ;
         $partsToCheck = array(1,6,11);
-        $textToScreen .= $this->textToScreen($textParts, $partsToCheck);
+        $textToScreen .= $this->filter->textToScreen($textParts, $partsToCheck);
         
+        $data = [];
         $locations = [];
         $streets = $this->streets();
         
@@ -450,6 +498,10 @@ class Extractor {
                 $piecestextToScreen  = explode($streetName, $textToScreen);
                 $pieces2    = explode(' ', $piecestextToScreen[1]);
                 $pieceNextToStreet = $pieces2[1];
+                $ZIP = trim($pieces2[2]);
+                if(strlen($ZIP)==4 && !intval($ZIP)==0){ // seems to be a valid zip
+                    $streetZIP = $ZIP;
+                }
                 $returnNeedle = $streetName;
                 
                 if ( preg_match( '/^\d+/', $pieceNextToStreet)  ) { //validate string starts with at least one integer (syntax can be 12a)!
@@ -469,10 +521,11 @@ class Extractor {
                     $returnNeedle .= ' ' . $pieceNextToStreet; //eg: Wolstraat 15a
                 }
                 $result = $returnNeedle . ', ' . $streetZIP ;
-                array_push($locations, $result);
+                array_push($data, $result);
 
             }        
         }
+        $locations = array_unique($data);
         $this->geoCode($locations);
     }
 

@@ -167,5 +167,18 @@ use PHPMailer\PHPMailer\PHPMailer;
             return $res;
         }
 
+        /**
+         * searches the key for a specific value in an multidimensional array
+         */
+
+        function multiDimArrayFindKey($multiDimArray, $field, $value){
+            foreach($multiDimArray as $key => $item) {
+                if ( $item[$field] === $value )
+                    return $key;
+            }
+            return false;
+        }
+        
+
 
     }
