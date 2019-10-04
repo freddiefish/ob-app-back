@@ -45,6 +45,7 @@
          * checks if a doc exists in staorage directory, else will download it
          * @param string docId
          * @return void
+         * @todo google buckets for remote
          */
         
         public function downloadDoc($docId){
@@ -70,7 +71,7 @@
 
         public function downloadDocs($list) {
             foreach($list as $item) {
-                $this->downloadDoc($list['docId']);
+                $this->downloadDoc($item['docId']);
             }
         }
 

@@ -1,23 +1,45 @@
 <?php
 use Sk\Geohash\Geohash;
 use Sunra\PhpSimple\HtmlDomParser;
+use Google\Cloud\Core\Timestamp;
 
 class Extractor {
-
+    
     private $app;
     private $dl;
-    private $doc;
     private $filter;
     private $util;
+
+    public  $docList = [];
+    public  $doc = [];
+    private $pathToScrape;
+    private $eventDate;
+    private $groupId;
+    private $groupName;
+
+    // entities
+    public $locations;
+    public $financialStakeholders;
+    public $people;
+
+    // general fields
+    public $docId;
+    public $intId;
+    public $category;
+    public $title;
+    public $textParts;
+    public $addenda;
+    public $tables;
+    public $tplParts = array(0 => 'Gekoppelde besluiten', 1 => 'Aanleiding en context', 2 => 'Omschrijving stedenbouwkundige handelingen', 3 => 'Juridische grond', 4 => 'Regelgeving: bevoegdheid', 5 => 'Openbaar onderzoek', 6 => 'Argumentatie', 7 => 'Financiële gevolgen', 8 => 'Algemene financiële opmerkingen', 9 => 'Strategisch kader', 10 => 'Adviezen', 11 => 'Besluit', 12 => 'Bijlagen');
+
 
     /**
      * DOM scraping, PDF, Financial, Location, Person, Organisation, Associated refs
      */
 
-    public function __construct($app, $dl, $doc, $filter, $util){
+    public function __construct(App $app, Downloader $dl, Filter $filter, Util $util){
         $this -> app = $app;
         $this -> dl = $dl;
-        $this -> doc = $doc;
         $this -> filter = $filter;
         $this -> util = $util;
     }
@@ -41,6 +63,169 @@ class Extractor {
     }
 
     /**
+     * 
+     *
+     */
+    public function dateStringify($date){
+            $dateTimestamp   = $date->getTimestamp();
+
+            $year            = date("Y", $dateTimestamp);
+            $month           = date("n", $dateTimestamp);
+            $monthTrailZero  = date("m", $dateTimestamp);
+            $day             = date("j", $dateTimestamp);
+
+        return array($day, $month, $monthTrailZero, $year);
+    }
+
+
+    /**
+     * gets json response for calendar month 
+     * @param int year
+     * @param int month (with trailing zero!)
+     * @return string   json 
+     */
+
+    public function scrapeCalendar($month, $year) {
+
+        $DOM = $this->dl->doCurl(API_BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $month);
+        $json = json_decode($DOM,true);
+        $this->app->log('Returned json for ' . $month . ' '. $year . ' in calendar'); 
+
+        return $json;
+    }
+
+    /** 
+     * for a given time into history, scrapes all documents form calendar webpage: https://ebesluit.antwerpen.be/calendar/show
+     * @param int daysToScreen
+     * @return array docList
+    */
+
+    public function getDocumentList($daysToScreen = 30) {
+
+        $startDate  = new DateTime();
+        $timeSpan   = new DateInterval('P' . $daysToScreen . 'D');
+        $timeSpan->invert = 1;
+        $startDate->add($timeSpan);
+        $stopDate   = new DateTime();
+        $updateDate = $startDate;
+        list($day, $month, $monthTrailZero, $year) = $this->dateStringify($updateDate);
+
+        $json = $this->scrapeCalendar($monthTrailZero, $year);
+
+        while( $updateDate < $stopDate) {
+
+            list($updateDay, $updateMonth, $updateMonthTrailZero, $updateYear) = $this->dateStringify($updateDate);
+            $this->app->log("Update for: " . $updateDay . '-' .  $updateMonth . '-' . $updateYear); 
+
+            if ($year <> $updateYear OR $monthTrailZero <> $updateMonthTrailZero) {
+                $year               = $updateYear;
+                $month              = $updateMonth;
+                $monthTrailZero     = $updateMonthTrailZero;
+                // update calender view
+                $json = $this->scrapeCalendar($monthTrailZero, $year);
+            }
+
+            $iterator = "$year$month$updateDay";
+
+            foreach ($json as $obj) {
+
+                if (array_key_exists($iterator, $obj)) { // not all dates are available
+                    foreach($obj[$iterator] as $val) { 
+                        // get the day's event
+                        $this->pathToScrape   = $val['url'];
+                        $this->eventDate      = $val['startDateString'];
+                        $this->groupId        = $val['groupId'];
+                        $this->groupName      = $val['className'];
+                        $this->scrapeEventDocs();
+                    }
+                }
+
+            }
+            $updateDate->add(new DateInterval('P1D')); //increment one day
+        }
+
+        $this->app->log('Found docs: ' . count($this->docList));
+       
+    }
+
+    /**
+     * scrape an event for all its documents
+     */
+
+     public function scrapeEventDocs() {
+
+        $DOM = HtmlDomParser::str_get_html( $this->dl->doCurl( API_BASE_DIR . $this->pathToScrape ) );
+
+        // get the agenda html 
+        $agendaHtml = $DOM->getElementById("agenda");
+
+        // published 
+        foreach($agendaHtml->find('a') as $e) {
+            $docHref = $e->href;
+            $pieces = explode('/', $docHref);
+            $docId = $pieces[2];
+
+            $this->createDocEntry($e, $docId);
+        }
+
+        // not published 
+        foreach($agendaHtml->find('span.title-no-rights') as $e) {
+            // non published docs have no id, so create random id
+            $docId = $this->util->getRandomString(8); 
+
+            $this->createDocEntry($e, $docId);
+        }
+
+        // prevent memory leaks
+        $DOM->clear();
+        unset($DOM);
+
+     }
+
+    /**
+     * creates a doc entry in docList
+     * @param object e
+     * @param string    docId
+     */
+
+    public function createDocEntry($e, $docId) {
+
+        $docTitle           = $e->innertext;
+        $row['docId']       = $docId;
+        $row['offTitle']    = $docTitle;
+        list($row['intId'], $row['title']) 
+                            = $this->getTitleElements($docTitle) ;
+        $row['eventDate']   = $this->eventDate;
+        $row['groupId']     = $this->groupId;
+        $row['groupName']   = $this->groupName;
+        $row['published']   = true;
+        $row['sortIndex1']  = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
+        array_push($this->docList, $row);
+
+    }
+
+
+    /**
+     * process official title (eg. "2019_DCME_00239 - Districtscollege - Notulen 19 september 2019 - Goedkeuring")
+     * @param string text
+     * @return array intId, cleanTitle
+     */
+
+    public function getTitleElements($txt) {
+        //process the official title, split off first part (e.g. 2016_MV_00157 - Mondelinge vraag van raa...)
+        $pieces = explode(" - ", $txt);  
+        $intId = trim($pieces[0]);
+    
+        //remove intId from title 
+        $cleanTitle = str_replace( $pieces[0] . " - " , "" , $txt ); 
+
+        $endToRemove = end($pieces);        
+        $cleanTitle = str_replace( " - " . $endToRemove , '' , $cleanTitle ); //case insensitive replace
+        
+        return array($intId, $cleanTitle );
+    }
+
+    /**
      * take a docId, downloads to storage, parses the text, cleans text, extracts (text paragraphs, addenda, associated docs, financial stakes
      * @param string    docId
      * @return  array   fullTxt, background, finalDecision, assDecisions, dataAtStake, addenda
@@ -48,25 +233,16 @@ class Extractor {
      */
 
     public function document($docId) {
-
-        try {
-            if(!$this->APICheckOK()){
-                throw new Exception('APIs health check failed');
-            }
-
             $text = $this->text($docId);
             $text = $this->filter->removeTpl($text);
             $text = $this->filter->whiteSpaceFilter($text);
             $text = $this->filter->indicateListItems($text);
             $textChops = $this->chopText($text);
             $this->textParts($textChops);
-            $this->whoGetsWhat($this->doc->textParts);
-            $this->locations($this->doc->textParts) ; 
-
-            } catch(Exception $e) {
-                $this->app->log('Document scraping failed: ' . $e->getMessage());
-            }
-
+            $this->whoGetsWhat();
+            $this->locations() ; 
+       
+            // 'Niet gepubliceerd. <a href="mailto:' . EMAIL_BESLUITVORMING . '?subject="lezen%20besluiten&body=Goede%20dag,%0Aik%20wil%20een%20besluit%20lezen%20op%20pagina:%20https://ebesluit.antwerpen.be/agenda/' . $val['id'] . '/view%20De%20link%20werkt%20helaas%20niet.%20Hoe%20kan%20ik%20het%20lezen?">vraag via email volledige tekst</a>';
     }
 
     /**
@@ -94,7 +270,7 @@ class Extractor {
     public function chopProcess($textChops) {
 
         $offset = 0;
-        foreach ($this->doc->tplParts as $tplPart) {
+        foreach ($this->tplParts as $tplPart) {
             $i =0;
             
             foreach($textChops as $key => $textChop) {
@@ -191,7 +367,7 @@ class Extractor {
 
     public function textParts($textChops) {
 
-        $tplParts   = $this->doc->tplParts;
+        $tplParts   = $this->tplParts;
         $tplDocument = false; // some docs have no template and will be handled different.
         $extrParts   = [];
         $heading     = '';
@@ -284,7 +460,7 @@ class Extractor {
                 'name' => 'Besluit',
                 'text' => $notTplDocGluedText ));
         }
-        $this->doc->textParts = $extrParts;     
+        $this->doc['textParts'] = $extrParts;     
     }
 
 
@@ -304,7 +480,7 @@ class Extractor {
         foreach ($matches[0] as $match) {
             array_push($files, $match);
         }
-        $this->doc->addenda = $files;  
+        $this->doc['addenda'] = $files;  
     }
 
     public function financials($text){
@@ -339,11 +515,11 @@ class Extractor {
     }
     
 
-    public function whoGetsWhat($textParts) {
+    public function whoGetsWhat() {
         $whoGetsWhat= [];
 
         // see if we have a table to extract
-        $tables = $this->filter->tables($textParts);
+        list($this->doc['textParts'],$tables) = $this->filter->tables($this->doc['textParts']);
 
         if(!empty($tables)) {
 
@@ -370,7 +546,7 @@ class Extractor {
                             'Amount' => $financials[$i] );
                         $i++;
                     }
-                    if (!empty($whoGetsWhat)) $this->doc->financialStakeholders = $whoGetsWhat;
+                    if (!empty($whoGetsWhat)) $this->doc['financialStakeholders'] = $whoGetsWhat;
                 }
                 catch (Exception $e) { 
                     $this->app->log('Caught exception: ' . $e->getMessage());
@@ -490,11 +666,11 @@ class Extractor {
         return $streets;
     }
 
-    public function locations($textParts) {
+    public function locations() {
     
-        $textToScreen = $this->doc->title ;
+        $textToScreen = $this->title ;
         $partsToCheck = array(1,6,11);
-        $textToScreen .= $this->filter->textToScreen($textParts, $partsToCheck);
+        $textToScreen .= $this->filter->textToScreen($this->doc['textParts'], $partsToCheck);
         
         $data = [];
         $locations = [];
@@ -556,7 +732,7 @@ class Extractor {
             $needleEncoded      = urlencode($searchString);
             $requestUrl         = 'http://loc.geopunt.be/geolocation/location?q=' . $needleEncoded; // docs: https://loc.geopunt.be/Help/Api/GET-v4-Location_q_latlon_xy_type_c
             
-            $geoloc = json_decode( do_curl( $requestUrl ));
+            $geoloc = json_decode( $this->dl->doCurl( $requestUrl ));
                     
             if (!empty($geoloc->LocationResult)){ // sometimes ["LocationResult"]=> array(0) { }  is returned
                 
@@ -576,14 +752,16 @@ class Extractor {
 
             } else {
             
-                logThis('Geopoint API has NO result');
+                $this->app->log('Geopoint API returned no result');
             }
         }
 
-        if (!empty($geoLocations)) $this->doc->locations = $geoLocations;
+        if (!empty($geoLocations)) $this->doc['locations'] = $geoLocations;
     }
    
-    
+    public function __destruct() {
+        // closing persistent connections
+    }
 
 
 }

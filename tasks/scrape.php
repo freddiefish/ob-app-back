@@ -1,42 +1,54 @@
 <?php
-/* This script scrapes https://ebesluit.antwerpen.be/calendar/show for data. 
-// The data are optionally enriched with geolocation data.
-// 
-// TODO 
-    Clean db: get out any locations without corresponding doc
-    Extract 
-        -"Gekoppelde besluiten" and index them
-        -References of "Bijlagen"
-        -financial data
-    Geolocation: some boundary located streets occur in other postal codes too (eg Smetsstraat, 2100 , Smetsstraat, 2140), find relevant one
-*/
-
 require_once __DIR__ . '/../bootstrap.php';
 
-$dl = new Downloader();
+$util        = new Util;
+$filter      = new Filter($util);
+$dl          = new Downloader($app);
+$extractor   = new Extractor($app,$dl,$filter,$util);
 
-$doGeoCoding = false;
-$daysToScreen = 2;
+try {
+    if(!$extractor->APICheckOK()){
+        throw new Exception('APIs health check failed');
+    }
 
-logThis('*************************************************');
-logthis( ( PROD ? 'Running production mode' : 'Running developer mode' ) );
-logThis('Script started: ' . date('l jS \of F Y h:i:s A'));
-logThis('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
+    $app->log('*******************************************');
+    $app->log( (PROD? 'Production mode' : 'Developper mode'));
+    $app->log('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
 
-$docList = get_doclist($daysToScreen);
+    $extractor->getDocumentList(1);
+    $dl->downloadDocs($extractor->docList);
 
-$dl->downloadDocs($docList);
+    foreach($extractor->docList as $item) {
+        $docExtractor = new Extractor($app,$dl,$filter,$util);
 
-/* $stringData = serialize($docList);
-file_put_contents('doclist-dev.txt',$stringData); 
-exit;
+        $docExtractor->doc['docId']         = $item['docId'];
+        $docExtractor->doc['offTitle']      = $item['offTitle'];
+        $docExtractor->doc['title']      = $item['title'];
+        $docExtractor->doc['intId']         = $item['intId'];
+        $docExtractor->doc['eventDate']     = $item['eventDate'];
+        $docExtractor->doc['groupId']       = $item['groupId'];
+        $docExtractor->doc['groupName']     = $item['groupName'];
+        $docExtractor->doc['published']     = $item['published'];
+        $docExtractor->doc['sortIndex1']    = $item['sortIndex1'];
+        $docExtractor->doc['decision']      = '';
 
-// read back in: 
-$string_data = file_get_contents("doclist.txt");
-$docList = unserialize($string_data); */ 
+        if ($docExtractor->doc['published']) {
+            $docExtractor->document($item['docId']);
+            $keyBGroundPart  = $util->multiDimArrayFindKey($docExtractor->doc['textParts'], 'id', 1);
+            $docExtractor->doc['background'] = $docExtractor->doc["textParts"][$keyBGroundPart]["text"];
+            $keyDecisionPart = $util->multiDimArrayFindKey($docExtractor->doc['textParts'], 'id', 11);
+            foreach( $docExtractor->doc["textParts"][$keyDecisionPart]["headings"] as $key => $val ) {
+                $docExtractor->doc['decision'] .=  $key . ' ' . $val ;
+            }
+        }
+        
+        $db = new Database($app);
+        $db->storeDoc($docExtractor->doc);
+    }
+    
+    $app->log('Script END');
 
-//var_dump($docList);
-add_to_db($docList,$doGeoCoding);
 
-logThis('Script ended: ' . date('l jS \of F Y h:i:s A'));
-logThis('END');
+} catch(Exception $e) {
+    $this->app->log('Document scraping failed: ' . $e->getMessage());
+}
