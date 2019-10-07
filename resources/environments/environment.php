@@ -17,7 +17,7 @@ $config = array(
         "baseUrl" => "http://127.0.0.1:8080"
     ),
     "paths" => array(
-        "publications" => ROOT_DIR . "/resources/storage/pdfs",
+        "publications" => "ob-app-dev-252415.appspot.com",
         "processed" => ROOT_DIR . "/resources/storage/processed",
         "log" =>ROOT_DIR 
         )

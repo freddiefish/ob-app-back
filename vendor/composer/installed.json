@@ -437,17 +437,17 @@
     },
     {
         "name": "google/auth",
-        "version": "v1.5.2",
-        "version_normalized": "1.5.2.0",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/googleapis/google-auth-library-php.git",
-            "reference": "2ee962e5df3e9427fda859f1b0515d6d62c4afa5"
+            "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/2ee962e5df3e9427fda859f1b0515d6d62c4afa5",
-            "reference": "2ee962e5df3e9427fda859f1b0515d6d62c4afa5",
+            "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
+            "reference": "6d5455b4c0f4a58b1f1b4bdf2ba49221123698b3",
             "shasum": ""
         },
         "require": {
@@ -466,9 +466,9 @@
             "sebastian/comparator": ">=1.2.3"
         },
         "suggest": {
-            "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings. Please require version ^2."
+            "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
         },
-        "time": "2019-07-22T21:01:31+00:00",
+        "time": "2019-10-01T18:35:05+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -490,25 +490,25 @@
     },
     {
         "name": "google/cloud-core",
-        "version": "v1.32.0",
-        "version_normalized": "1.32.0.0",
+        "version": "v1.33.1",
+        "version_normalized": "1.33.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/googleapis/google-cloud-php-core.git",
-            "reference": "1e5dceb51497baa295933588abaa93fa1e6f5e04"
+            "reference": "7b8773a5c6d501b3ed31655a8e243e1c17e2862e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/1e5dceb51497baa295933588abaa93fa1e6f5e04",
-            "reference": "1e5dceb51497baa295933588abaa93fa1e6f5e04",
+            "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/7b8773a5c6d501b3ed31655a8e243e1c17e2862e",
+            "reference": "7b8773a5c6d501b3ed31655a8e243e1c17e2862e",
             "shasum": ""
         },
         "require": {
-            "google/auth": "^1.5.1",
+            "google/auth": "^1.6",
             "guzzlehttp/guzzle": "^5.3|^6.0",
             "guzzlehttp/promises": "^1.3",
             "guzzlehttp/psr7": "^1.2",
-            "monolog/monolog": "~1",
+            "monolog/monolog": "^1.1|^2.0",
             "php": ">=5.5",
             "psr/http-message": "1.0.*",
             "rize/uri-template": "~0.3"
@@ -526,7 +526,7 @@
             "opis/closure": "May be used to serialize closures to process jobs in the batch daemon. Please require version ^3.",
             "symfony/lock": "Required for the Spanner cached based session pool. Please require the following commit: 3.3.x-dev#1ba6ac9"
         },
-        "time": "2019-08-21T17:32:44+00:00",
+        "time": "2019-10-02T20:38:25+00:00",
         "bin": [
             "bin/google-cloud-batch"
         ],
@@ -553,17 +553,17 @@
     },
     {
         "name": "google/cloud-firestore",
-        "version": "v1.7.1",
-        "version_normalized": "1.7.1.0",
+        "version": "v1.9.0",
+        "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/googleapis/google-cloud-php-firestore.git",
-            "reference": "e65e934438a83a46d1644b1ef24146b7b28f7806"
+            "reference": "22656a647253e3e2b04e5f0f213b6dd2a5141814"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/googleapis/google-cloud-php-firestore/zipball/e65e934438a83a46d1644b1ef24146b7b28f7806",
-            "reference": "e65e934438a83a46d1644b1ef24146b7b28f7806",
+            "url": "https://api.github.com/repos/googleapis/google-cloud-php-firestore/zipball/22656a647253e3e2b04e5f0f213b6dd2a5141814",
+            "reference": "22656a647253e3e2b04e5f0f213b6dd2a5141814",
             "shasum": ""
         },
         "require": {
@@ -581,7 +581,7 @@
         "suggest": {
             "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions."
         },
-        "time": "2019-08-08T18:24:19+00:00",
+        "time": "2019-10-02T20:38:25+00:00",
         "type": "library",
         "extra": {
             "component": {
@@ -603,60 +603,6 @@
             "Apache-2.0"
         ],
         "description": "Cloud Firestore client for PHP"
-    },
-    {
-        "name": "google/cloud-language",
-        "version": "v0.20.0",
-        "version_normalized": "0.20.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/googleapis/google-cloud-php-language.git",
-            "reference": "70ed1d9cb8fc4cf1aa1d2af8d8d59da1722dfc32"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/googleapis/google-cloud-php-language/zipball/70ed1d9cb8fc4cf1aa1d2af8d8d59da1722dfc32",
-            "reference": "70ed1d9cb8fc4cf1aa1d2af8d8d59da1722dfc32",
-            "shasum": ""
-        },
-        "require": {
-            "google/cloud-core": "^1.31",
-            "google/gax": "^1.1"
-        },
-        "require-dev": {
-            "erusev/parsedown": "^1.6",
-            "google/cloud-storage": "^1.3",
-            "phpdocumentor/reflection": "^3.0",
-            "phpunit/phpunit": "^4.8|^5.0",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "suggest": {
-            "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
-            "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions.",
-            "google/cloud-storage": "Analyze documents stored in Google Cloud Storage"
-        },
-        "time": "2019-08-07T20:57:43+00:00",
-        "type": "library",
-        "extra": {
-            "component": {
-                "id": "cloud-language",
-                "target": "googleapis/google-cloud-php-language.git",
-                "path": "Language",
-                "entry": "src/LanguageClient.php"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Google\\Cloud\\Language\\": "src",
-                "GPBMetadata\\Google\\Cloud\\Language\\": "metadata"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "description": "Cloud Natural Language Client for PHP"
     },
     {
         "name": "google/cloud-storage",
@@ -710,60 +656,6 @@
             "Apache-2.0"
         ],
         "description": "Cloud Storage Client for PHP"
-    },
-    {
-        "name": "google/cloud-vision",
-        "version": "v0.24.0",
-        "version_normalized": "0.24.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-            "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
-            "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
-            "shasum": ""
-        },
-        "require": {
-            "google/cloud-core": "^1.31",
-            "google/gax": "^1.1"
-        },
-        "require-dev": {
-            "erusev/parsedown": "^1.6",
-            "google/cloud-storage": "^1.12",
-            "phpdocumentor/reflection": "^3.0",
-            "phpunit/phpunit": "^4.8|^5.0",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "suggest": {
-            "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
-            "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions.",
-            "google/cloud-storage": "Annotate images stored in Google Cloud Storage"
-        },
-        "time": "2019-09-16T21:17:30+00:00",
-        "type": "library",
-        "extra": {
-            "component": {
-                "id": "cloud-vision",
-                "target": "googleapis/google-cloud-php-vision.git",
-                "path": "Vision",
-                "entry": "src/VisionClient.php"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Google\\Cloud\\Vision\\": "src",
-                "GPBMetadata\\Google\\Cloud\\Vision\\": "metadata"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "description": "Cloud Vision Client for PHP"
     },
     {
         "name": "google/common-protos",
@@ -945,17 +837,17 @@
     },
     {
         "name": "google/protobuf",
-        "version": "v3.9.1",
-        "version_normalized": "3.9.1.0",
+        "version": "v3.10.0",
+        "version_normalized": "3.10.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/protocolbuffers/protobuf-php.git",
-            "reference": "4bb1a332b47f618a0a21ad3cc9a43f1c4aaa5b62"
+            "reference": "5dffdd2c84112e6c91fd84f92e3df96649426881"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/4bb1a332b47f618a0a21ad3cc9a43f1c4aaa5b62",
-            "reference": "4bb1a332b47f618a0a21ad3cc9a43f1c4aaa5b62",
+            "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/5dffdd2c84112e6c91fd84f92e3df96649426881",
+            "reference": "5dffdd2c84112e6c91fd84f92e3df96649426881",
             "shasum": ""
         },
         "require": {
@@ -967,7 +859,7 @@
         "suggest": {
             "ext-bcmath": "Need to support JSON deserialization"
         },
-        "time": "2019-08-06T17:47:34+00:00",
+        "time": "2019-10-03T20:08:37+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1790,58 +1682,6 @@
         ]
     },
     {
-        "name": "mailjet/mailjet-apiv3-php",
-        "version": "v1.4.1",
-        "version_normalized": "1.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mailjet/mailjet-apiv3-php.git",
-            "reference": "9d89b9a424a9631bff8e499cbbe34058481e8102"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/mailjet/mailjet-apiv3-php/zipball/9d89b9a424a9631bff8e499cbbe34058481e8102",
-            "reference": "9d89b9a424a9631bff8e499cbbe34058481e8102",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "~6.0|~5.3",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "php-coveralls/php-coveralls": "^1.0",
-            "phpunit/phpunit": "^4.8"
-        },
-        "time": "2018-10-31T13:24:45+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Mailjet": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Mailjet",
-                "email": "dev@mailjet.com",
-                "homepage": "https://dev.mailjet.com"
-            }
-        ],
-        "description": "PHP wrapper for the Mailjet API",
-        "homepage": "https://github.com/mailjet/mailjet-apiv3-php/",
-        "keywords": [
-            "Mailjet",
-            "api",
-            "email",
-            "php",
-            "v3"
-        ]
-    },
-    {
         "name": "monolog/monolog",
         "version": "1.25.1",
         "version_normalized": "1.25.1.0",
@@ -2125,63 +1965,6 @@
         "description": "Library for handling version information and constraints"
     },
     {
-        "name": "php-ai/php-ml",
-        "version": "0.8.0",
-        "version_normalized": "0.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-ai/php-ml.git",
-            "reference": "5e02b893e904761cd7e2415b11778cd421494c07"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-ai/php-ml/zipball/5e02b893e904761cd7e2415b11778cd421494c07",
-            "reference": "5e02b893e904761cd7e2415b11778cd421494c07",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.1"
-        },
-        "require-dev": {
-            "phpbench/phpbench": "^0.14.0",
-            "phpstan/phpstan-phpunit": "^0.10",
-            "phpstan/phpstan-shim": "^0.10",
-            "phpstan/phpstan-strict-rules": "^0.10",
-            "phpunit/phpunit": "^7.0.0",
-            "symplify/coding-standard": "^5.1",
-            "symplify/easy-coding-standard": "^5.1"
-        },
-        "time": "2019-03-20T22:22:45+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Phpml\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Arkadiusz Kondas",
-                "email": "arkadiusz.kondas@gmail.com"
-            }
-        ],
-        "description": "PHP-ML - Machine Learning library for PHP",
-        "homepage": "https://github.com/php-ai/php-ml",
-        "keywords": [
-            "Neural network",
-            "artificial intelligence",
-            "computational learning theory",
-            "data science",
-            "feature extraction",
-            "machine learning",
-            "pattern recognition"
-        ]
-    },
-    {
         "name": "phpdocumentor/reflection-common",
         "version": "2.0.0",
         "version_normalized": "2.0.0.0",
@@ -2339,17 +2122,17 @@
     },
     {
         "name": "phpmailer/phpmailer",
-        "version": "v6.0.7",
-        "version_normalized": "6.0.7.0",
+        "version": "v6.1.1",
+        "version_normalized": "6.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPMailer/PHPMailer.git",
-            "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59"
+            "reference": "26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0c41a36d4508d470e376498c1c0c527aa36a2d59",
-            "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8",
+            "reference": "26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8",
             "shasum": ""
         },
         "require": {
@@ -2374,7 +2157,7 @@
             "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
             "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
         },
-        "time": "2019-02-01T15:04:28+00:00",
+        "time": "2019-09-27T21:33:43+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2384,16 +2167,16 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL-2.1"
+            "LGPL-2.1-only"
         ],
         "authors": [
             {
-                "name": "Jim Jagielski",
-                "email": "jimjag@gmail.com"
-            },
-            {
                 "name": "Marcus Bointon",
                 "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
             },
             {
                 "name": "Andy Prevost",
@@ -2407,23 +2190,23 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.8.1",
-        "version_normalized": "1.8.1.0",
+        "version": "1.9.0",
+        "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76"
+            "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
-            "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/f6811d96d97bdf400077a0cc100ae56aa32b9203",
+            "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203",
             "shasum": ""
         },
         "require": {
             "doctrine/instantiator": "^1.0.2",
             "php": "^5.3|^7.0",
-            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
+            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
             "sebastian/comparator": "^1.1|^2.0|^3.0",
             "sebastian/recursion-context": "^1.0|^2.0|^3.0"
         },
@@ -2431,7 +2214,7 @@
             "phpspec/phpspec": "^2.5|^3.2",
             "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
         },
-        "time": "2019-06-13T12:50:23+00:00",
+        "time": "2019-10-03T11:07:50+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4724,23 +4507,23 @@
     },
     {
         "name": "tecnickcom/tcpdf",
-        "version": "6.2.26",
-        "version_normalized": "6.2.26.0",
+        "version": "6.3.2",
+        "version_normalized": "6.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tecnickcom/TCPDF.git",
-            "reference": "367241059ca166e3a76490f4448c284e0a161f15"
+            "reference": "9fde7bb9b404b945e7ea88fb7eccd23d9a4e324b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/367241059ca166e3a76490f4448c284e0a161f15",
-            "reference": "367241059ca166e3a76490f4448c284e0a161f15",
+            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/9fde7bb9b404b945e7ea88fb7eccd23d9a4e324b",
+            "reference": "9fde7bb9b404b945e7ea88fb7eccd23d9a4e324b",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2018-10-16T17:24:05+00:00",
+        "time": "2019-09-20T09:35:01+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4770,8 +4553,8 @@
         "authors": [
             {
                 "name": "Nicola Asuni",
-                "role": "lead",
-                "email": "info@tecnick.com"
+                "email": "info@tecnick.com",
+                "role": "lead"
             }
         ],
         "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",

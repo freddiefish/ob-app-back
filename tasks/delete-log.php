@@ -2,6 +2,7 @@
 // TO DO script archives any entries older than 30 days
 // mails the log every week
 require_once __DIR__ . '/../bootstrap.php';
+$util = new Util();
 
 $logFile = ROOT_DIR . '/log.txt';
 
@@ -11,9 +12,9 @@ if (file_exists($logFile)) {
     unlink($logFile); // delete the log
 
 } else {
-    $msg = "Failed to delete!";
+    $msg = "File not found. Failed to delete!";
 }
 
 $msg .= "\n" . $logFile;
 
-mail_this('Log file delete', $msg , '');
+$util->mailThis('Log file delete', $msg , '');

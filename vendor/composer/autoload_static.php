@@ -7,10 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
 {
     public static $files = array (
+        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -71,7 +71,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'Prophecy\\' => 9,
-            'Phpml\\' => 6,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
@@ -98,9 +97,7 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Grpc\\Gcp\\' => 9,
             'Grpc\\' => 5,
             'Google\\Protobuf\\' => 16,
-            'Google\\Cloud\\Vision\\' => 20,
             'Google\\Cloud\\Storage\\' => 21,
-            'Google\\Cloud\\Language\\' => 22,
             'Google\\Cloud\\Firestore\\' => 23,
             'Google\\Cloud\\Core\\' => 18,
             'Google\\CRC32\\' => 13,
@@ -109,8 +106,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Google\\' => 7,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
             'GPBMetadata\\Google\\Firestore\\' => 29,
-            'GPBMetadata\\Google\\Cloud\\Vision\\' => 32,
-            'GPBMetadata\\Google\\Cloud\\Language\\' => 34,
             'GPBMetadata\\Google\\' => 19,
         ),
         'F' => 
@@ -234,10 +229,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
         ),
-        'Phpml\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
-        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
@@ -306,17 +297,9 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/google/protobuf/src/Google/Protobuf',
         ),
-        'Google\\Cloud\\Vision\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/cloud-vision/src',
-        ),
         'Google\\Cloud\\Storage\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-storage/src',
-        ),
-        'Google\\Cloud\\Language\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/cloud-language/src',
         ),
         'Google\\Cloud\\Firestore\\' => 
         array (
@@ -349,14 +332,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'GPBMetadata\\Google\\Firestore\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-firestore/metadata',
-        ),
-        'GPBMetadata\\Google\\Cloud\\Vision\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/cloud-vision/metadata',
-        ),
-        'GPBMetadata\\Google\\Cloud\\Language\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/cloud-language/metadata',
         ),
         'GPBMetadata\\Google\\' => 
         array (
@@ -415,13 +390,6 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Rize\\UriTemplate' => 
             array (
                 0 => __DIR__ . '/..' . '/rize/uri-template/src',
-            ),
-        ),
-        'M' => 
-        array (
-            'Mailjet' => 
-            array (
-                0 => __DIR__ . '/..' . '/mailjet/mailjet-apiv3-php/src',
             ),
         ),
         'B' => 

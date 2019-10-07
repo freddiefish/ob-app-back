@@ -1,4 +1,5 @@
 <?php
+use Google\Cloud\Storage\StorageClient;
 
     class Downloader {
 
@@ -51,15 +52,13 @@
         public function downloadDoc($docId){
     
             $fileName= '_besluit_' . $docId . '.pdf';
-            $path = $this -> app -> pubDir . '/' . $fileName;
-        
-            // dwonload if PDF is in local directory
-            if (!file_exists($path)) {
-        
-                $URL = API_BASE_DIR . '/publication/' . $docId .'/download';
-                $file__download= $this -> doCurl($URL);
-                file_put_contents($path, $file__download); 
-            }
+            
+            $dir = sys_get_temp_dir();
+            $tmp = tempnam($dir, "besluit");
+            $file__download= $this -> doCurl(API_BASE_DIR . '/publication/' . $docId .'/download');
+            file_put_contents($tmp, $file__download); 
+
+            $this->upload_object($this->app->pubDir, $fileName, $tmp);
             
         }
 
@@ -69,11 +68,80 @@
          * @return void pdfs in local storage folder
          */
 
-        public function downloadDocs($list) {
+        public function downloadDocs($list) 
+        {
+            $cloudStorageDocList = $this->list_objects($this->app->pubDir);
+
             foreach($list as $item) {
-                $this->downloadDoc($item['docId']);
+                if (!in_array('_besluit_' . $item['docId'] . '.pdf', $cloudStorageDocList )) $this->downloadDoc($item['docId']);
             }
         }
+
+
+        /**
+         * List all Cloud Storage buckets for the current project.
+         *
+         * @return void
+         */
+        function list_buckets()
+        {
+            $storage = new StorageClient();
+            foreach ($storage->buckets() as $bucket) {
+                printf('Bucket: %s' . PHP_EOL, $bucket->name());
+            }
+        }
+
+        /**
+         * List Cloud Storage bucket objects.
+         *
+         * @param string $bucketName the name of your Cloud Storage bucket.
+         *
+         * @return void
+         */
+        function list_objects($bucketName)
+        {
+            $storage = new StorageClient();
+            $bucket = $storage->bucket($bucketName);
+            foreach ($bucket->objects() as $object) {
+                printf('Object: %s' . PHP_EOL, $object->name());
+                $cloudStorageDocList[] = $object->name();
+            }
+            return $cloudStorageDocList;
+        }
+
+
+        /**
+         * Upload a file.
+         *
+         * @param string $bucketName the name of your Google Cloud bucket.
+         * @param string $objectName the name of the object.
+         * @param string $source the path to the file to upload.
+         *
+         * @return Psr\Http\Message\StreamInterface
+         */
+        function upload_object($bucketName, $objectName, $source)
+        {
+            $storage = new StorageClient();
+            $file = fopen($source, 'r');
+            $bucket = $storage->bucket($bucketName);
+            $object = $bucket->upload($file, [
+                'name' => $objectName
+            ]);
+            printf('Uploaded %s to gs://%s/%s' . PHP_EOL, basename($source), $bucketName, $objectName);
+        }
+
+        function download_object($bucketName, $objectName, $destination)
+        {
+            $storage = new StorageClient();
+            $bucket = $storage->bucket($bucketName);
+            $object = $bucket->object($objectName);
+            $object->downloadToFile($destination);
+            printf('Downloaded gs://%s/%s to %s' . PHP_EOL,
+                $bucketName, $objectName, basename($destination));
+        }
+
+
+
 
         public function __destruct(){}
 

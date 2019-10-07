@@ -84,8 +84,9 @@ class Database {
     }
 
 
-    public function docExists($field, $op, $val) {
-        
+    public function docExists($field, $op, $val) 
+    {
+        $this->firestore = new FirestoreClient();
         $decicionsRef = $this->firestore->collection('decisions');
         $query = $decicionsRef->where($field, $op , $val);
         $documents = $query->documents();

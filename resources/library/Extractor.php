@@ -232,17 +232,17 @@ class Extractor {
      * 
      */
 
-    public function document($docId) {
-            $text = $this->text($docId);
-            $text = $this->filter->removeTpl($text);
-            $text = $this->filter->whiteSpaceFilter($text);
-            $text = $this->filter->indicateListItems($text);
-            $textChops = $this->chopText($text);
-            $this->textParts($textChops);
-            $this->whoGetsWhat();
-            $this->locations() ; 
-       
-            // 'Niet gepubliceerd. <a href="mailto:' . EMAIL_BESLUITVORMING . '?subject="lezen%20besluiten&body=Goede%20dag,%0Aik%20wil%20een%20besluit%20lezen%20op%20pagina:%20https://ebesluit.antwerpen.be/agenda/' . $val['id'] . '/view%20De%20link%20werkt%20helaas%20niet.%20Hoe%20kan%20ik%20het%20lezen?">vraag via email volledige tekst</a>';
+    public function document($docId) 
+    {
+        $text = $this->text($docId);
+        $text = $this->filter->removeTpl($text);
+        $text = $this->filter->whiteSpaceFilter($text);
+        $text = $this->filter->indicateListItems($text);
+        $textChops = $this->chopText($text);
+        $this->textParts($textChops);
+        $this->whoGetsWhat();
+        $this->locations() ; 
+        // 'Niet gepubliceerd. <a href="mailto:' . EMAIL_BESLUITVORMING . '?subject="lezen%20besluiten&body=Goede%20dag,%0Aik%20wil%20een%20besluit%20lezen%20op%20pagina:%20https://ebesluit.antwerpen.be/agenda/' . $val['id'] . '/view%20De%20link%20werkt%20helaas%20niet.%20Hoe%20kan%20ik%20het%20lezen?">vraag via email volledige tekst</a>';
     }
 
     /**
@@ -253,11 +253,15 @@ class Extractor {
 
     public function text($docId){
 
-        $fileName = $this->app->pubDir . '/_besluit_' . $docId . '.pdf';
-        $parser = new \Smalot\PdfParser\Parser();
-    
-        if (file_exists($fileName)) {
-            $pdf = $parser->parseFile($fileName);
+        $fileName = '_besluit_' . $docId . '.pdf';
+        $dir = sys_get_temp_dir();
+        $filePath = $dir . '/' . $fileName;
+
+        $this->dl->download_object($this->app->pubDir, $fileName, $filePath);
+
+        if (file_exists($filePath)) {
+            $parser = new \Smalot\PdfParser\Parser();
+            $pdf = $parser->parseFile($filePath);
             $fullText = $pdf->getText(); 
         }
     
