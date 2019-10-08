@@ -1,7 +1,7 @@
 <?php
 switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':
-        require 'homepage.php';
+        require 'index.html';
         break;
     case '/doc-relevance':
         require 'tasks/doc-relevance.php';
@@ -14,6 +14,9 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
         break;
     case '/mail-log':
         require 'tasks/mail-log.php';
+        break;
+    case '/test':
+        require 'tasks/test.php';
         break;
     default:
         http_response_code(404);
