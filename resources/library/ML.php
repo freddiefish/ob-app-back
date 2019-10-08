@@ -4,7 +4,8 @@
 
         const TRESHHOLD = 3;
         const MIN_DOCUMENT_FREQUENCY = 2;
-        var $noNewTerms = 0;
+        public $noNewTerms = 0;
+        public $freqTerms = [];
 
         public function __construct(App $app){
             $this->app = $app;
@@ -225,6 +226,64 @@
             };
         }
 
-        
+        /** show frequecy of each term in a string
+         * @param string $text
+         * @return string $freqText
+         */
+
+        function textWithFreqTerms($text)
+        {
+            $freqText = '';
+            $terms = $this->getTerms($text, false);
+            foreach($terms as $term)
+            {
+                $freqText  .= $term . '(' . round( ($this->freqTerms[$term] / count ($this->freqTerms)) *100)  . '%) ';
+            }
+            return $freqText;
+        }
+
+        /** get the most frequent terms, above treshhold %
+         * @param int treshold percentage
+         * @return array topFreqTerms
+         */
+
+        function mostFreqTerms($treshhold) 
+        {
+            $total = count($this->freqTerms);
+            $normalizeFactor = 1 / ( max( $this->freqTerms ) / $total ); 
+            foreach( $this->freqTerms as $key=>$term ) {
+                $percTerm = round( ( ($term / $total) * 100 ) * $normalizeFactor);
+                if ($percTerm >= $treshhold) 
+                {
+                    echo $key . ': ' . $percTerm . '%<br>';
+                }
+            }
+        }
+
+        /**
+         * checks if any terms are in a given array
+         * @param array terms
+         * @param array refArray
+         * @return boolean 
+         */
+
+        function inRefArray($terms, $refArray)
+        {
+            foreach ($refArray as $refItem)
+            {
+                foreach($terms as $term)
+                {
+                    if (strpos($term, $refItem) !== false) return true;
+                }
+
+            }
+            
+            echo 'No matching for: ';
+            foreach($terms as $term)
+            {
+                echo $term . ' ';
+            }
+            echo '<br>';
+        }
 
     }
