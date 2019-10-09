@@ -4,7 +4,7 @@ require_once __DIR__ . '/../bootstrap.php';
 $util        = new Util;
 $filter      = new Filter($util);
 $dl          = new Downloader($app);
-$extractor   = new Extractor($app,$dl,$filter,$util);
+$extractor   = new Extractor($app,$dl,$filter,$util,$logger);
 
 try 
 {
@@ -13,16 +13,18 @@ try
         throw new Exception('APIs health check failed');
     }
 
-    $app->log('*******************************************');
-    $app->log( (PROD? 'Production mode' : 'Developper mode'));
-    $app->log('Memory usage (Kb): ' . memory_get_peak_usage()/1000);
+    $logger->info('*******************************************');
+    $logger->info( (PROD? 'Production mode' : 'Developper mode'));
+    $logger->info('Memory usage (MB): ' . memory_get_peak_usage()/1000000);
 
-    $extractor->getDocumentList(4);
+    $extractor->getDocumentList(1);
     $dl->downloadDocs($extractor->docList);
+
+    $logger->info('Memory usage (MB) after creatinb docList: ' . memory_get_peak_usage()/1000000);
 
     foreach($extractor->docList as $item) 
     {
-        $docExtractor = new Extractor($app,$dl,$filter,$util);
+        $docExtractor = new Extractor($app,$dl,$filter,$util,$logger);
         $db = new Database($app);
 
         $docExtractor->doc['docId']         = $item['docId'];
@@ -53,9 +55,10 @@ try
         }
         
     }
-    $app->log('Script END');
+    $logger->info('Memory usage (MB): ' . memory_get_peak_usage()/1000000);
+    $logger->info('Script END');
 
 } catch(Exception $e) 
 {
-    $this->app->log('Document scraping failed: ' . $e->getMessage());
+    $logger->info('Document scraping failed: ' . $e->getMessage());
 }

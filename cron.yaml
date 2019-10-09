@@ -6,11 +6,3 @@ cron:
   retry_parameters:
     min_backoff_seconds: 10
     max_doublings: 3
-- description: "weekly delete log"
-  url: /delete-log
-  schedule: every monday 09:00
-  timezone: Europe/Brussels
-- description: "mail log daily"
-  url: /mail-log
-  schedule: every day 07:00
-  timezone: Europe/Brussels

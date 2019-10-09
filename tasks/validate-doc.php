@@ -32,5 +32,5 @@
     }
 
     catch (Exception $e) {
-        $app->log( $e->getMessage() );
+        $logger->info( $e->getMessage() );
     }

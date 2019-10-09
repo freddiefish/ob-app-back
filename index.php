@@ -9,12 +9,6 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/scrape':
         require 'tasks/scrape.php';
         break;
-    case '/delete-log':
-        require 'tasks/delete-log.php';
-        break;
-    case '/mail-log':
-        require 'tasks/mail-log.php';
-        break;
     case '/test':
         require 'tasks/test.php';
         break;
@@ -22,3 +16,7 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
         http_response_code(404);
         exit('Not Found');
 }
+/* phpinfo();
+$msg = 'test xDebug ' . $_SERVER['DOCUMENT_ROOT'];
+echo $msg;
+echo '<br>' . 'ENDED'; */

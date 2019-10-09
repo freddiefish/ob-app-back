@@ -16,6 +16,7 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '3e76f7f02b41af8cea96018933f6b7e3' => __DIR__ . '/..' . '/hoa/protocol/Wrapper.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '7d8c19660fc7bda7e3f1bb627c20c455' => __DIR__ . '/..' . '/yooper/stop-words/src/StopWordFactory.php',
         '82b15671fa4352bd2c1ea8902d4c0c5d' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/helpers/storage.php',
@@ -73,8 +74,13 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Prophecy\\' => 9,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'O' => 
+        array (
+            'Opis\\Closure\\' => 13,
+        ),
         'M' => 
         array (
+            'Moontoast\\Math\\' => 15,
             'Monolog\\' => 8,
         ),
         'H' => 
@@ -98,6 +104,7 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Grpc\\' => 5,
             'Google\\Protobuf\\' => 16,
             'Google\\Cloud\\Storage\\' => 21,
+            'Google\\Cloud\\Logging\\' => 21,
             'Google\\Cloud\\Firestore\\' => 23,
             'Google\\Cloud\\Core\\' => 18,
             'Google\\CRC32\\' => 13,
@@ -105,6 +112,7 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
             'Google\\ApiCore\\' => 15,
             'Google\\' => 7,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
+            'GPBMetadata\\Google\\Logging\\' => 27,
             'GPBMetadata\\Google\\Firestore\\' => 29,
             'GPBMetadata\\Google\\' => 19,
         ),
@@ -233,6 +241,14 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Opis\\Closure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
+        'Moontoast\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -301,6 +317,10 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         array (
             0 => __DIR__ . '/..' . '/google/cloud-storage/src',
         ),
+        'Google\\Cloud\\Logging\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-logging/src',
+        ),
         'Google\\Cloud\\Firestore\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-firestore/src',
@@ -328,6 +348,10 @@ class ComposerStaticInit7e4313a4e6bf9d327b61532c0895dd4b
         'GPBMetadata\\Google\\Protobuf\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf',
+        ),
+        'GPBMetadata\\Google\\Logging\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud-logging/metadata',
         ),
         'GPBMetadata\\Google\\Firestore\\' => 
         array (

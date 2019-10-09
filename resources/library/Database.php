@@ -25,7 +25,7 @@ class Database {
                 'offTitle' => $doc['offTitle'],
                 'intID' => $doc['intId'], 
                 'status' => "NS",
-                'background' => $doc["background"],
+                'background' => '',
                 'date' => new Timestamp(new DateTime($doc['eventDate'])),
                 'decision' => $doc['decision'],
                 'docId' => $doc['docId'],

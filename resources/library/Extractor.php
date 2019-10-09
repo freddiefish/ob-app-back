@@ -9,6 +9,7 @@ class Extractor {
     private $dl;
     private $filter;
     private $util;
+    private $logger;
 
     public  $docList = [];
     public  $doc = [];
@@ -37,11 +38,12 @@ class Extractor {
      * DOM scraping, PDF, Financial, Location, Person, Organisation, Associated refs
      */
 
-    public function __construct(App $app, Downloader $dl, Filter $filter, Util $util){
+    public function __construct(App $app, Downloader $dl, Filter $filter, Util $util, $logger ){
         $this -> app = $app;
         $this -> dl = $dl;
         $this -> filter = $filter;
         $this -> util = $util;
+        $this -> logger = $logger;
     }
 
     public function APICheckOK() {
@@ -54,7 +56,7 @@ class Extractor {
         foreach ($APIList as $url) {
             $response = $this->dl->doCurl($url);
             if (empty($response)){
-                $this->app->log('APICheck failed with ' . $url);
+                $this->logger->error('APICheck failed with ' . $url);
                 return false;
             }
         }
@@ -89,7 +91,7 @@ class Extractor {
 
         $DOM = $this->dl->doCurl(API_BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $month);
         $json = json_decode($DOM,true);
-        $this->app->log('Returned json for ' . $month . ' '. $year . ' in calendar'); 
+        $this->logger->info('Returned json for ' . $month . ' '. $year . ' in calendar'); 
 
         return $json;
     }
@@ -115,7 +117,7 @@ class Extractor {
         while( $updateDate < $stopDate) {
 
             list($updateDay, $updateMonth, $updateMonthTrailZero, $updateYear) = $this->dateStringify($updateDate);
-            $this->app->log("Update for: " . $updateDay . '-' .  $updateMonth . '-' . $updateYear); 
+            $this->logger->info("Update for: " . $updateDay . '-' .  $updateMonth . '-' . $updateYear); 
 
             if ($year <> $updateYear OR $monthTrailZero <> $updateMonthTrailZero) {
                 $year               = $updateYear;
@@ -144,7 +146,7 @@ class Extractor {
             $updateDate->add(new DateInterval('P1D')); //increment one day
         }
 
-        $this->app->log('Found docs: ' . count($this->docList));
+        $this->logger->info('Found docs: ' . count($this->docList));
        
     }
 
@@ -173,12 +175,14 @@ class Extractor {
             // non published docs have no id, so create random id
             $docId = $this->util->getRandomString(8); 
 
-            $this->createDocEntry($e, $docId);
+            $this->createDocEntry($e, $docId, $published = false);
         }
 
         // prevent memory leaks
         $DOM->clear();
         unset($DOM);
+        unset($agendaHtml);
+        unset($e);
 
      }
 
@@ -188,7 +192,7 @@ class Extractor {
      * @param string    docId
      */
 
-    public function createDocEntry($e, $docId) {
+    public function createDocEntry($e, $docId, $published = true) {
 
         $docTitle           = $e->innertext;
         $row['docId']       = $docId;
@@ -198,7 +202,7 @@ class Extractor {
         $row['eventDate']   = $this->eventDate;
         $row['groupId']     = $this->groupId;
         $row['groupName']   = $this->groupName;
-        $row['published']   = true;
+        $row['published']   = $published;
         $row['sortIndex1']  = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
         array_push($this->docList, $row);
 
@@ -497,7 +501,7 @@ class Extractor {
         // Years
         $text = preg_replace('/(BE\s*[0-9]{2}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})/', 'IBAN', $text);
         $text = preg_replace('/([12][0-9]{3})/', 'YEAR', $text);
-        preg_match_all('/([0-9.,\s]+)(E\s*U\s*R)/', $text, $matches);
+        preg_match_all('/([0-9.,\s]+)((E\s*U\s*R)|(euro))/', $text, $matches);
     
         foreach($matches[1] as $match){
             $piece = trim($match);
@@ -531,29 +535,33 @@ class Extractor {
 
                 list($KBOs, $text) = $this->KBONumbers($table);
                 $financials = $this->financials($text);
-                try {
-                    if (!count($KBOs) === count($financials)) {
-                        throw new Exception('Number of KBOs do not match number of financials.');
+                try 
+                {
+                    if (count($KBOs) != count($financials)) 
+                    {
+                        throw new Exception('Number of KBOs do not match number of financials. Original text: ' . $text);
                     } 
-                    if (count($KBOs) === 0 ){
-                        throw new Exception('Found no KBOs in this table.');
+                    if (count($KBOs) != 0 )
+                    {
+                        $KBODetails = $this->getKBODetails($KBOs);
+                        $i = 0;
+                        foreach($KBOs as $KBO) 
+                        {
+                            $whoGetsWhat[$i] = array(
+                                'VAT' => $KBODetails[$i]["VAT"], 
+                                'Name' => $KBODetails[$i]["Name"], 
+                                'JuridicalForm' => $KBODetails[$i]["JuridicalForm"], 
+                                'Address' => $KBODetails[$i]["Address"], 
+                                'Amount' => $financials[$i] );
+                            $i++;
+                        }
+                        if (!empty($whoGetsWhat)) $this->doc['financialStakeholders'] = $whoGetsWhat;
+                        
                     }
-                    
-                    $KBODetails = $this->getKBODetails($KBOs);
-                    $i = 0;
-                    foreach($KBOs as $KBO) {
-                        $whoGetsWhat[$i] = array(
-                            'VAT' => $KBODetails[$i]["VAT"], 
-                            'Name' => $KBODetails[$i]["Name"], 
-                            'JuridicalForm' => $KBODetails[$i]["JuridicalForm"], 
-                            'Address' => $KBODetails[$i]["Address"], 
-                            'Amount' => $financials[$i] );
-                        $i++;
-                    }
-                    if (!empty($whoGetsWhat)) $this->doc['financialStakeholders'] = $whoGetsWhat;
                 }
-                catch (Exception $e) { 
-                    $this->app->log('Caught exception: ' . $e->getMessage());
+                catch (Exception $e) 
+                { 
+                    $this->logger->warning('Caught exception whoGetsWhat: ' . $e->getMessage());
                 }
 
             }
@@ -615,7 +623,7 @@ class Extractor {
                 if (!empty($row[1]) && in_array($row[0], $neededParts) ) $cleanData[$row[0]] = $row[1] ;
             }
         } else {
-            $this->app->log($country.$vatnum . ' is not a valid VAT number');
+            $this->logger->warning($country.$vatnum . ' is not a valid VAT number. Check: ' . $url);
         }
 
         return $cleanData;
@@ -624,7 +632,7 @@ class Extractor {
     private function requestBillit($KBO) {
         try {
             $url = 'https://www.btw-opzoeken.be/VATSearch/Search?KeyWord=' . $KBO ;
-            $response = do_curl($url);
+            $response = $this->dl->doCurl($url);
             $dom_json = json_decode($response,true);
             if(empty($dom_json)) {
                 throw new Exception('Could not get response from ' .  $url);
@@ -640,7 +648,7 @@ class Extractor {
             return $data;
 
         } catch (Exception $e){
-            $this->app->log( $e->getMessage());
+            $this->logger->error( $e->getMessage());
         }
             
     }
@@ -756,7 +764,7 @@ class Extractor {
 
             } else {
             
-                $this->app->log('Geopoint API returned no result');
+                $this->logger->warning('Geopoint API returned empty result');
             }
         }
 

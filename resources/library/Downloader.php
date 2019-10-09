@@ -63,7 +63,7 @@ use Google\Cloud\Storage\StorageClient;
         }
 
         /**
-         * takes a list of referenced docs, and downloads them to local storage
+         * takes a list of referenced docs, and if pubslished, then downloads pdfs to local storage
          * @param array list
          * @return void pdfs in local storage folder
          */
@@ -73,7 +73,7 @@ use Google\Cloud\Storage\StorageClient;
             $cloudStorageDocList = $this->list_objects($this->app->pubDir);
 
             foreach($list as $item) {
-                if (!in_array('_besluit_' . $item['docId'] . '.pdf', $cloudStorageDocList )) $this->downloadDoc($item['docId']);
+                if ($item['published'] && !in_array('_besluit_' . $item['docId'] . '.pdf', $cloudStorageDocList )) $this->downloadDoc($item['docId']);
             }
         }
 
@@ -100,10 +100,11 @@ use Google\Cloud\Storage\StorageClient;
          */
         function list_objects($bucketName)
         {
+            $cloudStorageDocList = [];
             $storage = new StorageClient();
             $bucket = $storage->bucket($bucketName);
             foreach ($bucket->objects() as $object) {
-                printf('Object: %s' . PHP_EOL, $object->name());
+                // printf('Object: %s' . PHP_EOL, $object->name());
                 $cloudStorageDocList[] = $object->name();
             }
             return $cloudStorageDocList;

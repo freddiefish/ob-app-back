@@ -1,9 +1,16 @@
 <?php
 spl_autoload_register(function($className) {
 	$file = LIBRARY_PATH . '/' . $className . '.php';
-	if (file_exists($file)) {
+	try
+	{
+		if (!file_exists($file))
+		{
+			throw new Exception('Class file ' . $className .'.php not found.');
+		}
 		include $file;
-	} else { 
-        echo 'Class Autoloader: we have a problem Houston!';
-    }
+	}
+	catch (Exception $e)
+	{
+		echo 'Autoloader problem: ' . $e->getMessage() ;
+	}
 });
