@@ -4,48 +4,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 
     class Util {
 
-        /**
-         * do_curl, mail
-         */
-
-
-        /**
-         * takes a path and an array to store to file and retruns true
-         * @param   string  path
-         * @param   array   list   
-         * @return  bool    
-         */
-
-        public function storeFile($path, $list){
-
-            $serializedData = serialize($list);
+        public $logger;
         
-            // save serialized data in a text file
-            if ( is_int ( file_put_contents($path, $serializedData) ) ) return true;
-        
+        public function __construct($logger)
+        {
+            $this->logger = $logger;
         }
 
-        /**
-         * Takes a path and reads a file into array or returns false
-         * @param   string  path
-         * @param   array   list
-         * @return  mixed list or empty array   
-         */
-
-        public function readFile($path) {
-
-            if (file_exists ( $path )) {
-            
-                $string_data = file_get_contents($path);
-                $list = unserialize($string_data);  
-
-                return $list;
-
-            } else {
-                return array();
-            }
-        
-        }
 
         function getRandomString($num) { 
             
@@ -110,7 +75,7 @@ use PHPMailer\PHPMailer\PHPMailer;
             }else{
                 echo 'Message could not be sent.';
                 echo 'Mailer Error: ' . $mail->ErrorInfo;
-                logThis('Mail send error: ' . $mail->ErrorInfo);
+                $this->logger->error('mailThis: send error ' . $mail->ErrorInfo);
                 // files must be in the same dir! $mail->addAttachment('path/to/invoice1.pdf', 'invoice1.pdf');
             }
         }

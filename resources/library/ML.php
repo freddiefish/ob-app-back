@@ -7,8 +7,9 @@
         public $noNewTerms = 0;
         public $freqTerms = [];
 
-        public function __construct(App $app){
+        public function __construct(App $app, $logger){
             $this->app = $app;
+            $this->logger = $logger;
         }
         
         /** 
@@ -71,7 +72,7 @@
             }
             $cleanTerms = array_filter($cleanTerms);
         
-            $this->app->log('Found ' .  count($cleanTerms) );
+            $this->logger->info('getTerms: found ' .  count($cleanTerms) . ' terms');
         
             return $cleanTerms;
         
@@ -94,7 +95,7 @@
                 array_push($randarray, $array[$key]);
             }
 
-            $this->app->log('Sampled ' . $limit . " from " . $cases . " cases\n");
+            $this->logger->info('Sampled ' . $limit . " from " . $cases . " cases");
             
             return $randarray;
         
@@ -108,21 +109,19 @@
          * @return  mixed    docIdList, bool
          */
         
-        function getDocIdList($docList) {
-             
+        function getDocIdList($docList) 
+        {        
             $docIdList = array();
-
-            foreach ($docList as $doc) {
-                if ($doc['published']) {
+            foreach ($docList as $doc) 
+            {
+                if ($doc['published']) 
+                {
                     $docId = $doc['id'] ;
                     array_push($docIdList , $docId);
                 }
             }
-
-            $this->app->log('Stored ' . count ($docIdList) . " array in docIDList\n"); 
-    
+            $this->logger->info('getDocIdList: put ' . count ($docIdList) . " docIds in docIDList"); 
             return $docIdList;
-            
         }
 
         
@@ -148,9 +147,9 @@
             
             if ($i == 0){
                 $this->noNewTerms++;
-                $this->app->log($this->noNewTerms . ' iterations with no new terms added to index');
+                $this->logger->info('addToIndex: ' . $this->noNewTerms . ' iterations with no new terms added');
             }
-            // $this->app->log('Added ' . $i . " new terms to index\n");
+            $this->logger->info('addToIndex: added ' . $i . " new terms");
         
             return $index;
         

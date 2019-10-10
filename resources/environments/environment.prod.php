@@ -17,9 +17,7 @@ $config = array(
         "baseUrl" => "http:google.com"
     ),
     "paths" => array(
-        "publications" => 'ob-app-db2b6.appspot.com', 
-        "processed" => ROOT_DIR . "/resources/storage/processed/",
-        "log" => ROOT_DIR  // gcloud has its own logger: https://console.cloud.google.com/logs/viewer?project=ob-app-dev-252415&minLogLevel=0&expandAll=false&timestamp=2019-09-18T11:48:04.181000000Z&customFacets=&limitCustomFacetWidth=true&dateRangeStart=2019-09-18T10:48:04.434Z&dateRangeEnd=2019-09-18T11:48:04.434Z&interval=PT1H&resource=gae_app&logName=projects%2Fob-app-dev-252415%2Flogs%2Fstderr&logName=projects%2Fob-app-dev-252415%2Flogs%2Fappengine.googleapis.com%252Frequest_log
+        "storage" => 'ob-app-db2b6.appspot.com'
         )
     );
  

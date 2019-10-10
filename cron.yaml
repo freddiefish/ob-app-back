@@ -1,7 +1,21 @@
 cron:
-- description: "daily decisions extraction"
+- description: "scrape daily decisions "
   url: /scrape
-  schedule: every 24 hours
+  schedule: every day 01:00
+  timezone: Europe/Brussels
+  retry_parameters:
+    min_backoff_seconds: 10
+    max_doublings: 3
+- description: "download daily decisions"
+  url: /download
+  schedule: every day 02:00
+  timezone: Europe/Brussels
+  retry_parameters:
+    min_backoff_seconds: 10
+    max_doublings: 3
+- description: "extract daily decisions"
+  url: /extract
+  schedule: every day 03:00
   timezone: Europe/Brussels
   retry_parameters:
     min_backoff_seconds: 10

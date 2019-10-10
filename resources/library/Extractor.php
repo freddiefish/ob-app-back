@@ -1,7 +1,6 @@
 <?php
 use Sk\Geohash\Geohash;
-use Sunra\PhpSimple\HtmlDomParser;
-use Google\Cloud\Core\Timestamp;
+
 
 class Extractor {
     
@@ -11,31 +10,20 @@ class Extractor {
     private $util;
     private $logger;
 
-    public  $docList = [];
     public  $doc = [];
-    private $pathToScrape;
-    private $eventDate;
-    private $groupId;
-    private $groupName;
+    public  $locations = [];
 
     // entities
-    public $locations;
     public $financialStakeholders;
-    public $people;
 
     // general fields
     public $docId;
-    public $intId;
-    public $category;
-    public $title;
-    public $textParts;
-    public $addenda;
-    public $tables;
+    public $categories =[];
     public $tplParts = array(0 => 'Gekoppelde besluiten', 1 => 'Aanleiding en context', 2 => 'Omschrijving stedenbouwkundige handelingen', 3 => 'Juridische grond', 4 => 'Regelgeving: bevoegdheid', 5 => 'Openbaar onderzoek', 6 => 'Argumentatie', 7 => 'Financiële gevolgen', 8 => 'Algemene financiële opmerkingen', 9 => 'Strategisch kader', 10 => 'Adviezen', 11 => 'Besluit', 12 => 'Bijlagen');
 
 
     /**
-     * DOM scraping, PDF, Financial, Location, Person, Organisation, Associated refs
+     * extract PDF, Financial, Location, Person, Organisation, Associated refs
      */
 
     public function __construct(App $app, Downloader $dl, Filter $filter, Util $util, $logger ){
@@ -46,188 +34,6 @@ class Extractor {
         $this -> logger = $logger;
     }
 
-    public function APICheckOK() {
-        $APIList = array(
-            'https://ebesluit.antwerpen.be',
-            'http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=NL&iso=NL&vat=152239108B01&name=&companyType=&street1=&postcode=&city=&BtnSubmitVat=Verify',
-            'https://www.btw-opzoeken.be/VATSearch/Search?KeyWord=0643479093',
-            'http://loc.geopunt.be/geolocation/location?q=kerkstraat');
-        
-        foreach ($APIList as $url) {
-            $response = $this->dl->doCurl($url);
-            if (empty($response)){
-                $this->logger->error('APICheck failed with ' . $url);
-                return false;
-            }
-        }
-        
-        return true;
-    }
-
-    /**
-     * 
-     *
-     */
-    public function dateStringify($date){
-            $dateTimestamp   = $date->getTimestamp();
-
-            $year            = date("Y", $dateTimestamp);
-            $month           = date("n", $dateTimestamp);
-            $monthTrailZero  = date("m", $dateTimestamp);
-            $day             = date("j", $dateTimestamp);
-
-        return array($day, $month, $monthTrailZero, $year);
-    }
-
-
-    /**
-     * gets json response for calendar month 
-     * @param int year
-     * @param int month (with trailing zero!)
-     * @return string   json 
-     */
-
-    public function scrapeCalendar($month, $year) {
-
-        $DOM = $this->dl->doCurl(API_BASE_DIR . '/calendar/filter?year=' . $year . '&month=' . $month);
-        $json = json_decode($DOM,true);
-        $this->logger->info('Returned json for ' . $month . ' '. $year . ' in calendar'); 
-
-        return $json;
-    }
-
-    /** 
-     * for a given time into history, scrapes all documents form calendar webpage: https://ebesluit.antwerpen.be/calendar/show
-     * @param int daysToScreen
-     * @return array docList
-    */
-
-    public function getDocumentList($daysToScreen = 30) {
-
-        $startDate  = new DateTime();
-        $timeSpan   = new DateInterval('P' . $daysToScreen . 'D');
-        $timeSpan->invert = 1;
-        $startDate->add($timeSpan);
-        $stopDate   = new DateTime();
-        $updateDate = $startDate;
-        list($day, $month, $monthTrailZero, $year) = $this->dateStringify($updateDate);
-
-        $json = $this->scrapeCalendar($monthTrailZero, $year);
-
-        while( $updateDate < $stopDate) {
-
-            list($updateDay, $updateMonth, $updateMonthTrailZero, $updateYear) = $this->dateStringify($updateDate);
-            $this->logger->info("Update for: " . $updateDay . '-' .  $updateMonth . '-' . $updateYear); 
-
-            if ($year <> $updateYear OR $monthTrailZero <> $updateMonthTrailZero) {
-                $year               = $updateYear;
-                $month              = $updateMonth;
-                $monthTrailZero     = $updateMonthTrailZero;
-                // update calender view
-                $json = $this->scrapeCalendar($monthTrailZero, $year);
-            }
-
-            $iterator = "$year$month$updateDay";
-
-            foreach ($json as $obj) {
-
-                if (array_key_exists($iterator, $obj)) { // not all dates are available
-                    foreach($obj[$iterator] as $val) { 
-                        // get the day's event
-                        $this->pathToScrape   = $val['url'];
-                        $this->eventDate      = $val['startDateString'];
-                        $this->groupId        = $val['groupId'];
-                        $this->groupName      = $val['className'];
-                        $this->scrapeEventDocs();
-                    }
-                }
-
-            }
-            $updateDate->add(new DateInterval('P1D')); //increment one day
-        }
-
-        $this->logger->info('Found docs: ' . count($this->docList));
-       
-    }
-
-    /**
-     * scrape an event for all its documents
-     */
-
-     public function scrapeEventDocs() {
-
-        $DOM = HtmlDomParser::str_get_html( $this->dl->doCurl( API_BASE_DIR . $this->pathToScrape ) );
-
-        // get the agenda html 
-        $agendaHtml = $DOM->getElementById("agenda");
-
-        // published 
-        foreach($agendaHtml->find('a') as $e) {
-            $docHref = $e->href;
-            $pieces = explode('/', $docHref);
-            $docId = $pieces[2];
-
-            $this->createDocEntry($e, $docId);
-        }
-
-        // not published 
-        foreach($agendaHtml->find('span.title-no-rights') as $e) {
-            // non published docs have no id, so create random id
-            $docId = $this->util->getRandomString(8); 
-
-            $this->createDocEntry($e, $docId, $published = false);
-        }
-
-        // prevent memory leaks
-        $DOM->clear();
-        unset($DOM);
-        unset($agendaHtml);
-        unset($e);
-
-     }
-
-    /**
-     * creates a doc entry in docList
-     * @param object e
-     * @param string    docId
-     */
-
-    public function createDocEntry($e, $docId, $published = true) {
-
-        $docTitle           = $e->innertext;
-        $row['docId']       = $docId;
-        $row['offTitle']    = $docTitle;
-        list($row['intId'], $row['title']) 
-                            = $this->getTitleElements($docTitle) ;
-        $row['eventDate']   = $this->eventDate;
-        $row['groupId']     = $this->groupId;
-        $row['groupName']   = $this->groupName;
-        $row['published']   = $published;
-        $row['sortIndex1']  = new Timestamp(new DateTime($row['eventDate'])) . $docId; // to order the items in the infinite scroll view in the app
-        array_push($this->docList, $row);
-
-    }
-
-
-    /**
-     * process official title (eg. "2019_DCME_00239 - Districtscollege - Notulen 19 september 2019 - Goedkeuring")
-     * @param string text
-     * @return array intId, cleanTitle
-     */
-
-    public function getTitleElements($txt) {
-        //process the official title, split off first part (e.g. 2016_MV_00157 - Mondelinge vraag van raa...)
-        $pieces = explode(" - ", $txt);  
-        $intId = trim($pieces[0]);
-    
-        //remove intId from title 
-        $cleanTitle = str_replace( $pieces[0] . " - " , "" , $txt ); 
-
-        $endToRemove = end($pieces);        
-        $cleanTitle = str_replace( " - " . $endToRemove , '' , $cleanTitle ); //case insensitive replace
-        
-        return array($intId, $cleanTitle );
-    }
 
     /**
      * take a docId, downloads to storage, parses the text, cleans text, extracts (text paragraphs, addenda, associated docs, financial stakes
@@ -238,6 +44,7 @@ class Extractor {
 
     public function document($docId) 
     {
+        $this->docId = $docId; // handy reference when troubleshooting the doc extraction process
         $text = $this->text($docId);
         $text = $this->filter->removeTpl($text);
         $text = $this->filter->whiteSpaceFilter($text);
@@ -249,6 +56,7 @@ class Extractor {
         // 'Niet gepubliceerd. <a href="mailto:' . EMAIL_BESLUITVORMING . '?subject="lezen%20besluiten&body=Goede%20dag,%0Aik%20wil%20een%20besluit%20lezen%20op%20pagina:%20https://ebesluit.antwerpen.be/agenda/' . $val['id'] . '/view%20De%20link%20werkt%20helaas%20niet.%20Hoe%20kan%20ik%20het%20lezen?">vraag via email volledige tekst</a>';
     }
 
+
     /**
      * Given a docID, Checks if the PDF file exists locally, extracts text, returns text
      * @param   string  docId
@@ -257,11 +65,11 @@ class Extractor {
 
     public function text($docId){
 
-        $fileName = '_besluit_' . $docId . '.pdf';
+        $objectName = 'pubs/_besluit_' . $docId . '.pdf';
         $dir = sys_get_temp_dir();
-        $filePath = $dir . '/' . $fileName;
+        $filePath = $dir . '/tempFileToExtract.pdf';
 
-        $this->dl->download_object($this->app->pubDir, $fileName, $filePath);
+        $this->dl->download_object($this->app->storage, $objectName, $filePath);
 
         if (file_exists($filePath)) {
             $parser = new \Smalot\PdfParser\Parser();
@@ -272,7 +80,6 @@ class Extractor {
         return $fullText ;
 
     }
-
 
 
     public function chopProcess($textChops) {
@@ -311,6 +118,7 @@ class Extractor {
         return $textChops;
     }
 
+
     public function chopText($text) {
         $textChops = [];
         // echo $text;
@@ -319,39 +127,55 @@ class Extractor {
         return $textChops;   
     }
 
-    public function postProces($heading, $gluedText) {
 
-        $subHeadings = [];
-        $introText = '';
+    public function postProces($headingId, $gluedText) {
 
-        if ($heading == 'Besluit') { // makes sure we have array with "Artikel" headings
-
+        if ($headingId == 11) 
+        { // makes sure we have array with "Artikel" headings
+            $subHeadings = [];
+            $introText = '';
             $continue = true;
 
-            for($i=1; $continue; $i++) {
+            for($i=1; $continue; $i++) 
+            {
                 $pattern = "/(<p>)*Artikel " . $i . "(<\/p>)*/";
                 $splits= preg_split($pattern, $gluedText);
-                if ($i==1) {
-                    $introText = $splits[0]; 
-                }
+                if ($i==1) $introText = $splits[0]; 
                 
-                if (count($splits)<2){
-                    $continue = false;
-                } else {
+                if (count($splits)<2) $continue = false;
+                else 
+                {
                     $next = $i+1;
                     $patternNext = "/(<p>)*Artikel " . $next . "(<\/p>)*/";
                     $splitsNext= preg_split($patternNext, $splits[1]);
-                    if (count($splitsNext)>1) { // we have a next header
-                        $subHeadings['Artikel ' . $i] = $splitsNext[0];
-                    } else {
-                        $subHeadings['Artikel ' . $i] = $splits[1];
+                    if (count($splitsNext)>1) array_push($subHeadings, array('name' => 'Artikel ' . $i, 'text' => $splitsNext[0] ) ); // we have a next header
+                    else 
+                    {
+                        array_push($subHeadings, array('name' => 'Artikel ' . $i, 'text' => $splitsNext[0]) );
+                        $continue = false;
                     }
                 }
             }
-            
+            return array($introText, $subHeadings);
         }
-        return array($introText, $subHeadings);
+        
+        if ($headingId == 0) // associated docs
+        {
+            $assocDocs = [];
+            $pieces = explode('</li>', $gluedText);
+            foreach($pieces as $piece)
+            {
+                $pieceCleanHTML = strip_tags($piece);
+                if(!empty($pieceCleanHTML)) array_push($assocDocs, strip_tags($piece)) ; 
+            }
+            $this->doc['assocDocs'] = $assocDocs;
+        }
+        if ($headingId == 7)
+        {
+            if( strtolower ( strip_tags($gluedText) ) == 'ja') $this->doc['financialConseq'] = true;
+        }
     }
+
 
     public function setCategory($docTitle) {
         $cats = array(0 =>'Onbekend',1 =>'Omgevingsvergunning');
@@ -372,101 +196,88 @@ class Extractor {
     }
 
    
-
     public function textParts($textChops) {
 
         $tplParts   = $this->tplParts;
-        $tplDocument = false; // some docs have no template and will be handled different.
         $extrParts   = [];
-        $heading     = '';
+        $heading     = array('name' => '', 'id' => 100);
         $gluedText   = '';
-        $notTplDocGluedText = '';
         $textChop    = '';
         $nrTextChops = count($textChops);
         $i           = 0;
-        
-        /**
-         * @todo process title
-         * @todo format some "aanleiding en context" as timeline
-         */
-        // $docTitle    = $textChops[0];
-        // $docCat = $this->setCategory($docTitle);
 
-        foreach($textChops as $textChop) {
-            
-            if (in_array($textChop,  $tplParts))  {
-                $tplDocument = true;
-                if (!empty($heading) ) {
-                    if ($heading == 'Besluit') { // postprocessing needed
-                        list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
+        foreach($textChops as $textChop) 
+        {
+            if (in_array($textChop,  $tplParts))  
+            {
+                if ($heading['id'] != 100 ) // prevent entry here
+                {
+                    if ($heading['id'] == 11) // Besluit
+                    { // postprocessing needed
+                        list($introText, $subHeadings) = $this->postProces($heading['id'], $gluedText);
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tplParts) ,
-                            'name' => $heading,
+                            'id' => $heading['id'] ,
+                            'name' => $heading['name'],
                             'text' => $introText,
                             'headings' => $subHeadings ) );
-                    } else {
+                        $this->doc['decision'] = array(
+                            'text' => $introText,
+                            'headings' => $subHeadings );
+                    } 
+                    else if ($heading['id'] == 0) $this->postProces($heading['id'], $gluedText); // assoc docs
+                    else if ($heading['id'] == 7) $this->postProces($heading['id'], $gluedText); // financiële gevolgen
+                    else 
+                    {
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tplParts) ,
-                            'name' => $heading,
+                            'id' => $heading['id'] ,
+                            'name' => $heading['name'],
                             'text' => $gluedText) );
                     }
                 }
                 
-                $heading = $textChop;
-                if ($heading == 'Gekoppelde besluiten') {
-                    //process like bijlagen
-                }
+                $heading['name'] = $textChop;
+                $heading['id'] = array_search($heading['name'], $tplParts);
                 $gluedText = '';
-                if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === 0 ) { // a new text part that starts with bullet list 
-                        $gluedText .= '<ul>';  
-                }   
+                if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === 0 ) $gluedText .= '<ul>';  // a new text part that starts with bullet list 
             } 
             
-            if (!in_array($textChop, $tplParts ) && $tplDocument) {
+            if (!in_array($textChop, $tplParts )) 
+            {
                 $pos = strpos($textChop, '<li>');  
-                if ($pos === 0) { // we have a list item
+                if ($pos === 0) 
+                { // we have a list item
                     $gluedText .= $textChop . '</li>';
-                    if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === false ) { // if next textChop is not a list item, close list 
-                            $gluedText .= '</ul>';
+                    if( $i+1 < $nrTextChops && strpos($textChops[$i+1], '<li>') === false ) $gluedText .= '</ul>';
+                } 
+                else 
+                { // we have a paragraph text
+                    if($heading['id'] == 12)
+                    { // Bijlagen : send any remaining textChops to the method
+                        $remainingText = '';
+                        foreach($textChops as $key=>$val)
+                        {
+                            if ($key >= $i) $remainingText .= $val . ' ';
                         }
-                } else { // we have a paragraph text
-                    if($heading == 'Bijlagen'){ // send any remaining textChops to the method
-                        $remaingText = '';
-                        foreach($textChops as $key=>$val){
-                            if ($key >= $i){
-                                $remaingText .= $val . ' ';
-                            }
-                        }
-                        $this->addenda($remaingText);
+                        $this->addenda($remainingText);
                         break;
                     }
-                    if($i+1 == $nrTextChops){ // works best when no  bijlagen ! last run, so finalize the textParts
-                        
+                    if($i+1 == $nrTextChops)
+                    { // works best when no  bijlagen ! last run, so finalize the textParts
                         $gluedText .= '<p>' . $textChop . '</p>';
-                        list($introText, $subHeadings) = $this->postProces($heading, $gluedText);
+                        list($introText, $subHeadings) = $this->postProces($heading['id'], $gluedText);
                         array_push($extrParts, array(
-                            'id' => array_search($heading, $tplParts) ,
-                            'name' => $heading,
+                            'id' => $heading['id'] ,
+                            'name' => $heading['name'],
                             'text' => $introText,
                             'headings' => $subHeadings ) );
-                    } else {
-                        $gluedText .= '<p>'. $textChop . '</p>';
-                    }
-
+                        $this->doc['decision'] = array(
+                                'text' => $introText,
+                                'headings' => $subHeadings );
+                    } 
+                    else  $gluedText .= '<p>'. $textChop . '</p>';
                 }   
             }
-
-            if(!$tplDocument && $i > 0) { // no need for title on $i = 0 
-                $notTplDocGluedText .= '<p>'. $textChop . '</p>';
-            }
-
-        $i++; 
-        }
-        if(!$tplDocument) {
-            array_push($extrParts, array(
-                'id' => 11 ,
-                'name' => 'Besluit',
-                'text' => $notTplDocGluedText ));
+            $i++; 
         }
         $this->doc['textParts'] = $extrParts;     
     }
@@ -490,6 +301,7 @@ class Extractor {
         }
         $this->doc['addenda'] = $files;  
     }
+
 
     public function financials($text){
 
@@ -539,7 +351,7 @@ class Extractor {
                 {
                     if (count($KBOs) != count($financials)) 
                     {
-                        throw new Exception('Number of KBOs do not match number of financials. Original text: ' . $text);
+                        throw new Exception('Number of KBOs do not match number of financials. DocId: ' . $this->doc['docId']);
                     } 
                     if (count($KBOs) != 0 )
                     {
@@ -569,6 +381,7 @@ class Extractor {
         }
     }
 
+
     function KBONumbers ($text) {
         $data = [];
         $KBOs = [];
@@ -595,6 +408,7 @@ class Extractor {
         
         return array($KBOs, $text);
     }
+
 
     private function requestVIES($KBO) {
 
@@ -623,11 +437,12 @@ class Extractor {
                 if (!empty($row[1]) && in_array($row[0], $neededParts) ) $cleanData[$row[0]] = $row[1] ;
             }
         } else {
-            $this->logger->warning($country.$vatnum . ' is not a valid VAT number. Check: ' . $url);
+            $this->logger->warning($country.$vatnum . ' is not a valid VAT number. DocId: ' . $this->doc['docId'] . ' on API: ' . $url);
         }
 
         return $cleanData;
     }
+
 
     private function requestBillit($KBO) {
         try {
@@ -653,6 +468,7 @@ class Extractor {
             
     }
 
+
     private function getKBODetails($KBOs) {
         $KBOData = [];
         foreach($KBOs as $KBO) {
@@ -671,6 +487,7 @@ class Extractor {
         return $KBOData;
     }
 
+
     public function streets(){
         $file           = LIBRARY_PATH . '/straatnamen.txt';
         $contents       = file_get_contents($file);
@@ -678,11 +495,16 @@ class Extractor {
         return $streets;
     }
 
-    public function locations() {
+
+    public function locations( $inTitleOnly = false ) {
     
-        $textToScreen = $this->title ;
-        $partsToCheck = array(1,6,11);
-        $textToScreen .= $this->filter->textToScreen($this->doc['textParts'], $partsToCheck);
+        $textToScreen = $this->doc['title'] ;
+
+        if (!$inTitleOnly) 
+        {
+            $partsToCheck = array(1,6,11);
+            $textToScreen .= $this->filter->textToScreen($this->doc['textParts'], $partsToCheck);
+        }
         
         $data = [];
         $locations = [];
@@ -727,8 +549,9 @@ class Extractor {
             }        
         }
         $locations = array_unique($data);
-        $this->geoCode($locations);
+        if(!empty($locations)) $this->geoCode($locations);
     }
+
 
     /**
      * returns array of lat, lng, geohash out of given array with address string
@@ -764,17 +587,16 @@ class Extractor {
 
             } else {
             
-                $this->logger->warning('Geopoint API returned empty result');
+                $this->logger->warning('Geopoint API ' . $requestUrl . ' returned empty result');
             }
         }
 
-        if (!empty($geoLocations)) $this->doc['locations'] = $geoLocations;
+        if (!empty($geoLocations)) $this->locations = $geoLocations;
     }
    
     public function __destruct() {
         // closing persistent connections
     }
-
 
 }
 

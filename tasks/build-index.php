@@ -25,7 +25,7 @@ $docIdList = $docTerms->getDocIdList($docList);
 $index = $util->readFile($indexpath);
 echo 'Read in: ' . count($index) . ' indexes ';
 $randDocRefs = $docTerms->getSample($docIdList, 2, 10);
-$util->storeFile($randDocListPath ,  $randDocRefs);
+$dl->storeFile($randDocListPath ,  $randDocRefs);
 
 foreach($randDocRefs as $key=>$val){
 
@@ -36,5 +36,5 @@ foreach($randDocRefs as $key=>$val){
     echo ('This iteration, index has ' . count($index) . ' indexes ');
 }
 
-$util->storeFile($app->procDir . '/index.txt', $index);
+$dl->storeFile($app->procDir . '/index.txt', $index);
 echo ('At end of script, index has ' . count($index) . ' indexes ');

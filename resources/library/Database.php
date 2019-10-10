@@ -4,46 +4,31 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Google\Cloud\Core\Timestamp;
 use Google\Cloud\Core\GeoPoint;
 
-class Database {
-
-
+class Database 
+{
     public $firestore;
     public $app;
+    public $logger;
 
-    public function __construct($app) {
+    public function __construct($app, $logger) 
+    {
         $this->app = $app;
+        $this->logger = $logger;
     }
 
-    public function storeDoc($doc) {
-
+    public function storeDoc($doc, $locations) 
+    {
         $this->firestore = new FirestoreClient();
 
-        if (!$this->docExists('docId', '=', $doc['docId'])) {
-
-            $data = [
-                'title' => $doc['title'],
-                'offTitle' => $doc['offTitle'],
-                'intID' => $doc['intId'], 
-                'status' => "NS",
-                'background' => '',
-                'date' => new Timestamp(new DateTime($doc['eventDate'])),
-                'decision' => $doc['decision'],
-                'docId' => $doc['docId'],
-                'fullText' => $doc['title'] ,
-                'groupId' => $doc['groupId'],
-                'groupName' => $doc['groupName'],
-                'published' => $doc['published'],
-                'hasGeoData' => false,
-                'hasNoRelevance' => true,
-                'sortIndex1' => $doc['sortIndex1'],
-            ];
-
+            $data = $doc;
             $ID = $this->addDocument('decisions',$data); // returns firestore ID
             
-            if (!empty($doc['locations'])) {
+            if (!empty($locations)) 
+            {
                 $decisionRef = $this->firestore->document('decisions/' . $ID);
 
-                foreach ($doc['locations'] as $location) {
+                foreach ($locations as $location) 
+                {
                     $data = [
                         'decisionRef' => $decisionRef,
                         'formattedAddress' => $location["formattedAddress"],
@@ -58,28 +43,25 @@ class Database {
                         $this->updateDocument('decisions', $ID, array(['path' => 'hasGeoData', 'value' => true]));
                 }
             }
-            
-            
-        }
     }
 
 
-    function addDocument($collection,$data) {
-        
+    function addDocument($collection,$data) 
+    {
         $addDoc = $this->firestore->collection($collection)->newDocument();
         $ID = $addDoc->id();
-        $this->app->log('Added ' . $collection . '>document with ID: ' . $ID);
+        $this->logger->info('Added ' . $collection . '>document with ID: ' . $ID);
         $addDoc->set($data);
     
         return $ID;
     }  
     
-    function updateDocument($collection,$ID,$query){
-        
+    function updateDocument($collection,$ID,$query)
+    {
         $updateRef = $this->firestore->collection($collection)->document($ID);
         $updateRef->update($query);
     
-        $this->app->log('Updated hasGeoData field in ' . $collection . '>document with ID: ' . $ID);
+        $this->logger->info('Updated hasGeoData field in ' . $collection . '>document with ID: ' . $ID);
     
     }
 
@@ -92,10 +74,10 @@ class Database {
         $documents = $query->documents();
         foreach ($documents as $document) {
             if ($document->exists()) {
-                $this->app->log('Document ' . $document->id()  . ' returned by query');
+                $this->logger->info('Document ' . $document->id()  . ' returned by query');
                 return true;
             } else {
-                $this->app->log('Document ' . $document->id() . ' does not exist' ); 
+                $this->logger->info('Document ' . $document->id() . ' does not exist' ); 
                 return false;
             }
         }
@@ -110,8 +92,8 @@ class Database {
      * @return  int numberDocs
      */
     
-    public function getNumberDocs($collection, $query) {
-
+    public function getNumberDocs($collection, $query) 
+    {
         $numberDocs = 0;
         $docRef = $this->firestore->collection($collection);
         if(!$query == null) {
@@ -129,9 +111,9 @@ class Database {
             }
         }
 
-        return $numberDocs;
-            
+        return $numberDocs;  
     }
+
 
     /**
      * for analysis, samples database and return documents
@@ -140,8 +122,8 @@ class Database {
      * @return  array   documents
      */
 
-     public function getSample( $collection, $limit) {
-
+     public function getSample( $collection, $limit) 
+     {
         $util = new Util();
         $random = $util -> getRandomString(12);
         $lowValue = "aaaaaaaaaaaa";
@@ -150,8 +132,6 @@ class Database {
         $documents = $query->documents();
         
         // reseed
-        return $documents;
-        
+        return $documents; 
      }
-
 }

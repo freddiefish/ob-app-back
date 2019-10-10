@@ -9,6 +9,12 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/scrape':
         require 'tasks/scrape.php';
         break;
+    case '/download':
+        require 'tasks/download.php';
+        break;
+    case '/extract':
+        require 'tasks/extract.php';
+        break;
     case '/test':
         require 'tasks/test.php';
         break;
