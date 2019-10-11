@@ -1,18 +1,28 @@
 <?php
 switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':
-        require 'homepage.php';
+        require 'index.html';
         break;
-    case '/cron-relevance':
-        require 'tasks/cron-relevance.php';
+    case '/doc-relevance':
+        require 'tasks/doc-relevance.php';
         break;
-    case '/cron-daily':
-        require 'tasks/cron-daily.php';
+    case '/scrape':
+        require 'tasks/scrape.php';
         break;
-    case '/cron-weekly':
-        require 'tasks/cron-weekly.php';
+    case '/download':
+        require 'tasks/download.php';
+        break;
+    case '/extract':
+        require 'tasks/extract.php';
+        break;
+    case '/test':
+        require 'tasks/test.php';
         break;
     default:
         http_response_code(404);
         exit('Not Found');
 }
+/* phpinfo();
+$msg = 'test xDebug ' . $_SERVER['DOCUMENT_ROOT'];
+echo $msg;
+echo '<br>' . 'ENDED'; */

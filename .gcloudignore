@@ -13,6 +13,8 @@
 .git
 .gitignore
 /resources/storage/
+log.txt
+.vscode
 
 # PHP Composer dependencies:
 /vendor/

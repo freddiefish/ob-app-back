@@ -1,7 +1,7 @@
 <?php
 define("PROD" , false);
 define('ROOT_DIR', realpath(__DIR__.'/..'));
-define("BASE_DIR",      "https://ebesluit.antwerpen.be");
+define("API_BASE_DIR",      "https://ebesluit.antwerpen.be");
 define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
 define("EMAIL_ADMIN", "frefeys@gmail.com");
 

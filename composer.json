@@ -5,12 +5,14 @@
         "saikiran/geohash": "1.0",
         "grpc/grpc": "^v1.1.0",
         "google/cloud-firestore": "^1.7",
-        "google/cloud-language": "^0.20.0",
         "phpmailer/phpmailer": "~6.0",
-        "yooper/php-text-analysis": "^1.5",
-        "google/cloud-vision": "^0.24.0",
-        "google/cloud-storage": "^1.14"
+        "google/cloud-storage": "^1.14",
+        "moontoast/math": "*",
+        "google/cloud-logging": "^1.18",
+        "opis/closure": "^3.4"
     },
     "require-dev": {
+        "codeception/codeception": "^3.1",
+        "yooper/php-text-analysis": "^1.5"
     }
 }

@@ -7,7 +7,7 @@ $firestore = new FirestoreClient();
 $ml = new Ml($app);
 $db = new Database();
 
-$app->log("*************************************************\n"  
+$logger->info("*************************************************\n"  
 . ( PROD ? 'Running production mode' : 'Running developer mode') 
 . "\nScript started: " . date('l jS \of F Y h:i:s A'));
 
@@ -41,7 +41,7 @@ foreach ($documents as $document) {
                 
         $query = null;
         $totNumberDocs = $db -> getNumberDocs($firestore, 'decisions', $query);
-        $freqAnalysis = $ml -> freqAnalysis($dataToAnalyze, $data['docId']);
+        $freqAnalysis = $ml -> freqAnalysis($dataToAnalyze);
 
         foreach($freqAnalysis as $key=>$val){
                 $IDF = 1; // http://www.tfidf.com
@@ -95,8 +95,6 @@ foreach ($documents as $document) {
                 ['path' => 'terms', 'value' => $mostRelTermsResults],
                 ['path' => 'hasNoRelevance', 'value' => false]
                 ]);
-        $app->log('Updated the terms field for doc ' . $document->id() );
+        $logger->info('Updated the terms field for doc ' . $document->id() );
         // set tagged true? in documents
 }
-
-mailLog();

@@ -3,22 +3,26 @@
     class Ml {
 
         const TRESHHOLD = 3;
-        var $noNewTerms = 0;
+        const MIN_DOCUMENT_FREQUENCY = 2;
+        public $noNewTerms = 0;
+        public $freqTerms = [];
 
-        public function __construct(App $app){
+        public function __construct(App $app, $logger){
             $this->app = $app;
+            $this->logger = $logger;
         }
         
         /** 
-         * Clean a text into a array of terms, unique terms or not
+         * Clean (does trim) a text into a array of terms, default on unique terms 
          * @param string    fullText
-         * @param string    docId
          * @param bool  unique
          * @return  array   Array of terms
-         * @todo split cases like "GoedkeuringMotiveringAanleiding"
+         * @todo clean text on text level first
+         * split cases like "GoedkeuringMotiveringAanleiding"
+         *      also get bi-grams
         */
 
-        public function getTerms($fullText, $docId, $unique){
+        public function getTerms($fullText, $unique = true){
             
             $punctures = array (';','\'','',':','-', ',' , '.' , '/',')','('); // case "Stad." -> clean to "Stad"
             $cleanTerms =array();
@@ -36,15 +40,6 @@
                 
                 // trim punctures . / , -
                 $term = str_replace($punctures , '', $term); 
-                // var_dump($term);
-                /*$matches = array();
-                split cases: "GoedkeuringMotiveringAanleiding"
-                 preg_match_all('/([A-Z]{1})[a-z]+/', $term, $matches); 
-                if (!empty($matches)) {
-                    var_dump($matches);
-                    // echo val($matches[0]);
-                    unset($matches);    
-                } */
                 
                 // make lowercase
                 $term = strtolower($term);
@@ -77,11 +72,12 @@
             }
             $cleanTerms = array_filter($cleanTerms);
         
-            $this->app->log('Found ' .  count($cleanTerms) . ' terms in doc ' . $docId);
+            $this->logger->info('getTerms: found ' .  count($cleanTerms) . ' terms');
         
             return $cleanTerms;
         
         }
+
         
         /**
          * takes ratio sample of given list with given limit (if limit = 0, no limit applied)
@@ -91,16 +87,17 @@
          * @return array sample
          */
 
-        public function getSample ($array, $ratio , $limit){
-
-            $numCases = count($array);
-            $sample = array_intersect_key( $array, array_flip( array_rand( $array, ($numCases / $ratio) ) ) ) ;
-            if($limit <> 0) { // we have a limit
-                $sample = array_slice($sample, 0, $limit);
+        public function getSample ($array, $limit){
+            $randarray = [];
+            $cases = count($array);
+            $randDocKeys = array_rand($array,$limit);
+            foreach($randDocKeys as $key) {
+                array_push($randarray, $array[$key]);
             }
-            $this->app->log('Sampled ' . count ($sample) . ' cases');
+
+            $this->logger->info('Sampled ' . $limit . " from " . $cases . " cases");
             
-            return $sample;
+            return $randarray;
         
         }
 
@@ -112,83 +109,20 @@
          * @return  mixed    docIdList, bool
          */
         
-        function getDocIdList($docList) {
-             
+        function getDocIdList($docList) 
+        {        
             $docIdList = array();
-
-            foreach ($docList as $doc) {
-                if ($doc['published']) {
+            foreach ($docList as $doc) 
+            {
+                if ($doc['published']) 
+                {
                     $docId = $doc['id'] ;
                     array_push($docIdList , $docId);
                 }
             }
-
-            $this->app->log('Stored ' . count ($docIdList) . ' docs in docIDList'); 
-    
+            $this->logger->info('getDocIdList: put ' . count ($docIdList) . " docIds in docIDList"); 
             return $docIdList;
-            
         }
-
-        /**
-         * checks if a doc exists in directory, else will download it
-         * @param string docId
-         * @return void
-         */
-        
-        public function downloadDoc($docId){
-            // downloads a single doc and puts it in a directory
-            
-            $fileName= '_besluit_' . $docId . '.pdf';
-            $path = $this->app->pubDir . '/' . $fileName;
-        
-            // dwonload if PDF is in local directory
-            if (!file_exists($path)) {
-        
-                $URL = BASE_DIR . '/publication/' . $docId .'/download';
-                $file__download= do_curl($URL);
-                file_put_contents($path, $file__download); 
-                $this->app->log('Downloaded ' . $fileName);
-            }
-            
-        }
-
-        /**
-         * Checks if a PDF file exists locally, extracts text, returns id and text
-         * @param   string  docId
-         * @param   array   docFullText
-         * @return  array   docFullText
-         */
-
-        public function extractText($docId){
-
-            $fullText = '';
-            $fileName = $this->app->pubDir . '/_besluit_' . $docId . '.pdf';
-
-            $parser = new \Smalot\PdfParser\Parser();
-        
-            if (file_exists($fileName)) {
-        
-                $pdf = $parser->parseFile($fileName);
-        
-                $fullText = $pdf->getText(); 
-                //strip from anything below "Bijlagen"
-                if (strpos($fullText ,'Bijlagen') ) {
-                    $arrayText = explode('Bijlagen', $fullText );
-                    $fullText= $arrayText[0];
-                } 
-        
-                $data = [
-                    'id' => $docId,
-                    'fullText' => $fullText
-                ];
-        
-        
-            }
-        
-            return $data ;
-        
-        }
-
 
         
         /**
@@ -198,37 +132,37 @@
          * @return  array   index
          */
         
-        public function addToIndex($terms, $index){
+        public function addToIndex($terms, $index, $unique = true){
 
             $i= 0;
         
             foreach($terms as $key=>$val) {
-                if ( !in_array($val, $index)) {
-                    $i = $i + 1;
+                if ( !in_array($val, $index) && $unique) {
                     array_push ($index , $val); 
-                } else {
-                    // $this->app->log($val . ' already in index');
+                } else if (!$unique) {
+                    array_push ($index , $val);
                 }
+                $i = $i + 1;
             }
             
             if ($i == 0){
                 $this->noNewTerms++;
-                $this->app->log($this->noNewTerms . ' iterations with no new terms added to index');
+                $this->logger->info('addToIndex: ' . $this->noNewTerms . ' iterations with no new terms added');
             }
-            $this->app->log('Added ' . $i . ' new terms to index');
+            $this->logger->info('addToIndex: added ' . $i . " new terms");
         
             return $index;
         
         }
 
         /**
-         * takes a text, calculates the normalised frequency of terms in text, its relevance against all docs in db, and the position of the terms in the text
+         * takes a array with text and weight, calculates the normalised frequency of terms in text, its relevance against all array in db, and the position of the terms in the text
          * @param array data
          * @param string id 
          * @return array freqAnalysis
          */
 
-        public function freqAnalysis($data, $id){
+        public function freqAnalysis($data){
             
             $terms = [];
             $termsChild = [];
@@ -244,7 +178,7 @@
 
                 $i = 0;
                 while($i < $weight) {
-                    $termsChild = $this -> getTerms($text, $id, false);
+                    $termsChild = $this -> getTerms($text, false);
                     foreach($termsChild as $termChild) {
                         array_push($terms, $termChild);
                     }
@@ -256,7 +190,7 @@
             
 
             $termFreqList = array_count_values($terms);
-        
+            // apply  MIN_DOCUMENT_FREQUENCY = 2
             // normalize against total number of terms in doc
             $totalNrTermsInDoc = array_sum ($termFreqList);   
             
@@ -291,6 +225,64 @@
             };
         }
 
-        
+        /** show frequecy of each term in a string
+         * @param string $text
+         * @return string $freqText
+         */
+
+        function textWithFreqTerms($text)
+        {
+            $freqText = '';
+            $terms = $this->getTerms($text, false);
+            foreach($terms as $term)
+            {
+                $freqText  .= $term . '(' . round( ($this->freqTerms[$term] / count ($this->freqTerms)) *100)  . '%) ';
+            }
+            return $freqText;
+        }
+
+        /** get the most frequent terms, above treshhold %
+         * @param int treshold percentage
+         * @return array topFreqTerms
+         */
+
+        function mostFreqTerms($treshhold) 
+        {
+            $total = count($this->freqTerms);
+            $normalizeFactor = 1 / ( max( $this->freqTerms ) / $total ); 
+            foreach( $this->freqTerms as $key=>$term ) {
+                $percTerm = round( ( ($term / $total) * 100 ) * $normalizeFactor);
+                if ($percTerm >= $treshhold) 
+                {
+                    echo $key . ': ' . $percTerm . '%<br>';
+                }
+            }
+        }
+
+        /**
+         * checks if any terms are in a given array
+         * @param array terms
+         * @param array refArray
+         * @return boolean 
+         */
+
+        function inRefArray($terms, $refArray)
+        {
+            foreach ($refArray as $refItem)
+            {
+                foreach($terms as $term)
+                {
+                    if (strpos($term, $refItem) !== false) return true;
+                }
+
+            }
+            
+            echo 'No matching for: ';
+            foreach($terms as $term)
+            {
+                echo $term . ' ';
+            }
+            echo '<br>';
+        }
 
     }
