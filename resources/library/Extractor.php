@@ -63,23 +63,39 @@ class Extractor {
      * @return  string   docFullText
      */
 
-    public function text($docId){
-
+    public function text($docId)
+    {
         $objectName = 'pubs/_besluit_' . $docId . '.pdf';
         $dir = sys_get_temp_dir();
         $filePath = $dir . '/tempFileToExtract.pdf';
 
         $this->dl->download_object($this->app->storage, $objectName, $filePath);
 
-        if (file_exists($filePath)) {
+        if (file_exists($filePath) && $this->fileSizeOK($filePath)) 
+        {
             $parser = new \Smalot\PdfParser\Parser();
             $pdf = $parser->parseFile($filePath);
             $fullText = $pdf->getText(); 
+            return $fullText ;
         }
-    
-        return $fullText ;
-
     }
+
+    public function fileSizeOK($filePath)
+    {
+        $limit = 15; // Mb 
+        $filesize = filesize($filePath); // bytes
+        $filesize = round($filesize / 1024 / 1024, 1); // megabytes with 1 digit
+ 
+        if ($filesize < $limit) return true;
+        else 
+        {
+            $this->logger->warning('Filesize limit of ' . $limit . 'MB exceeded');
+            $this->doc['decision']['text'] = 'Enkel PDF (' . $filesize . ' Mb) beschikbaar';
+        }
+        
+    }
+
+    
 
 
     public function chopProcess($textChops) {
@@ -279,7 +295,7 @@ class Extractor {
             }
             $i++; 
         }
-        $this->doc['textParts'] = $extrParts;     
+        if(!empty($extrParts)) $this->doc['textParts'] = $extrParts;     
     }
 
 
