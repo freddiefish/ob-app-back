@@ -16,7 +16,7 @@ try
     $logger->info( (PROD? 'Production mode' : 'Developper mode'));
     $logger->info('Memory usage (MB): ' . round( memory_get_peak_usage()/1000000 )  );
 
-    $scraper->getDocumentList(2);
+    $scraper->getDocumentList();
     printf('Memory usage (MB) after creating docList: %s' . PHP_EOL , round( memory_get_peak_usage()/1000000 ) );
     $logger->info('Memory usage (MB) after creating docList: ' . round( memory_get_peak_usage()/1000000 ) );
     

@@ -14,7 +14,7 @@ $config = array(
     "name" => "Open Bestuur",
     "mode" => PROD,
     "urls" => array(
-        "baseUrl" => "http:google.com"
+        "baseUrl" => "https://ob-app-db2b6.appspot.com"
     ),
     "paths" => array(
         "storage" => 'ob-app-db2b6.appspot.com'

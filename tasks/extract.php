@@ -7,21 +7,19 @@ $filter      = new Filter($util);
 
 try 
 {
-    if(!$dl->APICheckOK())
-    {
-        throw new Exception('APIs health check failed');
-    }
+    if(!$dl->APICheckOK()) throw new Exception('APIs health check failed');
 
     $logger->info('*******************************************');
     $logger->info( (PROD? 'Production mode' : 'Developper mode'));
     $logger->info('Memory usage (MB): ' . round( memory_get_peak_usage()/1000000 )  );
 
     $docList = $dl->readFile($app->storage, 'core/docList.txt');
+    $pdfList = $dl->list_objects($app->storage);
+
     foreach($docList as $item) 
     {
-        $docExtractor   = new Extractor($app,$dl,$filter,$util,$logger);
         $db             = new Database($app,$logger);
-
+        $docExtractor   = new Extractor($app,$dl,$filter,$util,$logger);
         $docExtractor->doc['docId']         = $item['docId'];
         $docExtractor->doc['offTitle']      = $item['offTitle'];
         $docExtractor->doc['title']         = $item['title'];
@@ -35,21 +33,21 @@ try
 
         if (!$db->docExists('docId', '==', $item['docId'])) 
         {
-            if ($docExtractor->doc['published']) $docExtractor->document($item['docId']);
+            if ( $docExtractor->doc['published'] && $dl->pdfAvailable($item['docId'], $pdfList) ) $docExtractor->document($item['docId']);
             else $docExtractor->locations( $inTitleOnly = true ); // unpublished doc
         
             $db->storeDoc($docExtractor->doc, $docExtractor->locations);
             unset($docExtractor);
             gc_collect_cycles();
-        }
-        printf('Memory usage (MB) after extracting & storing docId %s: %s' . PHP_EOL , $item['docId'], round( memory_get_peak_usage()/1000000 ) );
-        $logger->info('Memory usage (MB) after extracting & storing docId ' . $item['docId'] . ': ' . round( memory_get_peak_usage()/1000000 ));
         
+            printf('Memory usage (MB) after extracting & storing docId %s: %s' . PHP_EOL , $item['docId'], round( memory_get_peak_usage()/1000000 ) );
+            $logger->info('Memory usage (MB) after extracting & storing docId ' . $item['docId'] . ': ' . round( memory_get_peak_usage()/1000000 ));       
+        }
     }
     $logger->info('Memory usage (MB) at end of script: ' . round( memory_get_peak_usage()/1000000 ) );
     $logger->info('Script END');
-
-} catch(Exception $e) 
+} 
+catch(Exception $e) 
 {
     $logger->error('Job failed: ' . $e->getMessage());
 }

@@ -119,8 +119,8 @@ use Google\Cloud\Storage\StorageClient;
          * @todo google buckets for remote
          */
         
-        public function downloadDoc($docId){
-    
+        public function downloadDoc($docId)
+        {
             $fileName= 'pubs/_besluit_' . $docId . '.pdf';
             
             $dir = sys_get_temp_dir();
@@ -128,8 +128,8 @@ use Google\Cloud\Storage\StorageClient;
             $file__download= $this -> doCurl(API_BASE_DIR . '/publication/' . $docId .'/download');
             file_put_contents($tmp, $file__download); 
 
-            $this->upload_object($this->app->storage, $fileName, $tmp);
-            
+            $this->upload_object($this->app->storage, $fileName, $tmp); 
+            $this->logger->info('Memory usage (MB): ' . round( memory_get_peak_usage()/1000000 )  );
         }
 
         /**
@@ -144,7 +144,16 @@ use Google\Cloud\Storage\StorageClient;
 
             foreach($list as $item) {
                 if ($item['published'] && !in_array('pubs/_besluit_' . $item['docId'] . '.pdf', $cloudStorageDocList )) $this->downloadDoc($item['docId']);
+                gc_collect_cycles();
             }
+        }
+
+
+        public function pdfAvailable($docId, $pdfList)
+        {
+            $filePointer = 'pubs/_besluit_' . $docId . '.pdf';
+            if( in_array($filePointer, $pdfList)) return true; // make sure we have a pdf file to extract
+            else $this->logger->info("pdfAvailable-> Pdf not found: " . $filePointer);        
         }
 
 
@@ -199,6 +208,7 @@ use Google\Cloud\Storage\StorageClient;
                 'name' => $objectName
             ]);
             printf('Uploaded %s to gs://%s/%s' . PHP_EOL, basename($source), $bucketName, $objectName);
+            $this->logger->info('Uploaded '. basename($source).' to gs://'.$bucketName.'/'.$objectName);
         }
 
         function download_object($bucketName, $objectName, $destination)
@@ -209,6 +219,7 @@ use Google\Cloud\Storage\StorageClient;
             $object->downloadToFile($destination);
             printf('Downloaded gs://%s/%s to %s' . PHP_EOL,
                 $bucketName, $objectName, basename($destination));
+            $this->logger->info('Downloaded gs://'.$bucketName.'/'.$objectName.' to '.basename($destination));
         }
 
         public function __destruct(){}
