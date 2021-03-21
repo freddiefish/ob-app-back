@@ -56,8 +56,8 @@ use PHPMailer\PHPMailer\PHPMailer;
             $mail->Port = 587;
         
             //headers
-            $mail->setFrom(EMAIL_ADMIN, 'Frederik Feys');
-            $mail->addAddress(EMAIL_ADMIN, 'Admin Fred'); 
+            $mail->setFrom(EMAIL_ADMIN, 'Open Bestuur');
+            $mail->addAddress(EMAIL_ADMIN, 'Admin'); 
             if (!empty($attFilePath)) $mail->addAttachment($attFilePath);
             // $mail->addCC('cc1@example.com', 'Elena');
             // $mail->addBCC('bcc1@example.com', 'Alex');
