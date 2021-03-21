@@ -3,7 +3,7 @@ define("PROD" , false);
 define('ROOT_DIR', realpath(__DIR__.'/..'));
 define("API_BASE_DIR",      "https://ebesluit.antwerpen.be");
 define("EMAIL_BESLUITVORMING", "besluitvorming.an@antwerpen.be");
-define("EMAIL_ADMIN", "frefeys@gmail.com");
+define("EMAIL_ADMIN", "admin@gmail.com");
 
 putenv('SUPPRESS_GCLOUD_CREDS_WARNING=true');
 
