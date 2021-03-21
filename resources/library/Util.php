@@ -50,8 +50,8 @@ use PHPMailer\PHPMailer\PHPMailer;
             $mail->isSMTP();
             $mail->Host = 'in-v3.mailjet.com';
             $mail->SMTPAuth = true;
-            $mail->Username = '08f0ffd5a702d5b663f39b69f213f40b'; 
-            $mail->Password = '20b9614eed9a3fb48ce428ae25eba13c' ; 
+            $mail->Username = ''; 
+            $mail->Password = '' ; 
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
         
