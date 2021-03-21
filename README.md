@@ -1,3 +1,2 @@
-# Open bestuur on App Engine Standard for PHP 7.2
-
-This app demonstrates decisions made in Antwerp
+# ob-app-back
+Is part of the Open Bestuur (ob-app) project. It aims to open up local council decisions for citizens. Back end is PHP based. It pulls data from the city of Antwerp feeding ob-app front
