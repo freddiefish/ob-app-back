@@ -14,9 +14,11 @@ Is part of the Open Bestuur (ob-app) project. It is an open source project that 
 
 Edit /resources/config.php
 
-If you choose a Google environment, also edit under resources/environments/environment.php and json files in resources/environments
+If you choose a Google environment, also edit under resources/environments/environment.php and json files with API keys in resources/environments
 
 Place code on any PHP server, create database (Currently set up with Google Firestore).  Create a cron job for regular data-pull intervals.
+
+Mailing capability: setup your [Mailjet](https://www.mailjet.com) account in resources/library/Util.php
 
 ## Supported Sources
 
