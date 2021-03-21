@@ -8,17 +8,20 @@ Is part of the Open Bestuur (ob-app) project. It is an open source project that 
 
 ## Related repositories
 
-[Front-end] (https://github.com/freddiefish/ob-app)
+[Front-end](https://github.com/freddiefish/ob-app)
 
 ## Configure 
+
 Edit /resources/config.php
-If you choose a Google environment, also edit resources/environments/environment.php and resources/environments/ob-app-5e6adab126e2.json
+
+If you choose a Google environment, also edit under resources/environments/environment.php and json files in resources/environments
 
 Place code on any PHP server, create database (Currently set up with Google Firestore).  Create a cron job for regular data-pull intervals.
 
 ## Supported Sources
 
 Data extraction support is available for the following source systems:
+
     + [e-besluit](https://ebesluit.antwerpen.be/)
 
 ## Contributing
